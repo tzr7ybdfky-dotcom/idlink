@@ -1,5 +1,7 @@
 """Build an undirected explainable graph without transitive identity claims."""
 
+from __future__ import annotations
+
 import hashlib
 from itertools import combinations
 
