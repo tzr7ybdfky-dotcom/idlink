@@ -1,0 +1,54 @@
+"""Serialize request starts per hostname and enforce server cooldowns."""
+
+import asyncio
+import time
+from collections.abc import Awaitable, Callable
+from urllib.parse import urlsplit
+
+
+class DomainRateLimiter:
+    """One shared instance serves every plugin in a CLI process."""
+
+    def __init__(
+        self,
+        interval: float = 2.0,
+        *,
+        clock: Callable[[], float] = time.monotonic,
+        sleep: Callable[[float], Awaitable[None]] = asyncio.sleep,
+    ) -> None:
+        if interval < 2.0:
+            raise ValueError("minimum interval is 2 seconds")
+        self.interval = interval
+        self.clock = clock
+        self.sleep = sleep
+        self._locks: dict[str, asyncio.Lock] = {}
+        self._next: dict[str, float] = {}
+        self._blocked: set[str] = set()
+
+    @staticmethod
+    def domain(url: str) -> str:
+        """Group ports and paths under one hostname."""
+        parsed = urlsplit(url)
+        if parsed.scheme != "https" or not parsed.hostname:
+            raise ValueError("only HTTPS URLs are supported")
+        return parsed.hostname.lower()
+
+    async def wait(self, url: str) -> None:
+        """Reserve a request slot without racing concurrent callers."""
+        domain = self.domain(url)
+        async with self._locks.setdefault(domain, asyncio.Lock()):
+            if domain in self._blocked:
+                raise ValueError("domain blocked after access or rate-limit response")
+            delay = self._next.get(domain, 0.0) - self.clock()
+            if delay > 0:
+                await self.sleep(delay)
+            self._next[domain] = self.clock() + self.interval
+
+    def block(self, url: str) -> None:
+        """Stop further requests for this run after a server refusal."""
+        self._blocked.add(self.domain(url))
+
+    def defer(self, url: str, seconds: float) -> None:
+        """Honor a robots delay immediately after the policy request."""
+        domain = self.domain(url)
+        self._next[domain] = max(self._next.get(domain, 0.0), self.clock() + seconds)

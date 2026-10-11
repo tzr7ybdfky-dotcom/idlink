@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>idlink — аудит публичных связей</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f5f7;color:#182033;font:16px system-ui,sans-serif}
+header{padding:24px 32px;background:#182033;color:#fff}h1{margin:0;font-size:28px}
+header p{max-width:900px;line-height:1.5;color:#d2dae9}main{display:grid;grid-template-columns:3fr 2fr;gap:20px;padding:24px}
+.panel{background:white;border:1px solid #dde3ee;border-radius:14px;padding:20px}
+svg{width:100%;height:470px;display:block}.edge{stroke:#536f9e;cursor:pointer}.hit{stroke:transparent;cursor:pointer}
+.node circle{fill:#236866;stroke:white;stroke-width:3}.node text{font-size:12px;fill:#182033}
+.percentage{font-size:13px;fill:#2e4770;paint-order:stroke;stroke:white;stroke-width:5}
+button{font:inherit;cursor:pointer;border:1px solid #b8c7dc;border-radius:8px;background:#f4f7fc;padding:10px;text-align:left}
+button:hover,button:focus-visible{background:#e0ebf9;outline:2px solid #236866}#edge-list{display:grid;gap:8px}
+.signal{padding:14px 0;border-bottom:1px solid #e2e7ee}.counter{color:#695439;line-height:1.5}
+.muted{color:#617088}a{color:#236866;overflow-wrap:anywhere}.warning{color:#7b4021}footer{padding:16px 32px;font-size:12px;color:#617088}
+@media(max-width:800px){main{grid-template-columns:1fr;padding:12px}header{padding:20px}svg{height:350px}}
+</style></head><body>
+<header><h1>idlink · публичные связи</h1>
+<p>Оценки — эвристика, а не измеренная вероятность. Ложные совпадения могут причинить вред.
+Максимальный вывод: «вероятно связаны». Проверяйте причины и контрдоводы каждой связи.</p></header>
+<main><section class="panel"><h2>Граф наблюдений</h2>
+<p class="muted">Толщина ребра пропорциональна оценке. Выберите связь на графе или в списке.</p>
+<svg id="graph" role="img" aria-label="Граф вероятностных связей"></svg>
+<div id="warnings"></div><h3>Связи</h3><div id="edge-list"></div></section>
+<aside class="panel" id="details" aria-live="polite"><h2>Разбор связи</h2>
+<p class="muted">Выберите ребро. Связи не переносятся автоматически на соседние профили.</p></aside></main>
+<noscript>Для графа нужен JavaScript. Текстовый разбор доступен через idlink explain.</noscript>
+<footer>Отчёт работает офлайн. Изображения и исходные тексты профилей не сохранены.
+<details><summary>D3 7.9.0 · ISC license</summary><pre>__D3_LICENSE__</pre></details></footer>
+<script id="idlink-data" type="application/json">__DATA__</script>
+<script>__D3__</script>
+<script>
+"use strict";
+const report = JSON.parse(document.getElementById("idlink-data").textContent);
+const nodes = report.nodes.map(d => ({...d}));
+const edges = Object.entries(report.edges).map(([id, d]) => ({...d, id, source:d.a, target:d.b}));
+const pct = p => (p * 100).toFixed(1) + "%";
+const labels = new Map(nodes.map(d => [d.id, d.platform + " / " + d.username]));
+function text(parent, tag, value, cls) {
+  const element = document.createElement(tag); element.textContent = value;
+  if (cls) element.className = cls; parent.appendChild(element); return element;
+}
+function showEdge(edge) {
+  const box = document.getElementById("details"); box.replaceChildren();
+  text(box,"h2",pct(edge.probability) + " · " + edge.verdict);
+  text(box,"p","ID: " + edge.id,"muted");
+  [edge.a,edge.b].forEach(url => {
+    text(box,"h3",labels.get(url) || url);
+    const link = text(box,"a",url);
+    if (/^https?:\/\//.test(url)) { link.href = url; link.target = "_blank"; link.rel = "noopener noreferrer"; }
+  });
+  edge.signals.forEach(signal => {
+    const row = text(box,"div","","signal");
+    text(row,"strong",signal.name + " · log_lr " + signal.log_lr.toFixed(3));
+    text(row,"p",signal.explanation);
+    if (signal.counter) text(row,"p","Контрдовод: " + signal.counter,"counter");
+  });
+}
+const list = document.getElementById("edge-list");
+edges.forEach(edge => {
+  const button = text(list,"button",pct(edge.probability) + " · " + labels.get(edge.a) + " ↔ " + labels.get(edge.b));
+  button.dataset.edgeId = edge.id; button.addEventListener("click",() => showEdge(edge));
+});
+if (!edges.length) text(list,"p","Недостаточно профилей для сравнения.","muted");
+report.warnings.forEach(w => text(document.getElementById("warnings"),"p",w,"warning"));
+const svg = d3.select("#graph").attr("viewBox","0 0 760 470");
+const simulation = d3.forceSimulation(nodes)
+  .force("link",d3.forceLink(edges).id(d => d.id).distance(200))
+  .force("charge",d3.forceManyBody().strength(-600))
+  .force("center",d3.forceCenter(380,235)).force("collide",d3.forceCollide(65)).stop();
+simulation.tick(250);
+nodes.forEach(d => {d.x=Math.max(85,Math.min(675,d.x));d.y=Math.max(60,Math.min(410,d.y));});
+svg.selectAll(".edge").data(edges).join("line").attr("class","edge")
+  .attr("x1",d=>d.source.x).attr("y1",d=>d.source.y).attr("x2",d=>d.target.x).attr("y2",d=>d.target.y)
+  .attr("stroke-width",d => 12 * d.probability).on("click",(_,d)=>showEdge(d));
+svg.selectAll(".hit").data(edges).join("line").attr("class","hit").attr("stroke-width",18)
+  .attr("x1",d=>d.source.x).attr("y1",d=>d.source.y).attr("x2",d=>d.target.x).attr("y2",d=>d.target.y)
+  .on("click",(_,d)=>showEdge(d));
+svg.selectAll(".percentage").data(edges).join("text").attr("class","percentage")
+  .attr("x",d=>(d.source.x+d.target.x)/2).attr("y",d=>(d.source.y+d.target.y)/2-8)
+  .text(d=>pct(d.probability));
+const groups = svg.selectAll(".node").data(nodes).join("g").attr("class","node")
+  .attr("transform",d=>`translate(${d.x},${d.y})`);
+groups.append("circle").attr("r",17);
+groups.append("text").attr("text-anchor","middle").attr("y",38).text(d=>d.platform);
+groups.append("text").attr("text-anchor","middle").attr("y",55).text(d=>d.username.slice(0,25));
+</script></body></html>
