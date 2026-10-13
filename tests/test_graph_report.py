@@ -40,3 +40,19 @@ def test_profile_label_cannot_escape_json_script() -> None:
     html = render_html(make_report([a]))
     assert "<img src=x" not in html
     assert "\\u003c/script>" in html
+
+
+def test_large_graph_keeps_nodes_without_accumulating_weak_edges() -> None:
+    profiles = [
+        Profile(
+            platform="fixture",
+            username="demo",
+            url=f"https://example.org/{i}",
+            fetched_at=datetime.now(UTC),
+        )
+        for i in range(30)
+    ]
+    report = make_report(profiles, sparse=True)
+    assert len(report.nodes) == 30
+    assert not report.edges
+    assert "30%" in report.warnings[0]

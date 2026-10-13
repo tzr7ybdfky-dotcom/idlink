@@ -48,7 +48,7 @@ class Report(BaseModel):
     checks: list[SourceCheck] = Field(default_factory=list)
 
 
-def build_graph(profiles: list[Profile]) -> nx.Graph[str]:
+def build_graph(profiles: list[Profile], *, sparse: bool = False) -> nx.Graph[str]:
     """Evaluate each pair independently; duplicate profile URLs are rejected."""
     graph: nx.Graph[str] = nx.Graph()
     for profile in profiles:
@@ -57,7 +57,10 @@ def build_graph(profiles: list[Profile]) -> nx.Graph[str]:
         graph.add_node(profile.url, platform=profile.platform, username=profile.username)
     for a, b in combinations(profiles, 2):
         edge = score(a, b)
-        graph.add_edge(a.url, b.url, id=edge_id(a.url, b.url), edge=edge, weight=edge.probability)
+        if not sparse or edge.probability >= 0.3:
+            graph.add_edge(
+                a.url, b.url, id=edge_id(a.url, b.url), edge=edge, weight=edge.probability
+            )
     return graph
 
 
@@ -65,14 +68,13 @@ def make_report(
     profiles: list[Profile], warnings: list[str] | None = None, *, sparse: bool = False
 ) -> Report:
     """Project the graph to a typed minimal report schema."""
-    graph = build_graph(profiles)
+    graph = build_graph(profiles, sparse=sparse)
     edges: dict[str, Edge] = {}
     for _, _, attrs in graph.edges(data=True):
         edge = attrs["edge"]
         if not isinstance(edge, Edge):
             raise TypeError("graph edge must contain an Edge")
-        if not sparse or edge.probability >= 0.3:
-            edges[str(attrs["id"])] = edge
+        edges[str(attrs["id"])] = edge
     return Report(
         nodes=[Node(id=p.url, platform=p.platform, username=p.username) for p in profiles],
         edges=edges,
