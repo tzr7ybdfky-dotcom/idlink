@@ -5,7 +5,7 @@ import re
 import secrets
 from datetime import UTC, datetime
 from importlib.resources import files
-from urllib.parse import quote, urlsplit
+from urllib.parse import parse_qs, quote, urlsplit
 
 from bs4 import BeautifulSoup
 from pydantic import BaseModel, Field, TypeAdapter
@@ -53,7 +53,7 @@ SOCIAL_RULES = {
         url="https://t.me/{}",
         probe="https://t.me/{}",
         kind="message",
-        errors=RULES["telegram"].errors,
+        errors=[],
         pattern=r"[A-Za-z][A-Za-z0-9_]{3,30}[A-Za-z0-9]",
         evidence="telegram",
     ),
@@ -96,13 +96,23 @@ def page_evidence(rule: ProbeRule, body: str, username: str, url: str) -> bool:
         return True
     soup = BeautifulSoup(body, "html.parser")
     if rule.evidence == "telegram":
-        title = soup.select_one(".tgme_page_title span")
-        action = soup.select_one("a.tgme_action_button[href]")
+        title = soup.select_one(".tgme_page_title")
+        actions = soup.select("a.tgme_action_button[href], a.tgme_action_button_new[href]")
+
+        def resolves_requested_handle(href: str) -> bool:
+            target = urlsplit(href)
+            names = parse_qs(target.query).get("domain", [])
+            return (
+                target.scheme == "tg"
+                and target.netloc == "resolve"
+                and len(names) == 1
+                and names[0].casefold() == username.casefold()
+            )
+
         return bool(
             title
             and title.get_text(strip=True)
-            and action
-            and str(action.get("href")).lower() == "tg://resolve?domain=" + username.lower()
+            and any(resolves_requested_handle(str(action.get("href", ""))) for action in actions)
         )
     if rule.evidence == "profile-meta":
         locator = soup.select_one('meta[property="og:url"]')

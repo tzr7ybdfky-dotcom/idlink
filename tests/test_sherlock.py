@@ -109,12 +109,30 @@ async def test_all_roots_are_checked_beyond_old_16_limit() -> None:
             '<a class="tgme_action_button" href="tg://resolve?domain=alice">Open</a>',
             "found",
         ),
-        ("telegram", "<title>Telegram Messenger</title>", "missing"),
+        ("telegram", "<title>Telegram Messenger</title>", "unknown"),
         (
             "telegram",
             "If you have <strong>Telegram</strong>, you can contact "
             '<a class="tgme_username_link" href="tg://resolve?domain=alice">Alice</a>',
-            "missing",
+            "unknown",
+        ),
+        (
+            "telegram",
+            '<div class="tgme_page_title"><span>Example</span></div>'
+            '<a class="tgme_action_button_new shine" href="tg://resolve?domain=Alice">Open</a>',
+            "found",
+        ),
+        (
+            "telegram",
+            '<div class="tgme_page_title">Example</div>'
+            '<a class="tgme_action_button_new" href="tg://resolve?domain=alice&amp;start=hello">Open</a>',
+            "found",
+        ),
+        (
+            "telegram",
+            '<div class="tgme_page_title">Example</div>'
+            '<a class="tgme_action_button_new" href="tg://resolve?domain=someoneelse">Open</a>',
+            "unknown",
         ),
         ("telegram", "<html>Sign in</html>", "unknown"),
         ("instagram", '{"id":"42","username":"alice"}', "found"),
