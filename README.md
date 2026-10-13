@@ -9,6 +9,11 @@ Python 3.11+, MIT. Каждый результат содержит процен
 ## Запуск
 
 Установку выполняйте **из папки проекта**, где находится `pyproject.toml`, а не из домашней папки `~`.
+Нужны Python 3.11+ и Git. Выберите инструкции для своей ОС; примеры аудита ниже
+используют аккаунт владельца репозитория — замените `tzr7ybdfky-dotcom` на свой ник.
+
+### Получение исходников (все ОС)
+
 Если исходники ещё не скачаны, сначала клонируйте репозиторий (для приватного репозитория нужен доступ):
 
 ```sh
@@ -23,7 +28,9 @@ cd /Users/USER/Desktop/Danya/idlink-project
 ```
 
 Если в терминале уже активно другое виртуальное окружение (например, созданное в `~`),
-сначала выполните `deactivate`. Затем из папки проекта установите CLI и запустите аудит:
+сначала выполните `deactivate`.
+
+### macOS (Terminal, zsh или bash)
 
 ```sh
 python3 -m venv .venv
@@ -31,10 +38,48 @@ source .venv/bin/activate
 python -m pip install '.[dev]'
 export IDLINK_REPOSITORY_URL=https://github.com/tzr7ybdfky-dotcom/idlink
 
-# Пример для владельца этого репозитория; замените ник на свой.
 idlink audit tzr7ybdfky-dotcom --platforms github --out report.html
-open report.html  # macOS
+open report.html
 ```
+
+### Linux (bash или zsh)
+
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install '.[dev]'
+export IDLINK_REPOSITORY_URL=https://github.com/tzr7ybdfky-dotcom/idlink
+
+idlink audit tzr7ybdfky-dotcom --platforms github --out report.html
+xdg-open report.html
+```
+
+Если создание окружения сообщает об отсутствии `venv`/`ensurepip`, установите
+пакет поддержки venv для своей версии Python через пакетный менеджер дистрибутива.
+На Linux без графического интерфейса перенесите `report.html` на компьютер с браузером;
+если `xdg-open` отсутствует, откройте файл вручную.
+
+### Windows (PowerShell)
+
+Выполняйте команды в PowerShell из папки проекта. Активация окружения не требуется:
+явный путь к Python позволяет запускать CLI без изменения политики выполнения скриптов.
+
+```powershell
+py -3 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install '.[dev]'
+$env:IDLINK_REPOSITORY_URL = 'https://github.com/tzr7ybdfky-dotcom/idlink'
+
+.\.venv\Scripts\python.exe -m idlink audit tzr7ybdfky-dotcom --platforms github --out report.html
+Start-Process .\report.html
+```
+
+Если команда `py` не найдена, используйте `python -m venv .venv`, предварительно
+проверив `python --version` (нужна версия 3.11+).
+Для остальных примеров ниже в PowerShell заменяйте начальное `idlink` на
+`.\.venv\Scripts\python.exe -m idlink`.
+Переменная URL действует только в текущем терминале; в новом окне задайте её снова.
+
+### Частые ошибки и другие команды
 
 Ошибка `Neither 'setup.py' nor 'pyproject.toml' found` означает, что вы находитесь
 не в папке проекта. Перейдите в неё через `cd` и повторите установку.
