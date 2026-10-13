@@ -76,7 +76,13 @@ async def test_multi_source_search_partial_failure_and_links() -> None:
         limiter=DomainRateLimiter(sleep=sleep),
     ) as http:
         report = await search_report(
-            http, SearchRequest(seed="demo", mode="search", purpose="Research")
+            http,
+            SearchRequest(
+                seed="demo",
+                mode="search",
+                purpose="Research",
+                platforms="github,keybase,hackernews",
+            ),
         )
     assert len(report.nodes) == 2
     assert {c.status for c in report.checks} == {"found", "error"}

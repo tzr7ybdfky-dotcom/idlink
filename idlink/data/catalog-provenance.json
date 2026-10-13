@@ -5,5 +5,6 @@
   "source_sha256": "3fdfc6694c5cd99798881215554b09e617c6d5284a6219fae309882566a9fb30",
   "license": "MIT",
   "entries": 452,
-  "use": "URL templates only; no Sherlock detection rules or profile data"
+  "use": "URL templates and GET existence heuristics; no example usernames, extra headers or profile data",
+  "probe_rules": 450
 }

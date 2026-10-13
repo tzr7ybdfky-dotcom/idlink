@@ -35,7 +35,7 @@ main{grid-template-columns:minmax(0,1fr);padding:32px;gap:28px;max-width:1600px;
 <details><summary>Профили по площадкам</summary><div id="profiles"></div></details>
 <p class="muted">Перетаскивайте узлы, масштабируйте колёсиком. Толщина связи — её оценка. Пунктир группирует наблюдения без оценки личности.</p>
 <button id="reset-view" type="button">Сбросить масштаб</button><svg id="graph" role="img" aria-label="Граф вероятностных связей"></svg>
-<div id="warnings"></div><h3>Связи</h3><div id="edge-list"></div></section>
+<details><summary>Статусы и предупреждения</summary><div id="warnings"></div></details><h3>Связи</h3><div id="edge-list"></div></section>
 <aside hidden class="panel" id="details" aria-live="polite"><h2>Разбор связи</h2>
 <p class="muted">Выберите ребро. Связи не переносятся автоматически на соседние профили.</p></aside></main>
 <noscript>Для графа нужен JavaScript. Текстовый разбор доступен через idlink explain.</noscript>
@@ -108,7 +108,7 @@ const defs=svg.append("defs"),pattern=defs.append("pattern").attr("id","dots").a
 pattern.append("circle").attr("cx",1).attr("cy",1).attr("r",1).attr("fill","#222222");
 svg.append("rect").attr("width",900).attr("height",540).attr("fill","url(#dots)");
 const canvas=svg.append("g");
-const zoom=d3.zoom().scaleExtent([.35,3]).on("zoom",event=>canvas.attr("transform",event.transform));
+const zoom=d3.zoom().scaleExtent([.05,3]).on("zoom",event=>canvas.attr("transform",event.transform));
 svg.call(zoom);document.getElementById("reset-view").onclick=()=>svg.transition().duration(300).call(zoom.transform,d3.zoomIdentity);
 if(!nodes.length){canvas.append("text").attr("x",450).attr("y",270).attr("text-anchor","middle").attr("fill","#989898").text("Нет найденных профилей. Проверьте статусы источников.");}
 const hub=canvas.append("g").attr("class","hub").attr("transform","translate(450,270)").style("display",nodes.length?null:"none");
@@ -124,10 +124,19 @@ groups.append("rect").attr("x",-92).attr("y",-34).attr("width",184).attr("height
 groups.append("text").attr("class","platform").attr("x",-76).attr("y",-9).text(d=>d.platform.toUpperCase());
 groups.append("text").attr("class","username").attr("x",-76).attr("y",16).text(d=>d.username.length>19?d.username.slice(0,18)+"…":d.username);
 groups.call(d3.drag().on("start",(event,d)=>{if(!event.active)simulation.alphaTarget(.1).restart();d.fx=d.x;d.fy=d.y;}).on("drag",(event,d)=>{d.fx=event.x;d.fy=event.y;}).on("end",(event,d)=>{if(!event.active)simulation.alphaTarget(0);d.fx=event.x;d.fy=event.y;}));
-simulation.on("tick",()=>{
+function redraw(){
  groups.attr("transform",d=>`translate(${d.x},${d.y})`);
  observations.attr("x2",d=>d.x).attr("y2",d=>d.y);
  for(const selection of [lines,hits])selection.attr("x1",d=>d.source.x).attr("y1",d=>d.source.y).attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
  percentages.attr("x",d=>(d.source.x+d.target.x)/2).attr("y",d=>(d.source.y+d.target.y)/2-12);
-});
+}
+simulation.on("tick",redraw).stop();simulation.tick(250);redraw();
+function fit(){
+ if(!nodes.length)return;
+ const left=Math.min(415,...nodes.map(d=>d.x-110)),right=Math.max(485,...nodes.map(d=>d.x+110));
+ const top=Math.min(235,...nodes.map(d=>d.y-60)),bottom=Math.max(305,...nodes.map(d=>d.y+60));
+ const scale=Math.min(1,820/(right-left),460/(bottom-top));
+ svg.call(zoom.transform,d3.zoomIdentity.translate(450-(left+right)*scale/2,270-(top+bottom)*scale/2).scale(scale));
+}
+fit();document.getElementById("reset-view").onclick=fit;
 </script></body></html>

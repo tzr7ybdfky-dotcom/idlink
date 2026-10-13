@@ -61,7 +61,9 @@ def build_graph(profiles: list[Profile]) -> nx.Graph[str]:
     return graph
 
 
-def make_report(profiles: list[Profile], warnings: list[str] | None = None) -> Report:
+def make_report(
+    profiles: list[Profile], warnings: list[str] | None = None, *, sparse: bool = False
+) -> Report:
     """Project the graph to a typed minimal report schema."""
     graph = build_graph(profiles)
     edges: dict[str, Edge] = {}
@@ -69,9 +71,15 @@ def make_report(profiles: list[Profile], warnings: list[str] | None = None) -> R
         edge = attrs["edge"]
         if not isinstance(edge, Edge):
             raise TypeError("graph edge must contain an Edge")
-        edges[str(attrs["id"])] = edge
+        if not sparse or edge.probability >= 0.3:
+            edges[str(attrs["id"])] = edge
     return Report(
         nodes=[Node(id=p.url, platform=p.platform, username=p.username) for p in profiles],
         edges=edges,
-        warnings=warnings or [],
+        warnings=(warnings or [])
+        + (
+            ["В большой карте показаны связи с оценкой ≥30%; остальные пары скрыты."]
+            if sparse
+            else []
+        ),
     )

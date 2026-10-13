@@ -9,7 +9,7 @@ body{margin:0;background:var(--bg);color:var(--text);font:15px system-ui,sans-se
 <p class="note">Все подходящие автоисточники включены. Ложные совпадения могут причинить вред: оценка связи не доказывает личность. Почта используется только для Gravatar.</p>
 <p id="status" role="status" aria-live="polite">Готов к поиску</p><p id="error" role="alert"></p>
 <section id="results" hidden><div class="result-head"><div id="summary" class="stats"></div><button id="download">Скачать HTML</button></div><iframe id="report" title="Интерактивная карта профилей" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox"></iframe></section>
-<details class="catalogue"><summary>Дерево источников <span id="catalog-count" class="muted"></span></summary><p class="note">Автопроверка: GitHub, Bluesky, Hacker News, Keybase; домен — публичная страница, почта — Gravatar. Остальные площадки — ручные ссылки, существование профиля не подтверждено.</p><input id="filter" aria-label="Фильтр источников" placeholder="Найти площадку"><div id="catalog" class="branches"></div></details>
+<details class="catalogue"><summary>Дерево источников <span id="catalog-count" class="muted"></span></summary><p class="note">Публичные API и правила Sherlock для сотен площадок. Проверки страниц дают кандидатов и могут ошибаться. Запрещённые или неподдерживаемые источники остаются ручными ссылками. Домен — публичная страница; почта — Gravatar.</p><input id="filter" aria-label="Фильтр источников" placeholder="Найти площадку"><div id="catalog" class="branches"></div></details>
 </main><footer>idlink · Эвристические оценки с причинами и контрдоводами. Исходные картинки и тексты профилей не сохраняются.</footer>
 <script>
 "use strict";
@@ -17,7 +17,7 @@ const sources = __SOURCES__;
 const token = "__TOKEN__";
 const $=id=>document.getElementById(id);
 let artifact='',currentReport=null;
-const statusLabels={found:'Найден',missing:'Не найден через API',error:'Ошибка доступа',invalid:'Неподходящий ввод'};
+const statusLabels={found:'Найден',missing:'Не найден по правилу площадки',error:'Ошибка доступа',invalid:'Неподходящий ввод'};
 function el(tag,value,parent,cls){const n=document.createElement(tag);n.textContent=value;if(cls)n.className=cls;if(parent)parent.appendChild(n);return n;}
 function kind(){const s=$('seed').value.trim();return s.includes('@') || /^(?:[a-f\d]{32}|[a-f\d]{64})$/i.test(s)?'gravatar':s.includes('.')||s.includes('://')?'website':'username';}
 function drawCatalog(){
@@ -40,7 +40,7 @@ $('filter').oninput=drawCatalog;
 $('seed').oninput=()=>{currentReport=null;artifact='';$('results').hidden=true;drawCatalog();};
 $('search-form').onsubmit=async event=>{
  event.preventDefault();const seed=$('seed').value.trim();if(!seed)return;
- $('submit').disabled=true;$('seed').disabled=true;$('error').textContent='';$('status').textContent='Проверяем все подходящие автоисточники…';$('results').hidden=true;artifact='';currentReport=null;
+ $('submit').disabled=true;$('seed').disabled=true;$('error').textContent='';$('status').textContent='Проверяем все подходящие источники… это может занять несколько минут';$('results').hidden=true;artifact='';currentReport=null;
  try{
   const response=await fetch('/api/search',{method:'POST',headers:{'Content-Type':'application/json','X-idlink-token':token},body:JSON.stringify({seed,platforms:'all',depth:1})});
   const data=await response.json();if(!response.ok)throw new Error(data.error||'Поиск прерван');

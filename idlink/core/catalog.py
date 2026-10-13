@@ -4,6 +4,8 @@ from importlib.resources import files
 
 from pydantic import BaseModel, TypeAdapter
 
+from idlink.plugins.sherlock import RULES
+
 
 class Source(BaseModel):
     """A supported lookup or a clearly labelled unavailable source."""
@@ -96,6 +98,32 @@ for source in SOURCES:
         )
 existing = {s.label.casefold() for s in SOURCES}
 SOURCES.extend(s for s in manual_sources if s.label.casefold() not in existing)
+# Known restricted sources stay disabled even if an upstream rule exists.
+RESTRICTED = {
+    "telegram",
+    "habr",
+    "dev community",
+    "instagram",
+    "facebook",
+    "linkedin",
+    "reddit",
+    "tiktok",
+    "x / twitter",
+    "twitter",
+    "gitlab",
+}
+PROBE_SOURCES = {}
+for source in SOURCES:
+    rule = RULES.get(source.label.casefold())
+    if (
+        not source.automatic
+        and rule
+        and source.label.casefold() not in RESTRICTED
+        and not source.host
+    ):
+        source.automatic = True
+        source.reason = "Проверка страницы по правилу Sherlock; результат — эвристический кандидат."
+        PROBE_SOURCES[source.name] = rule
 USERNAME_PLATFORMS = frozenset(
     s.name for s in SOURCES if s.automatic and s.input_kind == "username"
 )
