@@ -6,220 +6,47 @@ Python 3.11+, MIT. Каждый результат содержит процен
 
 Проект пока хранится приватно. Лицензия позволяет открыть исходники позднее.
 
-## Полная инструкция: установка и запуск
+## Установка и запуск
 
-Начните здесь. `report.html` — готовый отчёт, а **http://127.0.0.1:8765** — интерфейс
-для нового поиска. Адрес работает только на компьютере, где запущен idlink.
-Ниже выберите **один** вариант: существующая папка или установка с нуля.
-Команды выполняйте по порядку; если появилась ошибка, остановитесь и исправьте её.
+Python 3.11+, Git и доступ к репозиторию.
 
-### Если проект уже скачан
-
-Откройте терминал и перейдите в папку проекта, где находится `pyproject.toml`.
-Путь зависит от того, куда вы распаковали архив или клонировали репозиторий.
-В инструкции для своей ОС ниже пропустите скачивание и создание рабочей папки:
-начните с проверки `pyproject.toml`, затем создайте `.venv`, установите зависимости
-и запустите сервер. Если окружение уже создано и проект установлен, используйте
-раздел «Повторный запуск после перезагрузки» с путём к своей папке.
-
-### Установка с нуля без Git и токенов
-
-1. Установите Python **3.11 или новее**, если его ещё нет. На Windows при установке
-   включите добавление Python в PATH. Проверка версии есть в командах ниже.
-2. Создайте рабочую папку командой для своей ОС ниже.
-3. Откройте https://github.com/tzr7ybdfky-dotcom/idlink в браузере и войдите в аккаунт
-   GitHub, которому разрешён доступ к приватному репозиторию.
-4. Нажмите **Code → Download ZIP**. Распакуйте архив **в рабочую папку `idlink-work`**.
-   Получится папка `idlink-main`; если имя отличается, замените его в командах.
-5. Убедитесь, что внутри распакованной папки есть `pyproject.toml` и папка `idlink`.
-   **Не создавайте пустой `pyproject.toml`: нужен весь скачанный проект.**
-6. Установите проект и запустите сервер командами для своей ОС.
-
-Если GitHub показывает 404 или нет кнопки скачивания, проверьте аккаунт и доступ
-к репозиторию. Вход в браузере не авторизует автоматически `git clone` в терминале.
-Пароль GitHub вместо токена для клонирования использовать нельзя; вариант ZIP
-не требует настраивать авторизацию Git.
-
-#### Linux — полный запуск через ZIP
-
-Откройте терминал и создайте папку:
+### Linux
 
 ```sh
-mkdir -p "$HOME/idlink-work"
-```
-
-Распакуйте ZIP в `~/idlink-work`, затем выполните:
-
-```sh
-cd "$HOME/idlink-work/idlink-main"
-ls pyproject.toml
-python3 --version
+git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
+cd idlink
 python3 -m venv .venv
-./.venv/bin/python -m pip install '.[dev]'
+./.venv/bin/python -m pip install .
 ./.venv/bin/python -m idlink serve --repository-url https://github.com/tzr7ybdfky-dotcom/idlink
 ```
 
-Если Python сообщает, что `venv` или `ensurepip` отсутствует, установите пакет
-поддержки venv для своей версии Python через пакетный менеджер дистрибутива,
-затем повторите создание окружения и установку.
-
-#### macOS — полный запуск через ZIP
-
-Откройте Terminal и сначала создайте папку:
+### macOS
 
 ```sh
-mkdir -p "$HOME/idlink-work"
-open "$HOME/idlink-work"
-```
-
-Скачайте и распакуйте ZIP в открывшуюся папку, затем выполните:
-
-```sh
-cd "$HOME/idlink-work/idlink-main"
-ls pyproject.toml
-python3 --version
+git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
+cd idlink
 python3 -m venv .venv
-./.venv/bin/python -m pip install '.[dev]'
+./.venv/bin/python -m pip install .
 ./.venv/bin/python -m idlink serve --repository-url https://github.com/tzr7ybdfky-dotcom/idlink
 ```
 
-#### Windows — полный запуск через ZIP
-
-Откройте **PowerShell** и создайте папку:
+### Windows (PowerShell)
 
 ```powershell
-New-Item -ItemType Directory -Path "$HOME\idlink-work" -Force | Out-Null
-Invoke-Item "$HOME\idlink-work"
-```
-
-Распакуйте ZIP в открывшуюся папку, затем выполните:
-
-```powershell
-Set-Location "$HOME\idlink-work\idlink-main"
-Get-Item .\pyproject.toml
-py -3 --version
+git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
+cd idlink
 py -3 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install '.[dev]'
+.\.venv\Scripts\python.exe -m pip install .
 .\.venv\Scripts\python.exe -m idlink serve --repository-url https://github.com/tzr7ybdfky-dotcom/idlink
 ```
 
-Если `py` не найден, в двух строках проверки и создания окружения замените `py -3`
-на `python`. Активация `.venv` и изменение ExecutionPolicy не нужны.
-
-### Что открыть и как выполнить поиск
-
-1. Дождитесь сообщения сервера и откройте **http://127.0.0.1:8765** в браузере.
-2. Для проверки себя оставьте `audit`; для поиска публичных профилей выберите
-   «Поиск публичных профилей» и заполните цель поиска.
-3. Выберите тип входа и введите ник, домен или e-mail. Для ника вводите только имя
-   аккаунта, без полного URL; у Hacker News регистр имеет значение.
-4. Выберите автоматические источники и нажмите «Найти профили».
-5. Посмотрите статусы: найден, отсутствует, ошибка или неподходящий ввод.
-   Ошибка доступа не означает отсутствия аккаунта.
-6. В каталоге откройте нужные ручные ссылки. Они не проверяются автоматически:
-   TikTok, Telegram и остальные такие ссылки не добавляют узлы и проценты в граф.
-7. Кликните ребро графа для причин и контрдоводов. Если найден один профиль,
-   ребра может не быть — это нормальный результат.
-8. Кнопкой скачивания сохраните HTML-отчёт. Он открывается без работающего сервера.
-
-Остановка сервера: **Ctrl+C** в его терминале. Если порт занят, остановите прежний
-сервер или добавьте `--port 8766` к команде запуска и откройте http://127.0.0.1:8766.
-
-### Повторный запуск после перезагрузки
-
-Устанавливать зависимости каждый раз не нужно. Откройте терминал, перейдите
-в папку проекта и запустите сервер. Для варианта ZIP:
-
-Linux / macOS:
-
-```sh
-cd "$HOME/idlink-work/idlink-main"
-./.venv/bin/python -m idlink serve --repository-url https://github.com/tzr7ybdfky-dotcom/idlink
-```
-
-Windows PowerShell:
-
-```powershell
-Set-Location "$HOME\idlink-work\idlink-main"
-.\.venv\Scripts\python.exe -m idlink serve --repository-url https://github.com/tzr7ybdfky-dotcom/idlink
-```
-
-Если проект находится в другой папке, замените путь в первой строке на свой.
-
-### Какие папки и файлы нужны
-
-```text
-idlink-work/
-└── idlink-main/
-    ├── pyproject.toml  ← уже находится в ZIP; настройки установки
-    ├── idlink/         ← уже находится в ZIP; код, каталог и HTML-шаблоны
-    ├── .venv/          ← создаётся командой python -m venv
-    └── report.html     ← создаётся CLI или сохраняется из браузера
-```
-
-Для запуска **не нужно вручную создавать Python-файл или `report.html`**:
-все файлы приложения уже в репозитории. Запуск выполняет `python -m idlink serve`.
-`.venv` содержит установленный Python-пакет; создание пустых файлов его не заменяет.
-Скачанный браузером отчёт обычно оказывается в папке «Загрузки», а не рядом с кодом.
-
-### Обновление установленного проекта
-
-Остановите сервер. Если проект клонирован через Git, в его папке выполните
-`git pull --ff-only`; при ошибке или локальных изменениях остановитесь.
-Если использовали ZIP, скачайте новый архив и распакуйте в новую папку, затем
-повторите установку для неё. Не удаляйте свои сохранённые отчёты.
-После обновления кода повторите команду установки из своей папки:
-
-```sh
-./.venv/bin/python -m pip install --upgrade '.[dev]'
-```
-
-В PowerShell:
-
-```powershell
-.\.venv\Scripts\python.exe -m pip install --upgrade '.[dev]'
-```
-
-Затем снова запустите сервер. Установка пакета нужна, чтобы команда из `.venv`
-использовала обновлённую версию, в том числе при запуске из другой папки.
-
-### Если запуск не работает
-
-| Сообщение / проблема | Что сделать |
-| --- | --- |
-| `No such file or directory` после `cd` | Проверьте путь и имя распакованной папки; используйте кавычки для путей с пробелами. |
-| `Neither setup.py nor pyproject.toml found` | Перейдите в папку с настоящим `pyproject.toml`; не запускайте установку в `~`. |
-| `Invalid username or token` при клонировании | Используйте описанное выше скачивание ZIP через авторизованный браузер. |
-| `idlink: command not found` | Используйте явный путь `.venv/bin/python -m idlink` или Windows-вариант выше; проверьте успешность установки. |
-| `No module named idlink` | Повторите установку через Python из `.venv` в папке проекта. |
-| Браузер не открывает `127.0.0.1:8765` | Проверьте, что сервер работает на этом же компьютере, терминал не закрыт и порт совпадает. |
-| В `report.html` нельзя начать новый поиск | Откройте адрес сервера; HTML-файл содержит только сохранённый результат. |
-| `report.html` отсутствует | Сначала создайте отчёт через CLI или скачайте его из интерфейса; сервер сам файл не записывает. |
-
-Ниже — возможности приложения, альтернативная установка через Git и команды CLI.
+Откройте **http://127.0.0.1:8765**. Остановка: **Ctrl+C**.
 
 ## Веб-интерфейс и поиск по площадкам
 
 Интерфейс в стиле дерева OSINT Framework: поле запроса, категории, фильтр площадок,
 статусы проверок, найденные профили и граф с объяснениями. Это локальное приложение;
 автономный `report.html` показывает готовый результат, а новый поиск выполняется через сервер.
-
-После установки по инструкции для своей ОС запустите сервер:
-
-```sh
-idlink serve --repository-url https://github.com/tzr7ybdfky-dotcom/idlink
-```
-
-В Windows PowerShell:
-
-```powershell
-.\.venv\Scripts\python.exe -m idlink serve --repository-url https://github.com/tzr7ybdfky-dotcom/idlink
-```
-
-Откройте **http://127.0.0.1:8765** в браузере и оставьте терминал работающим.
-Выберите «Поиск публичных профилей», введите ник и цель поиска, нажмите «Найти профили».
-Остановить сервер можно через Ctrl+C. `--port 8766` меняет порт, если стандартный занят.
-По умолчанию сохранён режим `audit`; поиск других публичных профилей — явный режим `search`.
 
 Каталог содержит **460 источников**. TikTok, Telegram, Instagram и другие популярные
 площадки включены как **ручные ссылки по шаблону ника**. Ссылка не подтверждает существование
@@ -254,152 +81,21 @@ URL-шаблоны взяты из [Sherlock](https://github.com/sherlock-projec
 Один HTTP-клиент и ограничитель сохраняются между поисками; блокировка домена действует
 до остановки сервера. Запросы из другого Origin и без токена страницы отклоняются.
 
-## Альтернативная установка через Git и запуск CLI
+## CLI
 
-Установку выполняйте **из папки проекта**, где находится `pyproject.toml`, а не из домашней папки `~`.
-Нужны Python 3.11+ и Git. Выберите инструкции для своей ОС; примеры аудита ниже
-используют аккаунт владельца репозитория — замените `tzr7ybdfky-dotcom` на свой ник.
-
-Каждый блок ниже содержит полный первый запуск из домашней папки:
-создаёт рабочую папку `idlink-work`, скачивает исходники в `idlink`, устанавливает CLI
-и создаёт `report.html`. Для клонирования приватного репозитория нужен доступ к нему на GitHub;
-при запросе авторизации завершите вход стандартным способом Git.
-**Обычный пароль GitHub не подходит для `git clone`.** Если Git не авторизован,
-откройте репозиторий в браузере, войдите в GitHub, выберите **Code → Download ZIP**,
-распакуйте архив в рабочую папку и перейдите через `cd` в распакованную папку
-(обычно `idlink-main`), где находится `pyproject.toml`. Далее начните со строки создания `.venv`.
-Если клонирование завершилось ошибкой, остановитесь: следующие команды выполнять нельзя.
-
-Файл `pyproject.toml` уже находится в репозитории: `git clone` создаёт его локальную копию
-вместе с папкой `idlink/`, содержащей код. Пустого файла с таким названием недостаточно.
-Файл отчёта `report.html` автоматически создаёт команда аудита — вручную создавать его не нужно.
-
-Если исходники уже скачаны, перейдите через `cd` в свою папку с `pyproject.toml`
-и начинайте выбранный блок со строки создания `.venv`.
-
-Если в терминале уже активно другое виртуальное окружение (например, созданное в `~`),
-сначала выполните `deactivate`.
-
-### Linux (bash или zsh)
-
-```sh
-cd ~
-mkdir -p idlink-work
-cd idlink-work
-git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
-cd idlink
-ls pyproject.toml
-python3 --version
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install '.[dev]'
-export IDLINK_REPOSITORY_URL=https://github.com/tzr7ybdfky-dotcom/idlink
-
-idlink audit tzr7ybdfky-dotcom --platforms github --out report.html
-xdg-open report.html
-```
-
-Если создание окружения сообщает об отсутствии `venv`/`ensurepip`, установите
-пакет поддержки venv для своей версии Python через пакетный менеджер дистрибутива.
-На Linux без графического интерфейса перенесите `report.html` на компьютер с браузером;
-если `xdg-open` отсутствует, откройте файл вручную.
-
-### macOS (Terminal, zsh или bash)
-
-```sh
-cd ~
-mkdir -p idlink-work
-cd idlink-work
-git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
-cd idlink
-ls pyproject.toml
-python3 --version
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install '.[dev]'
-export IDLINK_REPOSITORY_URL=https://github.com/tzr7ybdfky-dotcom/idlink
-
-idlink audit tzr7ybdfky-dotcom --platforms github --out report.html
-open report.html
-```
-
-### Windows (PowerShell)
-
-Откройте PowerShell. Активация окружения не требуется:
-явный путь к Python позволяет запускать CLI без изменения политики выполнения скриптов.
-
-```powershell
-Set-Location $HOME
-New-Item -ItemType Directory -Path idlink-work -Force | Out-Null
-Set-Location idlink-work
-git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
-Set-Location idlink
-Get-Item .\pyproject.toml
-py -3 --version
-py -3 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install '.[dev]'
-$env:IDLINK_REPOSITORY_URL = 'https://github.com/tzr7ybdfky-dotcom/idlink'
-
-.\.venv\Scripts\python.exe -m idlink audit tzr7ybdfky-dotcom --platforms github --out report.html
-Start-Process .\report.html
-```
-
-Если команда `py` не найдена, используйте `python -m venv .venv`, предварительно
-проверив `python --version` (нужна версия 3.11+).
-Для остальных примеров ниже в PowerShell заменяйте начальное `idlink` на
-`.\.venv\Scripts\python.exe -m idlink`.
-Переменная URL действует только в текущем терминале; в новом окне задайте её снова.
-
-После установки папка проекта содержит:
-
-```text
-idlink-work/
-└── idlink/
-    ├── pyproject.toml   # настройки установки, скачиваются из репозитория
-    ├── idlink/          # исходный код CLI, скачивается из репозитория
-    ├── .venv/          # окружение, создаёт python -m venv
-    └── report.html     # результат, создаёт команда audit
-```
-
-В новом терминале перейдите в `~/idlink-work/idlink` (Linux/macOS) или
-`$HOME\idlink-work\idlink` (PowerShell), снова задайте переменную URL и запустите аудит.
-На Linux/macOS перед запуском активируйте окружение через `source .venv/bin/activate`;
-на Windows используйте путь `.\.venv\Scripts\python.exe -m idlink`, как в блоке выше.
-
-### Частые ошибки и другие команды
-
-Ошибка `Neither 'setup.py' nor 'pyproject.toml' found` означает, что вы находитесь
-не в папке проекта. Перейдите в неё через `cd` и повторите установку.
-После неудачной установки команда `idlink` недоступна и выдаёт `command not found`.
-
-Ниже — **отдельные примеры**, их не нужно запускать все подряд.
-`YOUR_USERNAME` замените на свой ник; `example.org` и `user@example.org` — на свои домен и e-mail.
-`EDGE_ID` замените на ID ребра, показанный CLI при создании отчёта; если связей нет, объяснять нечего.
+В папке проекта используйте `.venv/bin/python -m idlink` (Linux/macOS)
+или `.\.venv\Scripts\python.exe -m idlink` (Windows) вместо `idlink` ниже.
+Для `audit` и `search` добавьте `--repository-url https://github.com/tzr7ybdfky-dotcom/idlink`.
 
 ```sh
 idlink audit YOUR_USERNAME --platforms github --out report.html
-idlink YOUR_USERNAME --out report.html
-idlink audit example.org --profile github:YOUR_USERNAME --out report.html
-idlink audit user@example.org --profile github:YOUR_USERNAME --out report.html
-idlink search YOUR_USERNAME --purpose 'Проверка собственных публичных связей' --depth 1
+idlink search YOUR_USERNAME --purpose 'Проверка публичных профилей' --platforms all --out report.html
 idlink explain EDGE_ID --report report.html
 ```
 
-URL репозитория обязателен: используйте переменную выше или `--repository-url`.
-Команда без названия режима запускает `audit`. В `audit` указывайте свои профили.
-`--profile platform:identifier` можно повторять для явно указанных своих аккаунтов.
-`--activity` дополнительно запрашивает до 100 публичных событий GitHub.
-`--platforms auto` выбирает источник по входу: ник → GitHub, домен → website,
-e-mail или MD5/SHA-256 → Gravatar. Домены принимаются без пути либо как HTTPS origin.
-Хеш Gravatar не используется как ник при сравнении имён.
-
-`search` требует непустой `--purpose` и выводит предупреждение о вреде ложных совпадений.
-Глубина — 0 или 1: только явно опубликованные ссылки, не перебор вариантов ника.
-Лимиты: восемь исходных профилей, до восьми ссылок с каждого, до 16 профилей за запуск.
-Список не найденных профилей и ошибок отображается отдельно от оценок.
-
-Коды выхода: **0** — успех (включая отсутствие профиля), **2** — ошибка ввода/файла,
-**3** — сеть или запрет доступа. При частичной ошибке сохраняется доступный отчёт и код 3.
+`YOUR_USERNAME` — ник, `EDGE_ID` — ID ребра из вывода.
+`audit` — режим по умолчанию; `search` требует непустую цель.
+Коды выхода: 0 — успех, 2 — ошибка ввода, 3 — сеть или запрет доступа.
 
 ## Отчёт
 
