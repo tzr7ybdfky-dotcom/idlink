@@ -40,18 +40,7 @@
 
 Нужны **Python 3.11+** и **Git**. Замените `YOUR_USERNAME` на нужный ник.
 
-### Linux
-
-```bash
-git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
-cd idlink
-python3 -m venv .venv
-.venv/bin/python -m pip install .
-source .venv/bin/activate
-idlink search YOUR_USERNAME
-```
-
-### macOS
+### Linux / macOS
 
 ```bash
 git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
