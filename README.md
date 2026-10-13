@@ -12,20 +12,17 @@ Python 3.11+, MIT. Каждый результат содержит процен
 Нужны Python 3.11+ и Git. Выберите инструкции для своей ОС; примеры аудита ниже
 используют аккаунт владельца репозитория — замените `tzr7ybdfky-dotcom` на свой ник.
 
-### Получение исходников (все ОС)
+Каждый блок ниже содержит полный первый запуск из домашней папки:
+создаёт рабочую папку `idlink-work`, скачивает исходники в `idlink`, устанавливает CLI
+и создаёт `report.html`. Для клонирования приватного репозитория нужен доступ к нему на GitHub;
+при запросе авторизации завершите вход стандартным способом Git.
 
-Если исходники ещё не скачаны, сначала клонируйте репозиторий (для приватного репозитория нужен доступ):
+Файл `pyproject.toml` уже находится в репозитории: `git clone` создаёт его локальную копию
+вместе с папкой `idlink/`, содержащей код. Пустого файла с таким названием недостаточно.
+Файл отчёта `report.html` автоматически создаёт команда аудита — вручную создавать его не нужно.
 
-```sh
-git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
-cd idlink
-```
-
-Если проект уже находится на этом Mac в рабочей папке, вместо клонирования выполните:
-
-```sh
-cd /Users/USER/Desktop/Danya/idlink-project
-```
+Если исходники уже скачаны, перейдите через `cd` в свою папку с `pyproject.toml`
+и начинайте выбранный блок со строки создания `.venv`.
 
 Если в терминале уже активно другое виртуальное окружение (например, созданное в `~`),
 сначала выполните `deactivate`.
@@ -33,6 +30,13 @@ cd /Users/USER/Desktop/Danya/idlink-project
 ### macOS (Terminal, zsh или bash)
 
 ```sh
+cd ~
+mkdir -p idlink-work
+cd idlink-work
+git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
+cd idlink
+ls pyproject.toml
+python3 --version
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install '.[dev]'
@@ -45,6 +49,13 @@ open report.html
 ### Linux (bash или zsh)
 
 ```sh
+cd ~
+mkdir -p idlink-work
+cd idlink-work
+git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
+cd idlink
+ls pyproject.toml
+python3 --version
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install '.[dev]'
@@ -61,10 +72,17 @@ xdg-open report.html
 
 ### Windows (PowerShell)
 
-Выполняйте команды в PowerShell из папки проекта. Активация окружения не требуется:
+Откройте PowerShell. Активация окружения не требуется:
 явный путь к Python позволяет запускать CLI без изменения политики выполнения скриптов.
 
 ```powershell
+Set-Location $HOME
+New-Item -ItemType Directory -Path idlink-work -Force | Out-Null
+Set-Location idlink-work
+git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
+Set-Location idlink
+Get-Item .\pyproject.toml
+py -3 --version
 py -3 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install '.[dev]'
 $env:IDLINK_REPOSITORY_URL = 'https://github.com/tzr7ybdfky-dotcom/idlink'
@@ -78,6 +96,22 @@ Start-Process .\report.html
 Для остальных примеров ниже в PowerShell заменяйте начальное `idlink` на
 `.\.venv\Scripts\python.exe -m idlink`.
 Переменная URL действует только в текущем терминале; в новом окне задайте её снова.
+
+После установки папка проекта содержит:
+
+```text
+idlink-work/
+└── idlink/
+    ├── pyproject.toml   # настройки установки, скачиваются из репозитория
+    ├── idlink/          # исходный код CLI, скачивается из репозитория
+    ├── .venv/          # окружение, создаёт python -m venv
+    └── report.html     # результат, создаёт команда audit
+```
+
+В новом терминале перейдите в `~/idlink-work/idlink` (macOS/Linux) или
+`$HOME\idlink-work\idlink` (PowerShell), снова задайте переменную URL и запустите аудит.
+На macOS/Linux перед запуском активируйте окружение через `source .venv/bin/activate`;
+на Windows используйте путь `.\.venv\Scripts\python.exe -m idlink`, как в блоке выше.
 
 ### Частые ошибки и другие команды
 
