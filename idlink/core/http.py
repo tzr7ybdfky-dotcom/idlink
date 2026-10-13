@@ -40,6 +40,7 @@ class PublicHTTP:
         self.client = httpx.AsyncClient(
             transport=transport,
             timeout=20,
+            limits=httpx.Limits(max_connections=128, max_keepalive_connections=128),
             follow_redirects=False,
             trust_env=False,
             headers={"User-Agent": self.user_agent},
@@ -124,6 +125,5 @@ class PublicHTTP:
             policy = self._robots[origin]
             if not policy.can_fetch(url):
                 raise PluginError("robots.txt disallows this resource")
-            self.limiter.interval = max(self.limiter.interval, policy.delay)
-            self.limiter.defer(url, self.limiter.interval)
+            self.limiter.defer(url, max(self.limiter.interval, policy.delay))
         return await self._request(url)

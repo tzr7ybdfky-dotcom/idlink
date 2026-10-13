@@ -24,7 +24,7 @@ class SearchRequest(BaseModel):
     seed: str = Field(min_length=1, max_length=80)
     mode: Literal["audit", "search"] = "audit"
     purpose: str = Field(default="", max_length=500)
-    platforms: str = "all"
+    platforms: str = Field(default="all", max_length=65_536)
     depth: int = Field(default=0, ge=0, le=1)
 
     def roots(self) -> list[tuple[str, str]]:
@@ -46,12 +46,25 @@ def trusted_request(host: str, origin: str, token: str, expected: str, port: int
 
 async def search_report(http: PublicHTTP, request: SearchRequest) -> Report:
     """Reuse the same transport and rate limiter across browser searches."""
-    result = await collect(http, request.roots(), depth=request.depth)
+    roots = request.roots()
+    result = await collect(
+        http,
+        roots,
+        depth=request.depth,
+        allowed_platforms=frozenset(name for name, _ in roots)
+        if request.platforms not in {"all", "auto"}
+        else None,
+    )
     return result.report
 
 
 def serve(
-    repository_url: str, port: int = 8765, *, initial_seed: str = "", open_browser: bool = False
+    repository_url: str,
+    port: int = 8765,
+    *,
+    initial_seed: str = "",
+    open_browser: bool = False,
+    initial_platforms: str = "all",
 ) -> None:
     """Serve only on IPv4 loopback; requests are serialized and not logged."""
     token = secrets.token_urlsafe(32)
@@ -95,10 +108,11 @@ def serve(
                         .replace(
                             "__INITIAL_SEED__", json.dumps(initial_seed).replace("<", "\\u003c")
                         )
+                        .replace("__INITIAL_PLATFORMS__", json.dumps(initial_platforms))
                         .replace(
                             "__SOURCES__",
                             json.dumps(
-                                [s.model_dump() for s in SOURCES], ensure_ascii=False
+                                [s.model_dump(mode="json") for s in SOURCES], ensure_ascii=False
                             ).replace("<", "\\u003c"),
                         )
                     )
@@ -123,7 +137,7 @@ def serve(
                 try:
                     length = int(self.headers.get("Content-Length", "0"))
                     if (
-                        not 0 < length <= 4096
+                        not 0 < length <= 131_072
                         or self.headers.get("Content-Type") != "application/json"
                     ):
                         raise ValueError("Недопустимый формат запроса.")

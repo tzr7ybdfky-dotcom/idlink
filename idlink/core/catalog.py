@@ -18,6 +18,7 @@ class Source(BaseModel):
     reason: str = "Официальный публичный API; robots.txt проверяется при запросе."
     host: str = ""
     template: str = ""
+    tags: frozenset[str] = frozenset()
 
 
 SOURCES = [
@@ -82,6 +83,11 @@ SOURCES = [
 manual_sources = TypeAdapter(list[Source]).validate_json(
     files("idlink.data").joinpath("platforms.json").read_bytes()
 )
+manual_sources.extend(
+    TypeAdapter(list[Source]).validate_json(
+        files("idlink.data").joinpath("extra_platforms.json").read_bytes()
+    )
+)
 by_label = {s.label.casefold(): s for s in manual_sources}
 for source in SOURCES:
     imported = by_label.get(source.label.casefold())
@@ -104,7 +110,7 @@ for source in SOURCES:
         and not source.host
     ):
         source.automatic = True
-        source.reason = "Проверка страницы по правилу Sherlock; результат — эвристический кандидат."
+        source.reason = "Правило публичной GET-проверки; результат — эвристический кандидат."
         PROBE_SOURCES[source.name] = rule
 USERNAME_PLATFORMS = frozenset(
     s.name for s in SOURCES if s.automatic and s.input_kind == "username"

@@ -8,6 +8,7 @@ from typing import Annotated
 import typer
 
 from idlink.core.cache import ProfileCache
+from idlink.core.categories import CATEGORIES, selected_platforms
 from idlink.core.collection import Collection, collect, plan_seeds
 from idlink.core.http import PublicHTTP
 from idlink.core.models import Profile
@@ -28,6 +29,7 @@ async def execute(
     depth: int,
     activity: bool,
     on_profile: Callable[[Profile], None] | None = None,
+    allowed_platforms: frozenset[str] | None = None,
 ) -> Collection:
     """Share one policy-aware client and limiter across all sources."""
     async with PublicHTTP(repository_url) as http:
@@ -38,6 +40,7 @@ async def execute(
             activity=activity,
             cache=ProfileCache(Path(".cache/idlink")),
             on_profile=on_profile,
+            allowed_platforms=allowed_platforms,
         )
 
 
@@ -49,6 +52,7 @@ def run(
     extra: list[str] | None,
     depth: int,
     activity: bool,
+    restrict_sources: bool = False,
 ) -> None:
     """Validate inputs first, emit a report and preserve partial-failure exit status."""
     try:
@@ -62,6 +66,7 @@ def run(
                 depth,
                 activity,
                 on_profile=(lambda p: typer.echo(p.url)) if out is None else None,
+                allowed_platforms=frozenset(p for p, _ in roots) if restrict_sources else None,
             )
         )
         if out is not None:
@@ -108,6 +113,7 @@ def audit(
 
 @app.command()
 def search(
+    ctx: typer.Context,
     username: str,
     repository_url: Repo = "https://github.com/tzr7ybdfky-dotcom/idlink",
     purpose: Annotated[str | None, typer.Option("--purpose")] = None,
@@ -116,6 +122,23 @@ def search(
     out: Annotated[Path | None, typer.Option("--out")] = None,
     profile: Profiles = None,
     activity: Activity = False,
+    forums: Annotated[bool, typer.Option("--forums", help="Только: Форумы.")] = False,
+    social: Annotated[bool, typer.Option("--social", help="Только: Социальные сети.")] = False,
+    dev: Annotated[bool, typer.Option("--dev", help="Только: Разработка.")] = False,
+    gaming: Annotated[bool, typer.Option("--gaming", help="Только: Игры.")] = False,
+    music: Annotated[bool, typer.Option("--music", help="Только: Музыка.")] = False,
+    video: Annotated[bool, typer.Option("--video", help="Только: Видео и стримы.")] = False,
+    photo: Annotated[bool, typer.Option("--photo", help="Только: Фотография.")] = False,
+    art: Annotated[bool, typer.Option("--art", help="Только: Искусство и дизайн.")] = False,
+    blogs: Annotated[bool, typer.Option("--blogs", help="Только: Блоги.")] = False,
+    news: Annotated[bool, typer.Option("--news", help="Только: Новости.")] = False,
+    science: Annotated[bool, typer.Option("--science", help="Только: Наука.")] = False,
+    education: Annotated[bool, typer.Option("--education", help="Только: Образование.")] = False,
+    business: Annotated[bool, typer.Option("--business", help="Только: Работа и бизнес.")] = False,
+    shopping: Annotated[bool, typer.Option("--shopping", help="Только: Магазины.")] = False,
+    sport: Annotated[bool, typer.Option("--sport", help="Только: Спорт.")] = False,
+    travel: Annotated[bool, typer.Option("--travel", help="Только: Путешествия.")] = False,
+    wikis: Annotated[bool, typer.Option("--wikis", help="Только: Вики.")] = False,
 ) -> None:
     """Найти публичные профили на всех подключённых источниках."""
     if purpose is not None and not purpose.strip():
@@ -125,21 +148,60 @@ def search(
         "вероятностная связь не доказывает личность.",
         err=True,
     )
-    run(username, repository_url, platforms, out, profile, depth, activity)
+    try:
+        platforms = selected_platforms(platforms, ctx.params)
+    except ValueError as exc:
+        raise typer.BadParameter(str(exc)) from exc
+    run(
+        username,
+        repository_url,
+        platforms,
+        out,
+        profile,
+        depth,
+        activity,
+        restrict_sources=any(ctx.params.get(k) for k in CATEGORIES),
+    )
 
 
 @app.command()
 def visual(
+    ctx: typer.Context,
     username: str,
     repository_url: Repo = "https://github.com/tzr7ybdfky-dotcom/idlink",
     port: Annotated[int, typer.Option("--port", min=0, max=65535)] = 0,
+    platforms: Platforms = "all",
+    forums: Annotated[bool, typer.Option("--forums", help="Только: Форумы.")] = False,
+    social: Annotated[bool, typer.Option("--social", help="Только: Социальные сети.")] = False,
+    dev: Annotated[bool, typer.Option("--dev", help="Только: Разработка.")] = False,
+    gaming: Annotated[bool, typer.Option("--gaming", help="Только: Игры.")] = False,
+    music: Annotated[bool, typer.Option("--music", help="Только: Музыка.")] = False,
+    video: Annotated[bool, typer.Option("--video", help="Только: Видео и стримы.")] = False,
+    photo: Annotated[bool, typer.Option("--photo", help="Только: Фотография.")] = False,
+    art: Annotated[bool, typer.Option("--art", help="Только: Искусство и дизайн.")] = False,
+    blogs: Annotated[bool, typer.Option("--blogs", help="Только: Блоги.")] = False,
+    news: Annotated[bool, typer.Option("--news", help="Только: Новости.")] = False,
+    science: Annotated[bool, typer.Option("--science", help="Только: Наука.")] = False,
+    education: Annotated[bool, typer.Option("--education", help="Только: Образование.")] = False,
+    business: Annotated[bool, typer.Option("--business", help="Только: Работа и бизнес.")] = False,
+    shopping: Annotated[bool, typer.Option("--shopping", help="Только: Магазины.")] = False,
+    sport: Annotated[bool, typer.Option("--sport", help="Только: Спорт.")] = False,
+    travel: Annotated[bool, typer.Option("--travel", help="Только: Путешествия.")] = False,
+    wikis: Annotated[bool, typer.Option("--wikis", help="Только: Вики.")] = False,
 ) -> None:
     """Открыть сайт и автоматически построить граф по нику, домену или почте."""
     from idlink.web import serve as serve_web
 
     try:
-        plan_seeds(username, "all", [])
-        serve_web(repository_url, port, initial_seed=username, open_browser=True)
+        platforms = selected_platforms(platforms, ctx.params)
+        plan_seeds(username, platforms, [])
+        serve_web(
+            repository_url,
+            port,
+            initial_seed=username,
+            open_browser=True,
+            initial_platforms=platforms,
+        )
     except (ValueError, OSError) as exc:
         raise typer.BadParameter(str(exc)) from exc
 
@@ -176,6 +238,19 @@ def explain(
             typer.echo(f"Контрдовод: {signal.counter}")
 
 
+@app.command("help")
+def show_help() -> None:
+    """Показать команды, флаги категорий и примеры поиска."""
+    typer.echo("idlink search НИК — ссылки в терминале\nidlink visual НИК — сайт с графом")
+    typer.echo("Вместо ника: домен или почта. Без фильтров проверяются все подходящие источники.")
+    typer.echo("\nКатегории (несколько флагов объединяются):")
+    for flag, (label, _) in CATEGORIES.items():
+        typer.echo(f"  --{flag:12} {label}")
+    typer.echo("\nДругие флаги: --platforms, --purpose, --depth, --out, --profile, --activity,")
+    typer.echo("--repository-url; у visual также --port. Подробности: idlink search --help.")
+    typer.echo("\nidlink search alice --forums --social\nidlink visual alice --gaming")
+
+
 @app.callback()
 def default_mode() -> None:
     """Аудит публичных связей; оценки эвристические и не доказывают личность."""
@@ -189,7 +264,7 @@ def main() -> None:
     if (
         args
         and not args[0].startswith("-")
-        and args[0] not in {"audit", "search", "explain", "serve", "visual"}
+        and args[0] not in {"audit", "search", "explain", "serve", "visual", "help"}
     ):
         args.insert(0, "audit")
     app(args=args)

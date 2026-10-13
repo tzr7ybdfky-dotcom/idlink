@@ -16,6 +16,7 @@ body{margin:0;background:var(--bg);color:var(--text);font:15px system-ui,sans-se
 const sources = __SOURCES__;
 const token = "__TOKEN__";
 const initialSeed = __INITIAL_SEED__;
+const initialPlatforms = __INITIAL_PLATFORMS__;
 const $=id=>document.getElementById(id);
 let artifact='',currentReport=null;
 const statusLabels={found:'Найден',missing:'Не найден по правилу площадки',error:'Ошибка доступа',invalid:'Неподходящий ввод'};
@@ -43,7 +44,7 @@ $('search-form').onsubmit=async event=>{
  event.preventDefault();const seed=$('seed').value.trim();if(!seed)return;
  $('submit').disabled=true;$('seed').disabled=true;$('error').textContent='';$('status').textContent='Проверяем все подходящие источники… это может занять несколько минут';$('results').hidden=true;artifact='';currentReport=null;
  try{
-  const response=await fetch('/api/search',{method:'POST',headers:{'Content-Type':'application/json','X-idlink-token':token},body:JSON.stringify({seed,platforms:'all',depth:1})});
+  const response=await fetch('/api/search',{method:'POST',headers:{'Content-Type':'application/json','X-idlink-token':token},body:JSON.stringify({seed,platforms:initialPlatforms,depth:1})});
   const data=await response.json();if(!response.ok)throw new Error(data.error||'Поиск прерван');
   currentReport=data.report;artifact=data.html;$('report').srcdoc=artifact;$('results').hidden=false;drawCatalog();$('summary').replaceChildren();
   for(const [count,label] of [[data.report.nodes.length,'профилей'],[Object.keys(data.report.edges).length,'связей']]){const item=el('div','',$('summary'));el('strong',String(count),item);el('span',label,item,'muted');}

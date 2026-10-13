@@ -56,3 +56,40 @@ def test_large_graph_keeps_nodes_without_accumulating_weak_edges() -> None:
     assert len(report.nodes) == 30
     assert not report.edges
     assert "30%" in report.warnings[0]
+
+
+def test_indexed_sparse_graph_matches_full_scoring() -> None:
+    """Canonical links, avatars and bio identifiers retain every edge above threshold."""
+    base = Profile(
+        platform="fixture",
+        username="uniquehandle123",
+        url="https://github.com/alice",
+        fetched_at=datetime.now(UTC),
+    )
+    profiles = [
+        base.model_copy(update={"outbound_links": frozenset({"http://www.example.org/b/#x"})}),
+        base.model_copy(update={"url": "https://example.org/b"}),
+        base.model_copy(update={"url": "https://example.org/c", "avatar_phash": 0}),
+        base.model_copy(update={"url": "https://example.org/d", "avatar_phash": 1}),
+        base.model_copy(
+            update={
+                "url": "https://example.org/e",
+                "bio_tokens": frozenset({"id:handle:alice", "rareword"}),
+            }
+        ),
+        base.model_copy(
+            update={
+                "url": "https://example.org/f",
+                "bio_tokens": frozenset({"id:handle:alice", "rareword"}),
+            }
+        ),
+        base.model_copy(
+            update={"url": "https://example.org/g", "activity_hist": (30,) + (0,) * 23}
+        ),
+    ]
+    full = make_report(profiles)
+    sparse = make_report(profiles, sparse=True)
+    assert sparse.edges == {
+        key: edge for key, edge in full.edges.items() if edge.probability >= 0.3
+    }
+    assert len(sparse.edges) >= 3

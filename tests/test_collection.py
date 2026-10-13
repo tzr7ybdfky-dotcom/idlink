@@ -166,3 +166,31 @@ async def test_domains_probe_concurrently_and_stream_fast_results() -> None:
             )
     assert order == ["bluesky", "github"]
     assert len(result.report.nodes) == 2
+
+
+async def test_source_filter_prevents_cross_category_link_expansion() -> None:
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(request.url.host)
+        if request.url.path == "/robots.txt":
+            return httpx.Response(404)
+        return httpx.Response(
+            200,
+            headers={"content-type": "text/html"},
+            text='<a rel="me" href="https://github.com/alice">me</a>',
+        )
+
+    async def sleep(delay: float) -> None:
+        pass
+
+    async with PublicHTTP(
+        "https://example.org/idlink",
+        transport=httpx.MockTransport(handler),
+        limiter=DomainRateLimiter(sleep=sleep),
+    ) as http:
+        result = await collect(
+            http, [("website", "example.org")], depth=1, allowed_platforms=frozenset({"website"})
+        )
+    assert len(result.report.nodes) == 1
+    assert set(calls) == {"example.org"}

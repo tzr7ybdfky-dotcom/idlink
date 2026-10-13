@@ -20,13 +20,13 @@ def test_offline_assets_and_license_are_available() -> None:
     assert "__DATA__" in assets.joinpath("report.html").read_text()
 
 
-def test_catalog_has_over_300_unique_sources_and_manual_social_links() -> None:
+def test_catalog_has_over_1000_distinct_hosts_and_public_social_links() -> None:
     from urllib.parse import urlsplit
 
     from idlink.core.catalog import SOURCES
 
-    assert len({s.label.casefold() for s in SOURCES}) > 300
-    assert len({urlsplit(s.template).hostname for s in SOURCES if s.template}) > 300
+    assert len({s.label.casefold() for s in SOURCES}) > 1000
+    assert len({urlsplit(s.template).hostname for s in SOURCES if s.template}) > 1000
     assert len({s.name for s in SOURCES}) == len(SOURCES)
     for label in ("Telegram", "TikTok", "Instagram"):
         source = next(s for s in SOURCES if s.label == label)
@@ -34,3 +34,12 @@ def test_catalog_has_over_300_unique_sources_and_manual_social_links() -> None:
         assert source.template.startswith("https://")
         assert source.template.count("{}") == 1
     assert "MIT" in files("idlink.data").joinpath("SHERLOCK-LICENSE").read_text()
+
+
+def test_maigret_license_and_sanitized_rules_are_packaged() -> None:
+    from idlink.plugins.sherlock import RULES
+
+    assert len(RULES) > 1000
+    assert "Soxoj" in files("idlink.data").joinpath("MAIGRET-LICENSE").read_text()
+    extra = files("idlink.data").joinpath("extra_probe_rules.json").read_text()
+    assert "usernameClaimed" not in extra and "requestBody" not in extra

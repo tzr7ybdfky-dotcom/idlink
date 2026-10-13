@@ -24,6 +24,7 @@ class ProbeRule(BaseModel):
     error_url: str = ""
     pattern: str = ""
     evidence: str = ""
+    presence: list[str] = Field(default_factory=list)
 
 
 RULES = {
@@ -32,6 +33,14 @@ RULES = {
         files("idlink.data").joinpath("probe_rules.json").read_bytes()
     )
 }
+RULES.update(
+    {
+        r.label.casefold(): r
+        for r in TypeAdapter(list[ProbeRule]).validate_json(
+            files("idlink.data").joinpath("extra_probe_rules.json").read_bytes()
+        )
+    }
+)
 
 
 # Check original public pages, never unofficial mirrors used by some upstream rules.
@@ -154,6 +163,8 @@ class SherlockPlugin(PlatformPlugin):
             raise PluginError("empty response; existence unknown")
         if rule.kind == "message" and any(error in plain for error in rule.errors):
             return None
+        if rule.presence and not any(marker in plain for marker in rule.presence):
+            raise PluginError("positive detection marker missing; existence unknown")
         if not page_evidence(rule, plain, username, url):
             raise PluginError("public profile evidence missing; existence unknown")
         if rule.kind not in {"message", "status_code", "response_url"}:

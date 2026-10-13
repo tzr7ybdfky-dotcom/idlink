@@ -1,5 +1,6 @@
 """Conservative name similarity with a replaceable common-name denylist."""
 
+from functools import lru_cache
 from importlib.resources import files
 
 from rapidfuzz.distance import JaroWinkler
@@ -12,6 +13,7 @@ def normalize(value: str) -> str:
     return value.lower().translate(str.maketrans("", "", "._-"))
 
 
+@lru_cache(maxsize=1)
 def common_names() -> frozenset[str]:
     """Read the bundled, provenance-documented conservative denylist."""
     content = files("idlink.data").joinpath("common_usernames.txt").read_text(encoding="utf-8")

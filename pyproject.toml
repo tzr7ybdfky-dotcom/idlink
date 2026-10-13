@@ -21,7 +21,7 @@ idlink = "idlink.cli:main"
 include = ["idlink*"]
 
 [tool.setuptools.package-data]
-"idlink.data" = ["*.txt", "*.json", "SHERLOCK-LICENSE"]
+"idlink.data" = ["*.txt", "*.json", "*-LICENSE"]
 "idlink.assets" = ["*.html", "*.js", "D3-LICENSE"]
 
 [tool.pytest.ini_options]

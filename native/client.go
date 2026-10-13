@@ -61,7 +61,7 @@ func nativeClient() *http.Client {
 	transport := http.DefaultTransport.(*http.Transport).Clone()
 	transport.Proxy = nil
 	transport.DialContext = resolveAndDial
-	transport.MaxIdleConns = 64
+	transport.MaxIdleConns = 256
 	transport.MaxIdleConnsPerHost = 4
 	return &http.Client{
 		Transport: transport, Timeout: 20 * time.Second,

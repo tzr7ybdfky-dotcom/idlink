@@ -183,3 +183,39 @@ async def test_telegram_robots_refusal_prevents_profile_request() -> None:
         with pytest.raises(PluginError):
             await SherlockPlugin(http, "telegram", SOCIAL_RULES["telegram"]).fetch("alice")
     assert calls == ["/robots.txt"]
+
+
+@pytest.mark.parametrize(
+    "body,outcome",
+    [("public-profile", "found"), ("login form", "error"), ("public-profile missing", "missing")],
+)
+async def test_maigret_requires_presence_and_prioritizes_absence(body: str, outcome: str) -> None:
+    async def sleep(delay: float) -> None:
+        pass
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return (
+            httpx.Response(404)
+            if request.url.path == "/robots.txt"
+            else httpx.Response(200, text=body)
+        )
+
+    rule = ProbeRule(
+        label="fixture",
+        url="https://fixture.example/{}",
+        probe="https://fixture.example/{}",
+        kind="message",
+        presence=["public-profile"],
+        errors=["missing"],
+    )
+    async with PublicHTTP(
+        "https://example.org/idlink",
+        transport=httpx.MockTransport(handler),
+        limiter=DomainRateLimiter(sleep=sleep),
+    ) as http:
+        plugin = SherlockPlugin(http, "fixture", rule)
+        if outcome == "error":
+            with pytest.raises(PluginError):
+                await plugin.fetch("alice")
+        else:
+            assert (await plugin.fetch("alice") is not None) == (outcome == "found")

@@ -68,6 +68,7 @@ def test_search_without_options_uses_all_sources(monkeypatch: pytest.MonkeyPatch
         extra: list[str] | None,
         depth: int,
         activity: bool,
+        restrict_sources: bool = False,
     ) -> None:
         calls.append((seed, repository_url, platforms))
 
@@ -76,3 +77,33 @@ def test_search_without_options_uses_all_sources(monkeypatch: pytest.MonkeyPatch
     assert result.exit_code == 0
     assert calls == [("demo", "https://github.com/tzr7ybdfky-dotcom/idlink", "all")]
     assert "ложные совпадения" in result.output
+
+
+async def test_crawl_delay_does_not_slow_unrelated_hostname() -> None:
+    """A site's crawl-delay applies only to that domain, not the entire pool."""
+    now = [0.0]
+    sleeps: list[float] = []
+
+    async def sleep(delay: float) -> None:
+        sleeps.append(delay)
+        now[0] += delay
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/robots.txt":
+            return (
+                httpx.Response(200, text="User-agent: *\nCrawl-delay: 20\nAllow: /")
+                if request.url.host == "slow.example"
+                else httpx.Response(404)
+            )
+        return httpx.Response(200, text="public")
+
+    from idlink.core.ratelimit import DomainRateLimiter
+
+    async with PublicHTTP(
+        "https://example.org/idlink",
+        transport=httpx.MockTransport(handler),
+        limiter=DomainRateLimiter(clock=lambda: now[0], sleep=sleep),
+    ) as http:
+        await http.get("https://slow.example/alice")
+        await http.get("https://fast.example/alice")
+    assert sleeps == [20.0, 2.0]

@@ -26,6 +26,7 @@ def test_search_streams_links_without_writing_html(
         depth: int,
         activity: bool,
         on_profile: Callable[[Profile], None] | None = None,
+        allowed_platforms: frozenset[str] | None = None,
     ) -> Collection:
         from datetime import UTC, datetime
 
@@ -57,7 +58,12 @@ def test_visual_prefills_seed_and_opens_browser(monkeypatch: pytest.MonkeyPatch)
     calls: list[tuple[str, bool]] = []
 
     def serve(
-        repository_url: str, port: int = 8765, *, initial_seed: str = "", open_browser: bool = False
+        repository_url: str,
+        port: int = 8765,
+        *,
+        initial_seed: str = "",
+        open_browser: bool = False,
+        initial_platforms: str = "all",
     ) -> None:
         calls.append((initial_seed, open_browser))
 

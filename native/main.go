@@ -23,14 +23,14 @@ type response struct {
 	Error   string            `json:"error,omitempty"`
 }
 
-// run multiplexes at most 24 requests and serializes complete response frames.
+// run multiplexes at most 128 requests and serializes complete response frames.
 func run(input io.Reader, output io.Writer) {
 	client := nativeClient()
 	defer client.CloseIdleConnections()
 	scanner := bufio.NewScanner(input)
 	scanner.Buffer(make([]byte, 4096), 65_536)
 	encoder := json.NewEncoder(output)
-	slots := make(chan struct{}, 24)
+	slots := make(chan struct{}, 128)
 	var workers sync.WaitGroup
 	var writer sync.Mutex
 	for scanner.Scan() {
