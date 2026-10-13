@@ -8,12 +8,43 @@ Python 3.11+, MIT. Каждый результат содержит процен
 
 ## Запуск
 
+Установку выполняйте **из папки проекта**, где находится `pyproject.toml`, а не из домашней папки `~`.
+Если исходники ещё не скачаны, сначала клонируйте репозиторий (для приватного репозитория нужен доступ):
+
+```sh
+git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
+cd idlink
+```
+
+Если проект уже находится на этом Mac в рабочей папке, вместо клонирования выполните:
+
+```sh
+cd /Users/USER/Desktop/Danya/idlink-project
+```
+
+Если в терминале уже активно другое виртуальное окружение (например, созданное в `~`),
+сначала выполните `deactivate`. Затем из папки проекта установите CLI и запустите аудит:
+
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install '.[dev]'
 export IDLINK_REPOSITORY_URL=https://github.com/tzr7ybdfky-dotcom/idlink
 
+# Пример для владельца этого репозитория; замените ник на свой.
+idlink audit tzr7ybdfky-dotcom --platforms github --out report.html
+open report.html  # macOS
+```
+
+Ошибка `Neither 'setup.py' nor 'pyproject.toml' found` означает, что вы находитесь
+не в папке проекта. Перейдите в неё через `cd` и повторите установку.
+После неудачной установки команда `idlink` недоступна и выдаёт `command not found`.
+
+Ниже — **отдельные примеры**, их не нужно запускать все подряд.
+`YOUR_USERNAME` замените на свой ник; `example.org` и `user@example.org` — на свои домен и e-mail.
+`EDGE_ID` замените на ID ребра, показанный CLI при создании отчёта; если связей нет, объяснять нечего.
+
+```sh
 idlink audit YOUR_USERNAME --platforms github --out report.html
 idlink YOUR_USERNAME --out report.html
 idlink audit example.org --profile github:YOUR_USERNAME --out report.html
