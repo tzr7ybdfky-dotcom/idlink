@@ -45,9 +45,34 @@ async def test_network_error() -> None:
             await http.get("https://api.github.com/users/demo")
 
 
-def test_cli_requires_purpose_and_repository() -> None:
+def test_cli_rejects_empty_purpose_and_audit_requires_repository() -> None:
     runner = CliRunner()
-    assert runner.invoke(app, ["search", "demo"]).exit_code == 2
     assert runner.invoke(app, ["audit", "demo"], env={"IDLINK_REPOSITORY_URL": ""}).exit_code == 2
     args = ["search", "demo", "--repository-url", "https://example.org/idlink", "--purpose", " "]
     assert runner.invoke(app, args).exit_code == 2
+
+
+def test_search_without_options_uses_all_sources(monkeypatch: pytest.MonkeyPatch) -> None:
+    """The short command keeps all-source lookup and the false-match warning."""
+    from pathlib import Path
+
+    import idlink.cli as cli
+
+    calls: list[tuple[str, str, str]] = []
+
+    def fake_run(
+        seed: str,
+        repository_url: str,
+        platforms: str,
+        out: Path,
+        extra: list[str] | None,
+        depth: int,
+        activity: bool,
+    ) -> None:
+        calls.append((seed, repository_url, platforms))
+
+    monkeypatch.setattr(cli, "run", fake_run)
+    result = CliRunner().invoke(app, ["search", "demo"], env={"IDLINK_REPOSITORY_URL": ""})
+    assert result.exit_code == 0
+    assert calls == [("demo", "https://github.com/tzr7ybdfky-dotcom/idlink", "all")]
+    assert "ложные совпадения" in result.output

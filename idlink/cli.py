@@ -82,16 +82,16 @@ def audit(
 @app.command()
 def search(
     username: str,
-    repository_url: Repo,
-    purpose: Annotated[str, typer.Option("--purpose")],
+    repository_url: Repo = "https://github.com/tzr7ybdfky-dotcom/idlink",
+    purpose: Annotated[str | None, typer.Option("--purpose")] = None,
     depth: Annotated[int, typer.Option("--depth", min=0, max=1)] = 1,
     platforms: Platforms = "all",
     out: Out = Path("report.html"),
     profile: Profiles = None,
     activity: Activity = False,
 ) -> None:
-    """Найти публичные профили с указанной целью и максимум одним переходом."""
-    if not purpose.strip():
+    """Найти публичные профили на всех подключённых источниках."""
+    if purpose is not None and not purpose.strip():
         raise typer.BadParameter("--purpose не должен быть пустым.")
     typer.echo(
         "Предупреждение: ложные совпадения могут причинить вред; "

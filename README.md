@@ -8,7 +8,8 @@ Python 3.11+, MIT. Каждый результат содержит процен
 
 ## Установка и запуск
 
-Python 3.11+, Git и доступ к репозиторию.
+Python 3.11+, Git и доступ к репозиторию. Клонируйте из папки, где ещё нет `idlink`.
+Если проект уже скачан, перейдите в папку с `pyproject.toml` и пропустите `git clone` и `cd idlink`.
 
 ### Linux
 
@@ -17,6 +18,7 @@ git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
 cd idlink
 python3 -m venv .venv
 ./.venv/bin/python -m pip install .
+source .venv/bin/activate
 ./.venv/bin/python -m idlink serve --repository-url https://github.com/tzr7ybdfky-dotcom/idlink
 ```
 
@@ -27,6 +29,7 @@ git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
 cd idlink
 python3 -m venv .venv
 ./.venv/bin/python -m pip install .
+source .venv/bin/activate
 ./.venv/bin/python -m idlink serve --repository-url https://github.com/tzr7ybdfky-dotcom/idlink
 ```
 
@@ -39,6 +42,9 @@ py -3 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install .
 .\.venv\Scripts\python.exe -m idlink serve --repository-url https://github.com/tzr7ybdfky-dotcom/idlink
 ```
+
+После активации окружения поиск в терминале: `idlink search USERNAME`.
+В Windows используйте `.\.venv\Scripts\python.exe -m idlink search USERNAME`.
 
 Откройте **http://127.0.0.1:8765**. Остановка: **Ctrl+C**.
 
@@ -64,7 +70,7 @@ GitLab, Habr и DEV Community также отключены до разрешё�
 CLI тоже проверяет все разрешённые источники по одному нику:
 
 ```sh
-idlink search YOUR_USERNAME --purpose 'Проверка публичных профилей по нику' --platforms all --depth 0
+idlink search YOUR_USERNAME
 ```
 
 `search` по умолчанию использует `--platforms all`, `audit` — `auto`.
@@ -85,16 +91,17 @@ URL-шаблоны взяты из [Sherlock](https://github.com/sherlock-projec
 
 В папке проекта используйте `.venv/bin/python -m idlink` (Linux/macOS)
 или `.\.venv\Scripts\python.exe -m idlink` (Windows) вместо `idlink` ниже.
-Для `audit` и `search` добавьте `--repository-url https://github.com/tzr7ybdfky-dotcom/idlink`.
+Для `audit` добавьте `--repository-url https://github.com/tzr7ybdfky-dotcom/idlink`.
 
 ```sh
 idlink audit YOUR_USERNAME --platforms github --out report.html
-idlink search YOUR_USERNAME --purpose 'Проверка публичных профилей' --platforms all --out report.html
+idlink search YOUR_USERNAME
 idlink explain EDGE_ID --report report.html
 ```
 
 `YOUR_USERNAME` — ник, `EDGE_ID` — ID ребра из вывода.
-`audit` — режим по умолчанию; `search` требует непустую цель.
+`audit` — режим по умолчанию; `search` проверяет все подключённые автоисточники.
+`--purpose` необязателен в CLI; явно переданная цель должна быть непустой.
 Коды выхода: 0 — успех, 2 — ошибка ввода, 3 — сеть или запрет доступа.
 
 ## Отчёт
@@ -205,7 +212,7 @@ HTML — явно запрошенный результат с URL и объяс
 
 Не применяйте оценки для обвинений, преследования или решений о трудоустройстве,
 кредитах и доступе к услугам. Не используйте утечки, закрытые данные, словари e-mail
-или подбор адресов. `--purpose` фиксирует намерение в интерфейсе, но не делает любой поиск допустимым.
+или подбор адресов. Цель в веб-интерфейсе и необязательный `--purpose` в CLI не делают любой поиск допустимым.
 
 ## Разработка и проверка
 
