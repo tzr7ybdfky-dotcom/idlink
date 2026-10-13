@@ -116,8 +116,8 @@ idlink search --help
 ### Скорость и регистр
 
 ```bash
-idlink search deMoUser --request-interval 0.5
-idlink search deMoUser --exact-case
+idlink search YOUR_USERNAME --request-interval 0.5
+idlink search YOUR_USERNAME --exact-case
 idlink search YOUR_USERNAME --timeout 12
 ```
 
