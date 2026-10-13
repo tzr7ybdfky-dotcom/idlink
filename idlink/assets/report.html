@@ -45,11 +45,12 @@ main{grid-template-columns:minmax(0,1fr);padding:32px;gap:28px;max-width:1600px;
 <script>__D3__</script>
 <script>
 "use strict";
+const platformLabels = __PLATFORM_LABELS__;
 let simulation=null;
 function drawReport(report){
  const positions=new Map(simulation?simulation.nodes().map(d=>[d.id,{x:d.x,y:d.y,fx:d.fx,fy:d.fy}]):[]);
  if(simulation)simulation.stop();
-const nodes = report.nodes.map(d => ({...d}));
+const nodes = report.nodes.map(d => ({...d, platform: platformLabels[d.platform] || d.platform}));
 const edges = Object.entries(report.edges).map(([id, d]) => ({...d, id, source:d.a, target:d.b}));
 const pct = p => (p * 100).toFixed(1) + "%";
 const labels = new Map(nodes.map(d => [d.id, d.platform + " / " + d.username]));

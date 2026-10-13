@@ -5,6 +5,7 @@ import re
 from importlib.resources import files
 from pathlib import Path
 
+from idlink.core.catalog import SOURCES
 from idlink.core.graph import Report
 
 
@@ -13,12 +14,15 @@ def render_html(report: Report) -> str:
     assets = files("idlink.assets")
     template = assets.joinpath("report.html").read_text(encoding="utf-8")
     payload = report.model_dump_json().replace("<", "\\u003c").replace("&", "\\u0026")
+    platform_labels = json.dumps({s.name: s.label for s in SOURCES}, ensure_ascii=False)
+    platform_labels = platform_labels.replace("<", "\\u003c").replace("&", "\\u0026")
     library = assets.joinpath("d3-7.9.0.min.js").read_text(encoding="utf-8")
     license_text = assets.joinpath("D3-LICENSE").read_text(encoding="utf-8")
     return (
         template.replace("__D3__", library)
         .replace("__D3_LICENSE__", license_text)
         .replace("__DATA__", payload)
+        .replace("__PLATFORM_LABELS__", platform_labels)
     )
 
 

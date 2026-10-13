@@ -93,3 +93,21 @@ def test_indexed_sparse_graph_matches_full_scoring() -> None:
         key: edge for key, edge in full.edges.items() if edge.probability >= 0.3
     }
     assert len(sparse.edges) >= 3
+
+
+def test_platform_labels_preserve_report_identifiers(tmp_path: Path) -> None:
+    """The graph displays catalogue names while stored IDs remain stable."""
+    profile = Profile(
+        platform="manual-archive-of-our-own",
+        username="example",
+        url="https://archiveofourown.org/users/example",
+        fetched_at=datetime.now(UTC),
+    )
+    report = make_report([profile])
+    path = tmp_path / "report.html"
+    write_report(report, path)
+    html = path.read_text()
+    assert '"manual-archive-of-our-own": "Archive of Our Own"' in html
+    assert "platform: platformLabels[d.platform] || d.platform" in html
+    assert "__PLATFORM_LABELS__" not in html
+    assert read_report(path).nodes[0].platform == profile.platform
