@@ -75,6 +75,6 @@ def test_failed_minecraft_lookup_is_visible_without_reporting_absence(
     result = CliRunner().invoke(app, ["search", "demouser", "--games"])
     assert result.exit_code == 3
     assert result.stdout == ""
-    assert "Minecraft: не удалось проверить" in result.stderr
+    assert "Minecraft: не удалось проверить (таймауты)" in result.stderr
     assert "существование профиля неизвестно" in result.stderr
     assert "Найдено: 0" in result.stderr

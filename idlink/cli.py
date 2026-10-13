@@ -20,6 +20,18 @@ from idlink.plugins.base import PluginError
 
 PLATFORM_LABELS = {source.name: source.label for source in SOURCES}
 PLATFORM_LABELS["website"] = "Website"
+ERROR_LABELS = {
+    "robots": "robots.txt",
+    "blocked": "блокировки",
+    "timeout": "таймауты",
+    "dns": "DNS",
+    "network": "сеть",
+    "http": "HTTP",
+    "response": "ответ сервера",
+    "redirect": "редиректы",
+    "policy": "политика доступа",
+    "unverified": "неподтверждено",
+}
 
 
 app = typer.Typer(no_args_is_help=True)
@@ -75,7 +87,8 @@ def run(
             and SOURCE_PRIORITY.get(check.platform, 100) < 100
         ):
             label = PLATFORM_LABELS.get(check.platform, check.platform)
-            typer.echo(f"{label}: не удалось проверить — {check.detail}", err=True)
+            reason = ERROR_LABELS.get(check.error_kind or "network", "сеть")
+            typer.echo(f"{label}: не удалось проверить ({reason}) — {check.detail}", err=True)
         now = time.monotonic()
         if now - last_print >= 2:
             typer.echo(f"Проверено {count}/{total} · {now - started:.0f} с", err=True)
@@ -126,28 +139,19 @@ def run(
             f"Неподтверждено: {sum(c.status == 'unverified' for c in result.report.checks)}.",
             err=True,
         )
-        reasons = {
-            "robots": "robots.txt",
-            "blocked": "блокировки",
-            "timeout": "таймауты",
-            "dns": "DNS",
-            "network": "сеть",
-            "http": "HTTP",
-            "response": "ответ сервера",
-            "redirect": "редиректы",
-            "policy": "политика доступа",
-        }
         counts = {
             key: sum(
                 c.status == "error" and (c.error_kind or "network") == key
                 for c in result.report.checks
             )
-            for key in reasons
+            for key in ERROR_LABELS
         }
         if errors:
             typer.echo(
                 "Причины: "
-                + "; ".join(f"{reasons[key]}: {count}" for key, count in counts.items() if count),
+                + "; ".join(
+                    f"{ERROR_LABELS[key]}: {count}" for key, count in counts.items() if count
+                ),
                 err=True,
             )
     else:
