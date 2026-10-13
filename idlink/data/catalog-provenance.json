@@ -1,0 +1,9 @@
+{
+  "source": "https://github.com/sherlock-project/sherlock",
+  "file": "sherlock_project/resources/data.json",
+  "retrieved_at": "2026-10-11",
+  "source_sha256": "3fdfc6694c5cd99798881215554b09e617c6d5284a6219fae309882566a9fb30",
+  "license": "MIT",
+  "entries": 452,
+  "use": "URL templates only; no Sherlock detection rules or profile data"
+}

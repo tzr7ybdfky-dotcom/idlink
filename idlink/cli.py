@@ -85,7 +85,7 @@ def search(
     repository_url: Repo,
     purpose: Annotated[str, typer.Option("--purpose")],
     depth: Annotated[int, typer.Option("--depth", min=0, max=1)] = 1,
-    platforms: Platforms = "auto",
+    platforms: Platforms = "all",
     out: Out = Path("report.html"),
     profile: Profiles = None,
     activity: Activity = False,
@@ -99,6 +99,20 @@ def search(
         err=True,
     )
     run(username, repository_url, platforms, out, profile, depth, activity)
+
+
+@app.command()
+def serve(
+    repository_url: Repo,
+    port: Annotated[int, typer.Option("--port", min=1024, max=65535)] = 8765,
+) -> None:
+    """Открыть локальный веб-интерфейс поиска на http://127.0.0.1:8765."""
+    from idlink.web import serve as serve_web
+
+    try:
+        serve_web(repository_url, port)
+    except (ValueError, OSError) as exc:
+        raise typer.BadParameter(str(exc)) from exc
 
 
 @app.command()
@@ -129,6 +143,10 @@ def main() -> None:
     import sys
 
     args = sys.argv[1:]
-    if args and not args[0].startswith("-") and args[0] not in {"audit", "search", "explain"}:
+    if (
+        args
+        and not args[0].startswith("-")
+        and args[0] not in {"audit", "search", "explain", "serve"}
+    ):
         args.insert(0, "audit")
     app(args=args)

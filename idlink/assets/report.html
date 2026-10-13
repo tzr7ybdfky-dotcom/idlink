@@ -2,7 +2,7 @@
 <html lang="ru"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'">
-<title>idlink — аудит публичных связей</title>
+<title>idlink — найденные публичные профили</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f4f5f7;color:#182033;font:16px system-ui,sans-serif}
 header{padding:24px 32px;background:#182033;color:#fff}h1{margin:0;font-size:28px}
@@ -16,11 +16,19 @@ button:hover,button:focus-visible{background:#e0ebf9;outline:2px solid #236866}#
 .signal{padding:14px 0;border-bottom:1px solid #e2e7ee}.counter{color:#695439;line-height:1.5}
 .muted{color:#617088}a{color:#236866;overflow-wrap:anywhere}.warning{color:#7b4021}footer{padding:16px 32px;font-size:12px;color:#617088}
 @media(max-width:800px){main{grid-template-columns:1fr;padding:12px}header{padding:20px}svg{height:350px}}
+body{background:#101117;color:#edeef5}header{background:#181a23;border-bottom:1px solid #303343}
+.panel{background:#181a23;border-color:#303343}button{background:#222533;color:#edeef5;border-color:#45495f}
+button:hover,button:focus-visible{background:#36304c;outline-color:#b3a1ff}.muted,footer{color:#a0a7ba}
+a{color:#a8decf}.warning,.counter{color:#e6bd89}.node circle{fill:#b3a1ff;stroke:#181a23}
+.node text{fill:#edeef5}.edge{stroke:#9c91c0}.percentage{fill:#edeef5;stroke:#181a23}
+.signal{border-color:#303343}#profiles{display:grid;gap:8px;margin:16px 0}#profiles details{border-left:1px solid #73648f;padding-left:16px}
+#profiles button{display:block;width:100%;margin:8px 0}summary{cursor:pointer;color:#c7b8f7}
 </style></head><body>
-<header><h1>idlink · публичные связи</h1>
+<header><h1>idlink · публичные профили</h1>
 <p>Оценки — эвристика, а не измеренная вероятность. Ложные совпадения могут причинить вред.
 Максимальный вывод: «вероятно связаны». Проверяйте причины и контрдоводы каждой связи.</p></header>
 <main><section class="panel"><h2>Граф наблюдений</h2>
+<details open><summary>Профили по площадкам</summary><div id="profiles"></div></details>
 <p class="muted">Толщина ребра пропорциональна оценке. Выберите связь на графе или в списке.</p>
 <svg id="graph" role="img" aria-label="Граф вероятностных связей"></svg>
 <div id="warnings"></div><h3>Связи</h3><div id="edge-list"></div></section>
@@ -58,6 +66,22 @@ function showEdge(edge) {
     if (signal.counter) text(row,"p","Контрдовод: " + signal.counter,"counter");
   });
 }
+function showProfile(node) {
+  const box=document.getElementById("details");box.replaceChildren();
+  text(box,"h2",node.platform + " / " + node.username);
+  text(box,"p","Найден публичный профиль. Совпадение ника не доказывает принадлежность человеку.","muted");
+  const link=text(box,"a",node.id);
+  if (/^https?:\/\//.test(node.id)){link.href=node.id;link.target="_blank";link.rel="noopener noreferrer";}
+  const related=edges.filter(e=>e.a===node.id || e.b===node.id);
+  related.forEach(edge=>{const b=text(box,"button",pct(edge.probability)+" · "+edge.verdict);b.onclick=()=>showEdge(edge);});
+  if(!related.length)text(box,"p","Других профилей для сравнения нет.","muted");
+}
+const profileList=document.getElementById("profiles");
+for(const platform of [...new Set(nodes.map(n=>n.platform))]){
+  const branch=text(profileList,"details","");branch.open=true;text(branch,"summary",platform);
+  nodes.filter(n=>n.platform===platform).forEach(node=>{const b=text(branch,"button",node.username);b.onclick=()=>showProfile(node);});
+}
+if(!nodes.length)text(profileList,"p","Профили не найдены. Проверьте статусы источников.","muted");
 const list = document.getElementById("edge-list");
 edges.forEach(edge => {
   const button = text(list,"button",pct(edge.probability) + " · " + labels.get(edge.a) + " ↔ " + labels.get(edge.b));
@@ -82,7 +106,7 @@ svg.selectAll(".percentage").data(edges).join("text").attr("class","percentage")
   .attr("x",d=>(d.source.x+d.target.x)/2).attr("y",d=>(d.source.y+d.target.y)/2-8)
   .text(d=>pct(d.probability));
 const groups = svg.selectAll(".node").data(nodes).join("g").attr("class","node")
-  .attr("transform",d=>`translate(${d.x},${d.y})`);
+  .attr("transform",d=>`translate(${d.x},${d.y})`).on("click",(_,d)=>showProfile(d));
 groups.append("circle").attr("r",17);
 groups.append("text").attr("text-anchor","middle").attr("y",38).text(d=>d.platform);
 groups.append("text").attr("text-anchor","middle").attr("y",55).text(d=>d.username.slice(0,25));

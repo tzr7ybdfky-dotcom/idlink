@@ -1,0 +1,3618 @@
+[
+  {
+    "name": "manual-1337x",
+    "label": "1337x",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.1337x.to/user/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-2dimensions",
+    "label": "2Dimensions",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://2Dimensions.com/a/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-7cups",
+    "label": "7Cups",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.7cups.com/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-9gag",
+    "label": "9GAG",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.9gag.com/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-about-me",
+    "label": "About.me",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://about.me/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-academia-edu",
+    "label": "Academia.edu",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://independent.academia.edu/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-airbit",
+    "label": "Airbit",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://airbit.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-airliners",
+    "label": "Airliners",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.airliners.net/user/{}/profile/photos",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-allmylinks",
+    "label": "AllMyLinks",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://allmylinks.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-aniworld",
+    "label": "AniWorld",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://aniworld.to/user/profil/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-anilist",
+    "label": "Anilist",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://anilist.co/user/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-apple-developer",
+    "label": "Apple Developer",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://developer.apple.com/forums/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-apple-discussions",
+    "label": "Apple Discussions",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://discussions.apple.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-aparat",
+    "label": "Aparat",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.aparat.com/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-archive-of-our-own",
+    "label": "Archive of Our Own",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://archiveofourown.org/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-archive-org",
+    "label": "Archive.org",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://archive.org/details/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-arduino-forum",
+    "label": "Arduino Forum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://forum.arduino.cc/u/{}/summary",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-artstation",
+    "label": "ArtStation",
+    "category": "Творчество и медиа",
+    "automatic": false,
+    "template": "https://www.artstation.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-asciinema",
+    "label": "Asciinema",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://asciinema.org/~{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-ask-fedora",
+    "label": "Ask Fedora",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://ask.fedoraproject.org/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-atcoder",
+    "label": "Atcoder",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://atcoder.jp/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-vjudge",
+    "label": "Vjudge",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://VJudge.net/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-audiojungle",
+    "label": "Audiojungle",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://audiojungle.net/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-autofrage",
+    "label": "Autofrage",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.autofrage.net/nutzer/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-avizo",
+    "label": "Avizo",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.avizo.cz/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-aws-skills-profile",
+    "label": "AWS Skills Profile",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://skillsprofile.skillbuilder.aws/user/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-booth",
+    "label": "BOOTH",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.booth.pm/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-bandcamp",
+    "label": "Bandcamp",
+    "category": "Творчество и медиа",
+    "automatic": false,
+    "template": "https://www.bandcamp.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-bazar-cz",
+    "label": "Bazar.cz",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.bazar.cz/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-behance",
+    "label": "Behance",
+    "category": "Творчество и медиа",
+    "automatic": false,
+    "template": "https://www.behance.net/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-bezuzyteczna",
+    "label": "Bezuzyteczna",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://bezuzyteczna.pl/uzytkownicy/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-biggerpockets",
+    "label": "BiggerPockets",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.biggerpockets.com/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-biohacking",
+    "label": "BioHacking",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://forum.dangerousthings.com/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-bitbucket",
+    "label": "BitBucket",
+    "category": "Разработка",
+    "automatic": false,
+    "template": "https://bitbucket.org/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-bitwarden-forum",
+    "label": "Bitwarden Forum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://community.bitwarden.com/u/{}/summary",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-blipfoto",
+    "label": "Blipfoto",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.blipfoto.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-blitz-tactics",
+    "label": "Blitz Tactics",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://blitztactics.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-blogger",
+    "label": "Blogger",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.blogspot.com",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-bluesky",
+    "label": "Bluesky",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://bsky.app/profile/{}.bsky.social",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-bookcrossing",
+    "label": "Bookcrossing",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.bookcrossing.com/mybookshelf/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-boardgamegeek",
+    "label": "BoardGameGeek",
+    "category": "Игры",
+    "automatic": false,
+    "template": "https://boardgamegeek.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-bravecommunity",
+    "label": "BraveCommunity",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://community.brave.com/u/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-breachsta-rs-forum",
+    "label": "BreachSta.rs Forum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://breachsta.rs/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-bugcrowd",
+    "label": "BugCrowd",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://bugcrowd.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-buymeacoffee",
+    "label": "BuyMeACoffee",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://buymeacoff.ee/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-buzzfeed",
+    "label": "BuzzFeed",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://buzzfeed.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-cfx-re-forum",
+    "label": "Cfx.re Forum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://forum.cfx.re/u/{}/summary",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-cgtrader",
+    "label": "CGTrader",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.cgtrader.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-cnet",
+    "label": "CNET",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.cnet.com/profiles/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-cssbattle",
+    "label": "CSSBattle",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://cssbattle.dev/player/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-ctan",
+    "label": "CTAN",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://ctan.org/author/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-caddy-community",
+    "label": "Caddy Community",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://caddy.community/u/{}/summary",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-car-talk-community",
+    "label": "Car Talk Community",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://community.cartalk.com/u/{}/summary",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-carbonmade",
+    "label": "Carbonmade",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.carbonmade.com",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-carrd",
+    "label": "Carrd",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.carrd.co/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-career-habr",
+    "label": "Career.habr",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://career.habr.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-cashapp",
+    "label": "CashApp",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://cash.app/${}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-championat",
+    "label": "Championat",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.championat.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-chaos",
+    "label": "Chaos",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://chaos.social/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-chatujme-cz",
+    "label": "Chatujme.cz",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://profil.chatujme.cz/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-chess",
+    "label": "Chess",
+    "category": "Игры",
+    "automatic": false,
+    "template": "https://www.chess.com/member/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-choice-community",
+    "label": "Choice Community",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://choice.community/u/{}/summary",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-clapper",
+    "label": "Clapper",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://clapperapp.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-cloudflarecommunity",
+    "label": "CloudflareCommunity",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://community.cloudflare.com/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-clozemaster",
+    "label": "Clozemaster",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.clozemaster.com/players/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-clubhouse",
+    "label": "Clubhouse",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.clubhouse.com/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-code-snippet-wiki",
+    "label": "Code Snippet Wiki",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://codesnippets.fandom.com/wiki/User:{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-codeberg",
+    "label": "Codeberg",
+    "category": "Разработка",
+    "automatic": false,
+    "template": "https://codeberg.org/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-codecademy",
+    "label": "Codecademy",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.codecademy.com/profiles/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-codechef",
+    "label": "Codechef",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.codechef.com/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-codeforces",
+    "label": "Codeforces",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://codeforces.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-codepen",
+    "label": "Codepen",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://codepen.io/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-coders-rank",
+    "label": "Coders Rank",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://profile.codersrank.io/user/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-coderwall",
+    "label": "Coderwall",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://coderwall.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-codesandbox",
+    "label": "CodeSandbox",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://codesandbox.io/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-codewars",
+    "label": "Codewars",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.codewars.com/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-codolio",
+    "label": "Codolio",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://codolio.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-coinvote",
+    "label": "Coinvote",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://coinvote.cc/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-colourlovers",
+    "label": "ColourLovers",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.colourlovers.com/lover/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-contently",
+    "label": "Contently",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.contently.com/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-coroflot",
+    "label": "Coroflot",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.coroflot.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-cplusplus",
+    "label": "Cplusplus",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://cplusplus.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-cracked",
+    "label": "Cracked",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.cracked.com/members/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-cracked-forum",
+    "label": "Cracked Forum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://cracked.ax/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-credly",
+    "label": "Credly",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.credly.com/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-crevado",
+    "label": "Crevado",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.crevado.com",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-crowdin",
+    "label": "Crowdin",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://crowdin.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-cryptohack",
+    "label": "CryptoHack",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://cryptohack.org/user/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-cryptomator-forum",
+    "label": "Cryptomator Forum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://community.cryptomator.org/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-cults3d",
+    "label": "Cults3D",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://cults3d.com/en/users/{}/creations",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-cyberdefenders",
+    "label": "CyberDefenders",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://cyberdefenders.org/p/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-dev-community",
+    "label": "DEV Community",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://dev.to/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-dmoj",
+    "label": "DMOJ",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://dmoj.ca/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-dailymotion",
+    "label": "DailyMotion",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.dailymotion.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-dcinside",
+    "label": "dcinside",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://gallog.dcinside.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-dealabs",
+    "label": "Dealabs",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.dealabs.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-deviantart",
+    "label": "DeviantArt",
+    "category": "Творчество и медиа",
+    "automatic": false,
+    "template": "https://www.deviantart.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-digitalspy",
+    "label": "DigitalSpy",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://forums.digitalspy.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-discogs",
+    "label": "Discogs",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.discogs.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-discord-bio",
+    "label": "Discord.bio",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://discords.com/api-v2/bio/details/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-discuss-elastic-co",
+    "label": "Discuss.Elastic.co",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://discuss.elastic.co/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-disqus",
+    "label": "Disqus",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://disqus.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-docker-hub",
+    "label": "Docker Hub",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://hub.docker.com/u/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-dribbble",
+    "label": "Dribbble",
+    "category": "Творчество и медиа",
+    "automatic": false,
+    "template": "https://dribbble.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-duolingo",
+    "label": "Duolingo",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.duolingo.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-eintracht-frankfurt-forum",
+    "label": "Eintracht Frankfurt Forum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://community.eintracht.de/fans/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-empretienda-ar",
+    "label": "Empretienda AR",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.empretienda.com.ar",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-envato-forum",
+    "label": "Envato Forum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://forums.envato.com/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-exposure",
+    "label": "Exposure",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.exposure.co/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-exophase",
+    "label": "exophase",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.exophase.com/user/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-eyeem",
+    "label": "EyeEm",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.eyeem.com/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-f3-cool",
+    "label": "F3.cool",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://f3.cool/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-fameswap",
+    "label": "Fameswap",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://fameswap.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-fandom",
+    "label": "Fandom",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.fandom.com/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-fanpop",
+    "label": "Fanpop",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.fanpop.com/fans/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-finanzfrage",
+    "label": "Finanzfrage",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.finanzfrage.net/nutzer/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-flickr",
+    "label": "Flickr",
+    "category": "Творчество и медиа",
+    "automatic": false,
+    "template": "https://www.flickr.com/people/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-flightradar24",
+    "label": "Flightradar24",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://my.flightradar24.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-flipboard",
+    "label": "Flipboard",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://flipboard.com/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-football",
+    "label": "Football",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.rusfootball.info/user/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-fortnitetracker",
+    "label": "FortniteTracker",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://fortnitetracker.com/profile/all/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-fosstodon",
+    "label": "Fosstodon",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://fosstodon.org/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-framapiaf",
+    "label": "Framapiaf",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://framapiaf.org/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-freelancer",
+    "label": "Freelancer",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.freelancer.com/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-freesound",
+    "label": "Freesound",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://freesound.org/people/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-gnome-vcs",
+    "label": "GNOME VCS",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://gitlab.gnome.org/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-gaiaonline",
+    "label": "GaiaOnline",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.gaiaonline.com/profiles/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-gamespot",
+    "label": "Gamespot",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.gamespot.com/profile/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-gamefaqs",
+    "label": "GameFAQs",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://gamefaqs.gamespot.com/community/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-geeksforgeeks",
+    "label": "GeeksforGeeks",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://auth.geeksforgeeks.org/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-genius-artists",
+    "label": "Genius (Artists)",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://genius.com/artists/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-genius-users",
+    "label": "Genius (Users)",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://genius.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-gesundheitsfrage",
+    "label": "Gesundheitsfrage",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.gesundheitsfrage.net/nutzer/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-getmyuni",
+    "label": "GetMyUni",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.getmyuni.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-giant-bomb",
+    "label": "Giant Bomb",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.giantbomb.com/profile/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-giphy",
+    "label": "Giphy",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://giphy.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-gitbook",
+    "label": "GitBook",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.gitbook.io/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-github",
+    "label": "GitHub",
+    "category": "Разработка",
+    "automatic": false,
+    "template": "https://www.github.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-warframe-market",
+    "label": "Warframe Market",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://warframe.market/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-gitlab",
+    "label": "GitLab",
+    "category": "Разработка",
+    "automatic": false,
+    "template": "https://gitlab.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-gitea",
+    "label": "Gitea",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://gitea.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-gitee",
+    "label": "Gitee",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://gitee.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-goodreads",
+    "label": "GoodReads",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.goodreads.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-google-play",
+    "label": "Google Play",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://play.google.com/store/apps/developer?id={}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-gradle",
+    "label": "Gradle",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://plugins.gradle.org/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-grailed",
+    "label": "Grailed",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.grailed.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-gumroad",
+    "label": "Gumroad",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.gumroad.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-gutefrage",
+    "label": "Gutefrage",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.gutefrage.net/nutzer/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hackthebox",
+    "label": "HackTheBox",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://forum.hackthebox.com/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hackaday",
+    "label": "Hackaday",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://hackaday.io/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hackenproof-hackers",
+    "label": "HackenProof (Hackers)",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://hackenproof.com/hackers/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hackerearth",
+    "label": "HackerEarth",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://hackerearth.com/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hackernews",
+    "label": "HackerNews",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://news.ycombinator.com/user?id={}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hackerone",
+    "label": "HackerOne",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://hackerone.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hackerrank",
+    "label": "HackerRank",
+    "category": "Разработка",
+    "automatic": false,
+    "template": "https://hackerrank.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hackersploit",
+    "label": "HackerSploit",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://forum.hackersploit.org/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hackmd",
+    "label": "HackMD",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://hackmd.io/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-harvard-scholar",
+    "label": "Harvard Scholar",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://scholar.harvard.edu/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hashnode",
+    "label": "Hashnode",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://hashnode.com/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hive-blog",
+    "label": "Hive Blog",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://hive.blog/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-holopin",
+    "label": "Holopin",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://holopin.io/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-houzz",
+    "label": "Houzz",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://houzz.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hubpages",
+    "label": "HubPages",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://hubpages.com/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hubski",
+    "label": "Hubski",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://hubski.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hudsonrock",
+    "label": "HudsonRock",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://cavalier.hudsonrock.com/api/json/v2/osint-tools/search-by-username?username={}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hugging-face",
+    "label": "Hugging Face",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://huggingface.co/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-ifttt",
+    "label": "IFTTT",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.ifttt.com/p/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-ifunny",
+    "label": "Ifunny",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://ifunny.co/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-irc-galleria",
+    "label": "IRC-Galleria",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://irc-galleria.net/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-icons8-community",
+    "label": "Icons8 Community",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://community.icons8.com/u/{}/summary",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-imgup-cz",
+    "label": "ImgUp.cz",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://imgup.cz/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-imgur",
+    "label": "Imgur",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://imgur.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-imood",
+    "label": "imood",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.imood.com/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-instagram",
+    "label": "Instagram",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://instagram.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-instapaper",
+    "label": "Instapaper",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.instapaper.com/p/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-instructables",
+    "label": "Instructables",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.instructables.com/member/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-intigriti",
+    "label": "Intigriti",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://app.intigriti.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-ionic-forum",
+    "label": "Ionic Forum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://forum.ionicframework.com/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-issuu",
+    "label": "Issuu",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://issuu.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-itch-io",
+    "label": "Itch.io",
+    "category": "Игры",
+    "automatic": false,
+    "template": "https://{}.itch.io/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-itemfix",
+    "label": "Itemfix",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.itemfix.com/c/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-jellyfin-weblate",
+    "label": "Jellyfin Weblate",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://translate.jellyfin.org/user/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-jimdo",
+    "label": "Jimdo",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.jimdosite.com",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-joplin-forum",
+    "label": "Joplin Forum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://discourse.joplinapp.org/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-jupyter-community-forum",
+    "label": "Jupyter Community Forum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://discourse.jupyter.org/u/{}/summary",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-kaggle",
+    "label": "Kaggle",
+    "category": "Разработка",
+    "automatic": false,
+    "template": "https://www.kaggle.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-kaskus",
+    "label": "kaskus",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.kaskus.co.id/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-keybase",
+    "label": "Keybase",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://keybase.io/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-kick",
+    "label": "Kick",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://kick.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-kik",
+    "label": "Kik",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://kik.me/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-kongregate",
+    "label": "Kongregate",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.kongregate.com/accounts/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-lor",
+    "label": "LOR",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.linux.org.ru/people/{}/profile",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-laracast",
+    "label": "Laracast",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://laracasts.com/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-launchpad",
+    "label": "Launchpad",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://launchpad.net/~{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-leetcode",
+    "label": "LeetCode",
+    "category": "Разработка",
+    "automatic": false,
+    "template": "https://leetcode.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-lemmyworld",
+    "label": "LemmyWorld",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://lemmy.world/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-lesswrong",
+    "label": "LessWrong",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.lesswrong.com/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-letterboxd",
+    "label": "Letterboxd",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://letterboxd.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-librarything",
+    "label": "LibraryThing",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.librarything.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-lichess",
+    "label": "Lichess",
+    "category": "Игры",
+    "automatic": false,
+    "template": "https://lichess.org/@/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-linkedin",
+    "label": "LinkedIn",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://linkedin.com/in/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-linktree",
+    "label": "Linktree",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://linktr.ee/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-linuxfr-org",
+    "label": "LinuxFR.org",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://linuxfr.org/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-listed",
+    "label": "Listed",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://listed.to/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-livejournal",
+    "label": "LiveJournal",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.livejournal.com",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-lobsters",
+    "label": "Lobsters",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://lobste.rs/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-lottiefiles",
+    "label": "LottieFiles",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://lottiefiles.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-mmorpg-forum",
+    "label": "MMORPG Forum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://forums.mmorpg.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-mamot",
+    "label": "Mamot",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://mamot.fr/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-medium",
+    "label": "Medium",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://medium.com/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-memrise",
+    "label": "Memrise",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.memrise.com/user/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-minecraft",
+    "label": "Minecraft",
+    "category": "Игры",
+    "automatic": false,
+    "template": "https://api.mojang.com/users/profiles/minecraft/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-mixcloud",
+    "label": "MixCloud",
+    "category": "Творчество и медиа",
+    "automatic": false,
+    "template": "https://www.mixcloud.com/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-monkeytype",
+    "label": "Monkeytype",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://monkeytype.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-motorradfrage",
+    "label": "Motorradfrage",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.motorradfrage.net/nutzer/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-musescore",
+    "label": "MuseScore",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://musescore.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-myanimelist",
+    "label": "MyAnimeList",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://myanimelist.net/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-myminifactory",
+    "label": "MyMiniFactory",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.myminifactory.com/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-mydramalist",
+    "label": "Mydramalist",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.mydramalist.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-myspace",
+    "label": "Myspace",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://myspace.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-nicommunityforum",
+    "label": "NICommunityForum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://community.native-instruments.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-namuwiki",
+    "label": "namuwiki",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://namu.wiki/w/%EC%82%AC%EC%9A%A9%EC%9E%90:{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-nationstates-nation",
+    "label": "NationStates Nation",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://nationstates.net/nation={}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-nationstates-region",
+    "label": "NationStates Region",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://nationstates.net/region={}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-naver",
+    "label": "Naver",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://blog.naver.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-needrom",
+    "label": "Needrom",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.needrom.com/author/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-newgrounds",
+    "label": "Newgrounds",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.newgrounds.com",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-nextcloud-forum",
+    "label": "Nextcloud Forum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://help.nextcloud.com/u/{}/summary",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-nightbot",
+    "label": "Nightbot",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://nightbot.tv/t/{}/commands",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-ninja-kiwi",
+    "label": "Ninja Kiwi",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://ninjakiwi.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-nintendolife",
+    "label": "NintendoLife",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.nintendolife.com/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-nitrotype",
+    "label": "NitroType",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.nitrotype.com/racer/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-notabug-org",
+    "label": "NotABug.org",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://notabug.org/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-nothing-community",
+    "label": "Nothing Community",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://nothing.community/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-nyaa-si",
+    "label": "Nyaa.si",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://nyaa.si/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-observablehq",
+    "label": "ObservableHQ",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://observablehq.com/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-open-collective",
+    "label": "Open Collective",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://opencollective.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-opengameart",
+    "label": "OpenGameArt",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://opengameart.org/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-openstreetmap",
+    "label": "OpenStreetMap",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.openstreetmap.org/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-odysee",
+    "label": "Odysee",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://odysee.com/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-opensource",
+    "label": "Opensource",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://opensource.com/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-ourdjtalk",
+    "label": "OurDJTalk",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://ourdjtalk.com/members?username={}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-outgress",
+    "label": "Outgress",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://outgress.com/agents/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-pcgamer",
+    "label": "PCGamer",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://forums.pcgamer.com/members/?username={}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-psnprofiles-com",
+    "label": "PSNProfiles.com",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://psnprofiles.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-packagist",
+    "label": "Packagist",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://packagist.org/packages/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-pastebin",
+    "label": "Pastebin",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://pastebin.com/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-patched",
+    "label": "Patched",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://patched.sh/User/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-patreon",
+    "label": "Patreon",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.patreon.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-pentesterlab",
+    "label": "PentesterLab",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://pentesterlab.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hotukdeals",
+    "label": "HotUKdeals",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.hotukdeals.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-mydealz",
+    "label": "Mydealz",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.mydealz.de/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-chollometro",
+    "label": "Chollometro",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.chollometro.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-peppernl",
+    "label": "PepperNL",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://nl.pepper.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-pepperpl",
+    "label": "PepperPL",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.pepper.pl/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-preisjaeger",
+    "label": "Preisjaeger",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.preisjaeger.at/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-pepperdeals",
+    "label": "Pepperdeals",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.pepperdeals.se/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-pepperealsus",
+    "label": "PepperealsUS",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.pepperdeals.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-promodescuentos",
+    "label": "Promodescuentos",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.promodescuentos.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-periscope",
+    "label": "Periscope",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.periscope.tv/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-pinkbike",
+    "label": "Pinkbike",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.pinkbike.com/u/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-pixelfed-social",
+    "label": "pixelfed.social",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://pixelfed.social/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-playstore",
+    "label": "PlayStore",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://play.google.com/store/apps/developer?id={}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-playstrategy",
+    "label": "Playstrategy",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://playstrategy.org/@/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-plurk",
+    "label": "Plurk",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.plurk.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-pokemon-showdown",
+    "label": "Pokemon Showdown",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://pokemonshowdown.com/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-polarsteps",
+    "label": "Polarsteps",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://polarsteps.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-polygon",
+    "label": "Polygon",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.polygon.com/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-polymart",
+    "label": "Polymart",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://polymart.org/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-producthunt",
+    "label": "ProductHunt",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.producthunt.com/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-programming-dev",
+    "label": "programming.dev",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://programming.dev/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-pychess",
+    "label": "Pychess",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.pychess.org/@/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-pronouns-page",
+    "label": "Pronouns.page",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://pronouns.page/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-pypi",
+    "label": "PyPi",
+    "category": "Разработка",
+    "automatic": false,
+    "template": "https://pypi.org/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-python-org-discussions",
+    "label": "Python.org Discussions",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://discuss.python.org/u/{}/summary",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-rajce-net",
+    "label": "Rajce.net",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.rajce.idnes.cz/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-rarible",
+    "label": "Rarible",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://rarible.com/marketplace/api/v4/urls/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-rate-your-music",
+    "label": "Rate Your Music",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://rateyourmusic.com/~{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-rclone-forum",
+    "label": "Rclone Forum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://forum.rclone.org/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-redbubble",
+    "label": "Redbubble",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.redbubble.com/people/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-reddit",
+    "label": "Reddit",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://www.reddit.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-realmeye",
+    "label": "Realmeye",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.realmeye.com/player/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-reisefrage",
+    "label": "Reisefrage",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.reisefrage.net/nutzer/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-replit-com",
+    "label": "Replit.com",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://replit.com/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-researchgate",
+    "label": "ResearchGate",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.researchgate.net/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-reverbnation",
+    "label": "ReverbNation",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.reverbnation.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-roblox",
+    "label": "Roblox",
+    "category": "Игры",
+    "automatic": false,
+    "template": "https://www.roblox.com/user.aspx?username={}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-royalcams",
+    "label": "RoyalCams",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://royalcams.com/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-ruby-forums",
+    "label": "Ruby Forums",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://ruby-forum.com/u/{}/summary",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-rubygems",
+    "label": "RubyGems",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://rubygems.org/profiles/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-rumble",
+    "label": "Rumble",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://rumble.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-runescape",
+    "label": "RuneScape",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://apps.runescape.com/runemetrics/app/overview/player/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-swapd",
+    "label": "SWAPD",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://swapd.co/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-sbazar-cz",
+    "label": "Sbazar.cz",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.sbazar.cz/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-scratch",
+    "label": "Scratch",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://scratch.mit.edu/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-scribd",
+    "label": "Scribd",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.scribd.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-seoforum",
+    "label": "SEOForum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://seoforum.com/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-shelf",
+    "label": "Shelf",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.shelf.im/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-shitpostbot5000",
+    "label": "ShitpostBot5000",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.shitpostbot.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-signal",
+    "label": "Signal",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://community.signalusers.org/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-sketchfab",
+    "label": "Sketchfab",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://sketchfab.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-slack",
+    "label": "Slack",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.slack.com",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-slant",
+    "label": "Slant",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.slant.co/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-slashdot",
+    "label": "Slashdot",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://slashdot.org/~{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-slideshare",
+    "label": "SlideShare",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://slideshare.net/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-slides",
+    "label": "Slides",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://slides.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-smugmug",
+    "label": "SmugMug",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.smugmug.com",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-smule",
+    "label": "Smule",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.smule.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-snapchat",
+    "label": "Snapchat",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://www.snapchat.com/add/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-soop",
+    "label": "SOOP",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.sooplive.co.kr/station/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-soundcloud",
+    "label": "SoundCloud",
+    "category": "Творчество и медиа",
+    "automatic": false,
+    "template": "https://soundcloud.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-sourceforge",
+    "label": "SourceForge",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://sourceforge.net/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-spacehey",
+    "label": "SpaceHey",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://spacehey.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-soylentnews",
+    "label": "SoylentNews",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://soylentnews.org/~{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-speakerdeck",
+    "label": "SpeakerDeck",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://speakerdeck.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-speedrun-com",
+    "label": "Speedrun.com",
+    "category": "Игры",
+    "automatic": false,
+    "template": "https://speedrun.com/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-spells8",
+    "label": "Spells8",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://forum.spells8.com/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-splice",
+    "label": "Splice",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://splice.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-splits-io",
+    "label": "Splits.io",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://splits.io/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-sporcle",
+    "label": "Sporcle",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.sporcle.com/user/{}/people",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-sportlerfrage",
+    "label": "Sportlerfrage",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.sportlerfrage.net/nutzer/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-sportsru",
+    "label": "SportsRU",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.sports.ru/profile/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-spotify",
+    "label": "Spotify",
+    "category": "Творчество и медиа",
+    "automatic": false,
+    "template": "https://open.spotify.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-star-citizen",
+    "label": "Star Citizen",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://robertsspaceindustries.com/citizens/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-status-cafe",
+    "label": "Status Cafe",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://status.cafe/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-steam-community-group",
+    "label": "Steam Community (Group)",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://steamcommunity.com/groups/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-steam-community-user",
+    "label": "Steam Community (User)",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://steamcommunity.com/id/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-strava",
+    "label": "Strava",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.strava.com/athletes/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-substack",
+    "label": "Substack",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.substack.com/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-sublimeforum",
+    "label": "SublimeForum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://forum.sublimetext.com/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-tetr-io",
+    "label": "TETR.IO",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://ch.tetr.io/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-themoviedb",
+    "label": "TheMovieDB",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.themoviedb.org/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-tiktok",
+    "label": "TikTok",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://www.tiktok.com/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-tiendanube",
+    "label": "Tiendanube",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.mitiendanube.com/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-topcoder",
+    "label": "Topcoder",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://profiles.topcoder.com/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-topmate",
+    "label": "Topmate",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://topmate.io/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-traktrain",
+    "label": "TRAKTRAIN",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://traktrain.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-telegram",
+    "label": "Telegram",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://t.me/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-tellonym-me",
+    "label": "Tellonym.me",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://tellonym.me/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-tenor",
+    "label": "Tenor",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://tenor.com/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-terraria-forums",
+    "label": "Terraria Forums",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://forums.terraria.org/index.php?search/42798315/&c[users]={}&o=relevance",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-themeforest",
+    "label": "ThemeForest",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://themeforest.net/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-tistory",
+    "label": "tistory",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.tistory.com/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-tradingview",
+    "label": "TradingView",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.tradingview.com/u/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-trakt",
+    "label": "Trakt",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.trakt.tv/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-trashboxru",
+    "label": "TrashboxRU",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://trashbox.ru/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-trawelling",
+    "label": "Trawelling",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://traewelling.de/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-trello",
+    "label": "Trello",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://trello.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-tryhackme",
+    "label": "TryHackMe",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://tryhackme.com/p/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-tuna",
+    "label": "Tuna",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://tuna.voicemod.net/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-tweakers",
+    "label": "Tweakers",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://tweakers.net/gallery/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-twitch",
+    "label": "Twitch",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://www.twitch.tv/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-trovo",
+    "label": "Trovo",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://trovo.live/s/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-twitter",
+    "label": "Twitter",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://x.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-typeracer",
+    "label": "Typeracer",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://data.typeracer.com/pit/profile?user={}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-ultimate-guitar",
+    "label": "Ultimate-Guitar",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://ultimate-guitar.com/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-unsplash",
+    "label": "Unsplash",
+    "category": "Творчество и медиа",
+    "automatic": false,
+    "template": "https://unsplash.com/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-untappd",
+    "label": "Untappd",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://untappd.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-valorant-forums",
+    "label": "Valorant Forums",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://valorantforums.com/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-vk",
+    "label": "VK",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://vk.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-vsco",
+    "label": "VSCO",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://vsco.co/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-velog",
+    "label": "Velog",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://velog.io/@{}/posts",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-velomania",
+    "label": "Velomania",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://forum.velomania.ru/member.php?username={}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-venmo",
+    "label": "Venmo",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://account.venmo.com/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-vero",
+    "label": "Vero",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://vero.co/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-vimeo",
+    "label": "Vimeo",
+    "category": "Творчество и медиа",
+    "automatic": false,
+    "template": "https://vimeo.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-virustotal",
+    "label": "VirusTotal",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.virustotal.com/gui/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-vlr",
+    "label": "VLR",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.vlr.gg/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-wicg-forum",
+    "label": "WICG Forum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://discourse.wicg.io/u/{}/summary",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-wakatime",
+    "label": "Wakatime",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://wakatime.com/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-warrior-forum",
+    "label": "Warrior Forum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.warriorforum.com/members/{}.html",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-wattpad",
+    "label": "Wattpad",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.wattpad.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-webnode",
+    "label": "WebNode",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.webnode.cz/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-weblate",
+    "label": "Weblate",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://hosted.weblate.org/user/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-weebly",
+    "label": "Weebly",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.weebly.com/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-wikipedia",
+    "label": "Wikipedia",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://en.wikipedia.org/wiki/Special:CentralAuth/{}?uselang=qqx",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-windy",
+    "label": "Windy",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://community.windy.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-wix",
+    "label": "Wix",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.wix.com",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-wolframalphaforum",
+    "label": "WolframalphaForum",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://community.wolfram.com/web/{}/home",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-wordpress",
+    "label": "WordPress",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.wordpress.com/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-wordpressorg",
+    "label": "WordPressOrg",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://profiles.wordpress.org/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-wordnik",
+    "label": "Wordnik",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.wordnik.com/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-wykop",
+    "label": "Wykop",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.wykop.pl/ludzie/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-xbox-gamertag",
+    "label": "Xbox Gamertag",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://xboxgamertag.com/search/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-yandexmusic",
+    "label": "YandexMusic",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://music.yandex/users/{}/playlists",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-younow",
+    "label": "YouNow",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.younow.com/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-youpic",
+    "label": "YouPic",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://youpic.com/photographer/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-youtube",
+    "label": "YouTube",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://www.youtube.com/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-akniga",
+    "label": "akniga",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://akniga.org/profile/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-babyblogru",
+    "label": "babyblogRU",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.babyblog.ru/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-chaos-social",
+    "label": "chaos.social",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://chaos.social/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-couchsurfing",
+    "label": "couchsurfing",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.couchsurfing.com/people/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-d3ru",
+    "label": "d3RU",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://d3.ru/user/{}/posts",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-dailykos",
+    "label": "dailykos",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.dailykos.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-devrant",
+    "label": "devRant",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://devrant.com/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-drive2",
+    "label": "drive2",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.drive2.ru/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-egpu",
+    "label": "eGPU",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://egpu.io/forums/profile/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-eintracht",
+    "label": "eintracht",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://community.eintracht.de/fans/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-fixya",
+    "label": "fixya",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.fixya.com/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-fl",
+    "label": "fl",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.fl.ru/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-forum-guns",
+    "label": "forum_guns",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://forum.guns.ru/forummisc/blog/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-freecodecamp",
+    "label": "freecodecamp",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.freecodecamp.org/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-furaffinity",
+    "label": "furaffinity",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.furaffinity.net/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-geocaching",
+    "label": "geocaching",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.geocaching.com/p/default.aspx?u={}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-habr",
+    "label": "habr",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://habr.com/ru/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hackster",
+    "label": "hackster",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.hackster.io/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-hunting",
+    "label": "hunting",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.hunting.ru/forum/members/?username={}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-interpals",
+    "label": "interpals",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.interpals.net/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-irecommend",
+    "label": "irecommend",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://irecommend.ru/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-jbzd-com-pl",
+    "label": "jbzd.com.pl",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://jbzd.com.pl/uzytkownik/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-jeuxvideo",
+    "label": "jeuxvideo",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.jeuxvideo.com/profil/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-kofi",
+    "label": "kofi",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://ko-fi.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-kwork",
+    "label": "kwork",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://kwork.ru/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-last-fm",
+    "label": "last.fm",
+    "category": "Творчество и медиа",
+    "automatic": false,
+    "template": "https://last.fm/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-leasehackr",
+    "label": "leasehackr",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://forum.leasehackr.com/u/{}/summary/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-livelib",
+    "label": "livelib",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.livelib.ru/reader/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-mastodon-cloud",
+    "label": "mastodon.cloud",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://mastodon.cloud/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-mastodon-social",
+    "label": "mastodon.social",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://mastodon.social/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-mastodon-xyz",
+    "label": "mastodon.xyz",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://mastodon.xyz/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-mstdn-social",
+    "label": "mstdn.social",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://mstdn.social/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-mercadolivre",
+    "label": "mercadolivre",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.mercadolivre.com.br/perfil/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-minds",
+    "label": "minds",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.minds.com/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-moikrug",
+    "label": "moikrug",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://moikrug.ru/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-mstdn-io",
+    "label": "mstdn.io",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://mstdn.io/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-nairaland-com",
+    "label": "nairaland.com",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.nairaland.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-n8n-community",
+    "label": "n8n Community",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://community.n8n.io/u/{}/summary",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-nnru",
+    "label": "nnRU",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.www.nn.ru/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-note",
+    "label": "note",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://note.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-npm",
+    "label": "npm",
+    "category": "Разработка",
+    "automatic": false,
+    "template": "https://www.npmjs.com/~{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-omg-lol",
+    "label": "omg.lol",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://{}.omg.lol",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-opennet",
+    "label": "opennet",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.opennet.ru/~{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-osu",
+    "label": "osu!",
+    "category": "Игры",
+    "automatic": false,
+    "template": "https://osu.ppy.sh/users/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-phpru",
+    "label": "phpRU",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://php.ru/forum/members/?username={}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-pikabu",
+    "label": "pikabu",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://pikabu.ru/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-pinterest",
+    "label": "Pinterest",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://www.pinterest.com/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-pr0gramm",
+    "label": "pr0gramm",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://pr0gramm.com/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-prog-hu",
+    "label": "prog.hu",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://prog.hu/azonosito/info/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-satsisru",
+    "label": "satsisRU",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://satsis.info/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-sessionize",
+    "label": "sessionize",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://sessionize.com/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-social-tchncs-de",
+    "label": "social.tchncs.de",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://social.tchncs.de/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-spletnik",
+    "label": "spletnik",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://spletnik.ru/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-svidbook",
+    "label": "svidbook",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.svidbook.ru/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-threads",
+    "label": "threads",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://www.threads.net/@{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-toster",
+    "label": "toster",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.toster.ru/user/{}/answers",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-tumblr",
+    "label": "tumblr",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://{}.tumblr.com/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-write-as",
+    "label": "write.as",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://write.as/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-znanylekarz-pl",
+    "label": "znanylekarz.pl",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.znanylekarz.pl/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-platzi",
+    "label": "Platzi",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://platzi.com/p/{}/",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-babyru",
+    "label": "BabyRu",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.baby.ru/u/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-wowhead",
+    "label": "Wowhead",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://wowhead.com/user={}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-addons-wago-io",
+    "label": "addons.wago.io",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://addons.wago.io/user/{}",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  },
+  {
+    "name": "manual-curseforge",
+    "label": "CurseForge",
+    "category": "Другие сообщества",
+    "automatic": false,
+    "template": "https://www.curseforge.com/members/{}/projects",
+    "reason": "Ручная проверка. Доступ и существование профиля не подтверждены."
+  }
+]

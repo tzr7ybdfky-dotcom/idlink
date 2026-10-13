@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 from itertools import combinations
+from typing import Literal
 
 import networkx as nx
 from pydantic import BaseModel, ConfigDict, Field
@@ -27,6 +28,15 @@ class Node(BaseModel):
     username: str
 
 
+class SourceCheck(BaseModel):
+    """Record a lookup outcome separately from person-link probabilities."""
+
+    platform: str
+    status: Literal["found", "missing", "error", "invalid"]
+    detail: str
+    url: str | None = None
+
+
 class Report(BaseModel):
     """User-requested artifact; never a persistent full-profile cache."""
 
@@ -35,6 +45,7 @@ class Report(BaseModel):
     nodes: list[Node]
     edges: dict[str, Edge]
     warnings: list[str] = Field(default_factory=list)
+    checks: list[SourceCheck] = Field(default_factory=list)
 
 
 def build_graph(profiles: list[Profile]) -> nx.Graph[str]:
