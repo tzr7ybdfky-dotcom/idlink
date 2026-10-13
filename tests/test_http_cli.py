@@ -64,7 +64,7 @@ def test_search_without_options_uses_all_sources(monkeypatch: pytest.MonkeyPatch
         seed: str,
         repository_url: str,
         platforms: str,
-        out: Path,
+        out: Path | None,
         extra: list[str] | None,
         depth: int,
         activity: bool,

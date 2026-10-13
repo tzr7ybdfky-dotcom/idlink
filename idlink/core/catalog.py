@@ -91,27 +91,9 @@ for source in SOURCES:
         source.automatic = False
         source.reason = "robots.txt запрещает выбранный API. Автопроверка отключена."
         source.template = f"https://{source.host}/wiki/User:{{}}"
-for source in SOURCES:
-    if source.name == "telegram":
-        source.reason = (
-            "Автосбор отключён: условия Telegram запрещают scraping. Только ручная ссылка."
-        )
 existing = {s.label.casefold() for s in SOURCES}
 SOURCES.extend(s for s in manual_sources if s.label.casefold() not in existing)
-# Known restricted sources stay disabled even if an upstream rule exists.
-RESTRICTED = {
-    "telegram",
-    "habr",
-    "dev community",
-    "instagram",
-    "facebook",
-    "linkedin",
-    "reddit",
-    "tiktok",
-    "x / twitter",
-    "twitter",
-    "gitlab",
-}
+RESTRICTED = {"habr", "dev community", "gitlab"}
 PROBE_SOURCES = {}
 for source in SOURCES:
     rule = RULES.get(source.label.casefold())

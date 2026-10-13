@@ -116,3 +116,53 @@ async def test_link_discovery_continues_after_missing_profile() -> None:
     assert {n.platform for n in result.report.nodes} == {"website", "bluesky"}
     assert any(c.platform == "keybase" and c.status == "missing" for c in result.report.checks)
     assert not result.has_errors
+
+
+async def test_domains_probe_concurrently_and_stream_fast_results() -> None:
+    """A slow platform must not prevent an independent profile reaching the callback."""
+    import asyncio
+    from datetime import UTC, datetime
+    from unittest.mock import patch
+
+    from idlink.core.models import Profile
+    from idlink.plugins.bluesky import BlueskyPlugin
+    from idlink.plugins.github import GitHubPlugin
+
+    entered = asyncio.Event()
+    fast_reported = asyncio.Event()
+    order: list[str] = []
+
+    async def slow(self: GitHubPlugin, username: str) -> Profile:
+        entered.set()
+        await asyncio.wait_for(fast_reported.wait(), timeout=1)
+        return Profile(
+            platform="github",
+            username=username,
+            url="https://github.com/alice",
+            fetched_at=datetime.now(UTC),
+        )
+
+    async def fast(self: BlueskyPlugin, username: str) -> Profile:
+        await entered.wait()
+        return Profile(
+            platform="bluesky",
+            username=username,
+            url="https://bsky.app/profile/alice.bsky.social",
+            fetched_at=datetime.now(UTC),
+        )
+
+    def report(profile: Profile) -> None:
+        order.append(profile.platform)
+        if profile.platform == "bluesky":
+            fast_reported.set()
+
+    async with PublicHTTP(
+        "https://example.org/idlink",
+        transport=httpx.MockTransport(lambda request: httpx.Response(404)),
+    ) as http:
+        with patch.object(GitHubPlugin, "fetch", slow), patch.object(BlueskyPlugin, "fetch", fast):
+            result = await collect(
+                http, [("github", "alice"), ("bluesky", "alice")], depth=0, on_profile=report
+            )
+    assert order == ["bluesky", "github"]
+    assert len(result.report.nodes) == 2

@@ -8,6 +8,7 @@ from urllib.parse import urlsplit
 import httpx
 
 from idlink import __version__
+from idlink.core.native import GoTransport, native_binary
 from idlink.core.ratelimit import DomainRateLimiter
 from idlink.core.robots import RobotsPolicy
 from idlink.plugins.base import PluginError
@@ -33,6 +34,8 @@ class PublicHTTP:
             raise ValueError("repository URL must be a valid HTTPS URL")
         self.user_agent = f"idlink/{__version__} (+{repository_url})"
         self.limiter = limiter or DomainRateLimiter()
+        if transport is None and (binary := native_binary()):
+            transport = GoTransport(binary)
         self._resolve_public_hosts = transport is None
         self.client = httpx.AsyncClient(
             transport=transport,

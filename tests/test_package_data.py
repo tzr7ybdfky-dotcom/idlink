@@ -30,7 +30,7 @@ def test_catalog_has_over_300_unique_sources_and_manual_social_links() -> None:
     assert len({s.name for s in SOURCES}) == len(SOURCES)
     for label in ("Telegram", "TikTok", "Instagram"):
         source = next(s for s in SOURCES if s.label == label)
-        assert not source.automatic
+        assert source.automatic
         assert source.template.startswith("https://")
         assert source.template.count("{}") == 1
     assert "MIT" in files("idlink.data").joinpath("SHERLOCK-LICENSE").read_text()

@@ -3,6 +3,7 @@
 import asyncio
 import json
 import secrets
+import webbrowser
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from importlib.resources import files
 from typing import Literal
@@ -49,7 +50,9 @@ async def search_report(http: PublicHTTP, request: SearchRequest) -> Report:
     return result.report
 
 
-def serve(repository_url: str, port: int = 8765) -> None:
+def serve(
+    repository_url: str, port: int = 8765, *, initial_seed: str = "", open_browser: bool = False
+) -> None:
     """Serve only on IPv4 loopback; requests are serialized and not logged."""
     token = secrets.token_urlsafe(32)
     with asyncio.Runner() as runner:
@@ -87,11 +90,17 @@ def serve(repository_url: str, port: int = 8765) -> None:
                     self.reply(403, '{"error":"Недопустимый адрес сервера."}')
                 elif self.path == "/":
                     page = files("idlink.assets").joinpath("search.html").read_text()
-                    page = page.replace("__TOKEN__", token).replace(
-                        "__SOURCES__",
-                        json.dumps([s.model_dump() for s in SOURCES], ensure_ascii=False).replace(
-                            "<", "\\u003c"
-                        ),
+                    page = (
+                        page.replace("__TOKEN__", token)
+                        .replace(
+                            "__INITIAL_SEED__", json.dumps(initial_seed).replace("<", "\\u003c")
+                        )
+                        .replace(
+                            "__SOURCES__",
+                            json.dumps(
+                                [s.model_dump() for s in SOURCES], ensure_ascii=False
+                            ).replace("<", "\\u003c"),
+                        )
                     )
                     self.reply(200, page, "text/html")
                 else:
@@ -137,7 +146,11 @@ def serve(repository_url: str, port: int = 8765) -> None:
 
         try:
             with HTTPServer(("127.0.0.1", port), Handler) as server:
+                if port == 0:
+                    port = server.server_port
                 print(f"idlink: http://127.0.0.1:{port} · Ctrl+C для остановки", flush=True)
+                if open_browser:
+                    webbrowser.open(f"http://127.0.0.1:{port}/")
                 server.serve_forever()
         except KeyboardInterrupt:
             pass

@@ -1,6 +1,7 @@
 """Audit-first CLI with bounded search and offline edge explanations."""
 
 import asyncio
+from collections.abc import Callable
 from pathlib import Path
 from typing import Annotated
 
@@ -9,6 +10,7 @@ import typer
 from idlink.core.cache import ProfileCache
 from idlink.core.collection import Collection, collect, plan_seeds
 from idlink.core.http import PublicHTTP
+from idlink.core.models import Profile
 from idlink.core.report import read_report, write_report
 from idlink.plugins.base import PluginError
 
@@ -25,11 +27,17 @@ async def execute(
     repository_url: str,
     depth: int,
     activity: bool,
+    on_profile: Callable[[Profile], None] | None = None,
 ) -> Collection:
     """Share one policy-aware client and limiter across all sources."""
     async with PublicHTTP(repository_url) as http:
         return await collect(
-            http, roots, depth=depth, activity=activity, cache=ProfileCache(Path(".cache/idlink"))
+            http,
+            roots,
+            depth=depth,
+            activity=activity,
+            cache=ProfileCache(Path(".cache/idlink")),
+            on_profile=on_profile,
         )
 
 
@@ -37,7 +45,7 @@ def run(
     seed: str,
     repository_url: str,
     platforms: str,
-    out: Path,
+    out: Path | None,
     extra: list[str] | None,
     depth: int,
     activity: bool,
@@ -45,8 +53,19 @@ def run(
     """Validate inputs first, emit a report and preserve partial-failure exit status."""
     try:
         roots = plan_seeds(seed, platforms, extra or [])
-        result = asyncio.run(execute(roots, repository_url, depth, activity))
-        write_report(result.report, out)
+        if out is None:
+            typer.echo(f"Проверяем {len(roots)} источников…", err=True)
+        result = asyncio.run(
+            execute(
+                roots,
+                repository_url,
+                depth,
+                activity,
+                on_profile=(lambda p: typer.echo(p.url)) if out is None else None,
+            )
+        )
+        if out is not None:
+            write_report(result.report, out)
     except ValueError as exc:
         raise typer.BadParameter(str(exc)) from exc
     except PluginError as exc:
@@ -55,13 +74,21 @@ def run(
     except OSError as exc:
         typer.echo(f"Ошибка записи отчёта или кэша: {exc}", err=True)
         raise typer.Exit(2) from exc
-    for node in result.report.nodes:
-        typer.echo(f"{node.platform}: {node.id}")
-    for warning in result.report.warnings:
-        typer.echo(warning, err=True)
-    for identifier, edge in result.report.edges.items():
-        typer.echo(f"{identifier}: {edge.probability:.1%} — {edge.verdict}")
-    typer.echo(f"Отчёт: {out}")
+    if out is None:
+        errors = sum(c.status == "error" for c in result.report.checks)
+        typer.echo(
+            f"Найдено: {len(result.report.nodes)}. Проверено: {len(result.report.checks)}. "
+            f"Ошибок доступа: {errors}.",
+            err=True,
+        )
+    else:
+        for node in result.report.nodes:
+            typer.echo(f"{node.platform}: {node.id}")
+        for warning in result.report.warnings:
+            typer.echo(warning, err=True)
+        for identifier, edge in result.report.edges.items():
+            typer.echo(f"{identifier}: {edge.probability:.1%} — {edge.verdict}")
+        typer.echo(f"Отчёт: {out}")
     if result.has_errors:
         raise typer.Exit(3)
 
@@ -86,7 +113,7 @@ def search(
     purpose: Annotated[str | None, typer.Option("--purpose")] = None,
     depth: Annotated[int, typer.Option("--depth", min=0, max=1)] = 1,
     platforms: Platforms = "all",
-    out: Out = Path("report.html"),
+    out: Annotated[Path | None, typer.Option("--out")] = None,
     profile: Profiles = None,
     activity: Activity = False,
 ) -> None:
@@ -99,6 +126,22 @@ def search(
         err=True,
     )
     run(username, repository_url, platforms, out, profile, depth, activity)
+
+
+@app.command()
+def visual(
+    username: str,
+    repository_url: Repo = "https://github.com/tzr7ybdfky-dotcom/idlink",
+    port: Annotated[int, typer.Option("--port", min=0, max=65535)] = 0,
+) -> None:
+    """Открыть сайт и автоматически построить граф по нику, домену или почте."""
+    from idlink.web import serve as serve_web
+
+    try:
+        plan_seeds(username, "all", [])
+        serve_web(repository_url, port, initial_seed=username, open_browser=True)
+    except (ValueError, OSError) as exc:
+        raise typer.BadParameter(str(exc)) from exc
 
 
 @app.command()
@@ -146,7 +189,7 @@ def main() -> None:
     if (
         args
         and not args[0].startswith("-")
-        and args[0] not in {"audit", "search", "explain", "serve"}
+        and args[0] not in {"audit", "search", "explain", "serve", "visual"}
     ):
         args.insert(0, "audit")
     app(args=args)

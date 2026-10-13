@@ -17,7 +17,7 @@ def test_all_sources_and_purpose_validation() -> None:
     assert len(SearchRequest(seed="demo", mode="search").roots()) == len(USERNAME_PLATFORMS)
     assert SearchRequest(seed="user@example.org").roots()[0][0] == "gravatar"
     with pytest.raises(ValueError):
-        SearchRequest(seed="demo", platforms="instagram").roots()
+        SearchRequest(seed="demo", platforms="unsupported-source").roots()
     assert len(SearchRequest(seed="demo", mode="search", purpose="Research").roots()) == len(
         USERNAME_PLATFORMS
     )
@@ -146,6 +146,7 @@ def test_server_routes_enforce_origin_and_intent_without_sockets(
         def serve_forever(self) -> None:
             page = self.request("GET", "/", {"Host": "127.0.0.1:8765"})
             assert "200 OK" in page and "TikTok" in page and "Telegram" in page
+            assert 'const initialSeed = "demo";' in page
             match = re.search(r'const token = "([^"]+)"', page)
             assert match is not None
             headers = {
@@ -154,7 +155,7 @@ def test_server_routes_enforce_origin_and_intent_without_sockets(
                 "X-idlink-token": match[1],
                 "Content-Type": "application/json",
             }
-            body = json.dumps({"seed": "demo", "platforms": "instagram"})
+            body = json.dumps({"seed": "demo", "platforms": "unsupported-source"})
             headers["Content-Length"] = str(len(body))
             assert "400 Bad Request" in self.request("POST", "/api/search", headers, body)
             assert not upstream
@@ -172,4 +173,4 @@ def test_server_routes_enforce_origin_and_intent_without_sockets(
 
     monkeypatch.setattr(web, "PublicHTTP", client)
     monkeypatch.setattr(web, "HTTPServer", FakeServer)
-    web.serve("https://example.org/idlink")
+    web.serve("https://example.org/idlink", initial_seed="demo")

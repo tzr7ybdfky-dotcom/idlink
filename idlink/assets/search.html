@@ -15,6 +15,7 @@ body{margin:0;background:var(--bg);color:var(--text);font:15px system-ui,sans-se
 "use strict";
 const sources = __SOURCES__;
 const token = "__TOKEN__";
+const initialSeed = __INITIAL_SEED__;
 const $=id=>document.getElementById(id);
 let artifact='',currentReport=null;
 const statusLabels={found:'Найден',missing:'Не найден по правилу площадки',error:'Ошибка доступа',invalid:'Неподходящий ввод'};
@@ -52,4 +53,5 @@ $('search-form').onsubmit=async event=>{
 };
 $('download').onclick=()=>{if(!artifact)return;const url=URL.createObjectURL(new Blob([artifact],{type:'text/html'}));const a=document.createElement('a');a.href=url;a.download='idlink-report.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 drawCatalog();
+if(initialSeed){$('seed').value=initialSeed;$('search-form').requestSubmit();}
 </script></body></html>
