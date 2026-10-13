@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-labelledby="title desc">
+  <title id="title">idlink — public profile discovery</title>
+  <desc id="desc">A black banner with the idlink wordmark and a geometric network of connected nodes.</desc>
+  <rect width="1200" height="320" rx="20" fill="#080808"/>
+  <rect x="1" y="1" width="1198" height="318" rx="19" fill="none" stroke="#292929"/>
+  <g fill="none" stroke="#404040" stroke-width="2">
+    <path d="M850 160 955 72 1090 130 1010 250 850 160 1090 130M955 72 1010 250"/>
+    <path d="m850 160-70 90m175-178-115-35m250 93 62-65" stroke-dasharray="5 8"/>
+  </g>
+  <g fill="#171717" stroke="#a3a3a3" stroke-width="2">
+    <circle cx="850" cy="160" r="22"/><circle cx="955" cy="72" r="11"/>
+    <circle cx="1090" cy="130" r="16"/><circle cx="1010" cy="250" r="12"/>
+  </g>
+  <g fill="#666"><circle cx="780" cy="250" r="5"/><circle cx="840" cy="37" r="5"/><circle cx="1152" cy="65" r="5"/></g>
+  <circle cx="850" cy="160" r="7" fill="#f4f4f4"/>
+  <text x="64" y="147" font-family="Arial, Helvetica, sans-serif" font-size="88" font-weight="700" letter-spacing="-5" fill="#f5f5f5">idlink</text>
+  <text x="68" y="194" font-family="Arial, Helvetica, sans-serif" font-size="23" fill="#aaa">Public profiles. Explainable connections.</text>
+  <text x="68" y="261" font-family="monospace" font-size="14" letter-spacing="2" fill="#777">CLI / INTERACTIVE GRAPH / OFFLINE REPORT</text>
+</svg>
