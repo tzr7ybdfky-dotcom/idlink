@@ -46,7 +46,7 @@ async def test_minecraft_is_found_with_and_without_gaming_filter() -> None:
     assert calls == ["https://api.mojang.com/users/profiles/minecraft/demouser"] * 2
 
 
-def test_failed_minecraft_lookup_is_visible_without_reporting_absence(
+def test_failed_minecraft_lookup_keeps_failure_exit_code_without_listing_errors(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     import idlink.cli as cli
@@ -76,6 +76,6 @@ def test_failed_minecraft_lookup_is_visible_without_reporting_absence(
     result = CliRunner().invoke(app, ["search", "demouser", "--games"])
     assert result.exit_code == 3
     assert result.stdout == ""
-    assert "Minecraft: не удалось проверить (таймауты)" in result.stderr
-    assert "существование профиля неизвестно" in result.stderr
-    assert "Найдено: 0" in result.stderr
+    assert "Minecraft:" not in result.stderr
+    assert "Найдено:" not in result.stderr
+    assert "таймаут" not in result.stderr

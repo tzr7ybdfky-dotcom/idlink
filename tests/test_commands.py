@@ -41,8 +41,10 @@ def test_search_prints_final_english_list_without_duplicates_or_html(
             url="https://www.tiktok.com/@alice",
             fetched_at=datetime.now(UTC),
         )
-        assert on_profile is not None
-        on_profile(profile)
+        assert on_profile is None
+        assert on_check is not None
+        on_check(SourceCheck(platform="tiktok", status="found", detail="found"), 1, 2)
+        on_check(SourceCheck(platform="telegram", status="found", detail="found"), 2, 2)
         return Collection(
             Report(
                 nodes=[
@@ -61,7 +63,7 @@ def test_search_prints_final_english_list_without_duplicates_or_html(
         "Telegram: https://t.me/alice",
         "TikTok: https://www.tiktok.com/@alice",
     ]
-    assert "TikTok: https://www.tiktok.com/@alice" in result.stderr
+    assert "TikTok: https://www.tiktok.com/@alice" not in result.stderr
     assert not (tmp_path / "report.html").exists()
 
 

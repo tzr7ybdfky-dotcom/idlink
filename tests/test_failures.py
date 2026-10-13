@@ -89,7 +89,7 @@ def test_cli_audit_success(tmp_path: Path) -> None:
     assert "Отчёт:" in result.output
 
 
-def test_search_distinguishes_unverified_from_access_reasons() -> None:
+def test_search_hides_unavailable_sources_but_preserves_failure_status() -> None:
     from idlink.core.graph import SourceCheck
 
     checks = [
@@ -105,5 +105,5 @@ def test_search_distinguishes_unverified_from_access_reasons() -> None:
         result = CliRunner().invoke(app, ["search", "alice"])
     assert result.exit_code == 3
     assert not result.stdout.strip()
-    assert "Недоступно: 2. Неподтверждено: 1." in result.stderr
-    assert "robots.txt: 1; таймауты: 1" in result.stderr
+    assert "Недоступно:" not in result.stderr
+    assert "robots.txt:" not in result.stderr

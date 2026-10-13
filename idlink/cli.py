@@ -1,17 +1,18 @@
 """Audit-first CLI with bounded search and offline edge explanations."""
 
 import asyncio
-import time
 from collections.abc import Callable
 from pathlib import Path
 from typing import Annotated
 
 import typer
+from rich.console import Console
+from rich.progress import BarColumn, Progress, TaskProgressColumn, TextColumn
 
 from idlink.core.cache import ProfileCache
 from idlink.core.catalog import SOURCES
 from idlink.core.categories import CATEGORIES, selected_platforms
-from idlink.core.collection import SOURCE_PRIORITY, Collection, collect, plan_seeds
+from idlink.core.collection import Collection, collect, plan_seeds
 from idlink.core.graph import SourceCheck
 from idlink.core.http import PublicHTTP
 from idlink.core.models import Profile
@@ -83,45 +84,38 @@ def run(
     respect_robots: bool = True,
 ) -> None:
     """Validate inputs first, emit a report and preserve partial-failure exit status."""
-    started, last_print = time.monotonic(), 0.0
+    console = Console(stderr=True)
+    bar = Progress(
+        TextColumn("Checking"),
+        BarColumn(),
+        TaskProgressColumn(),
+        console=console,
+        transient=True,
+        disable=out is not None or not console.is_terminal,
+    )
+    task = bar.add_task("", total=1)
 
     def progress(check: SourceCheck, count: int, total: int) -> None:
-        nonlocal last_print
-        if (
-            check.status in {"error", "unverified"}
-            and SOURCE_PRIORITY.get(check.platform, 100) < 100
-        ):
-            label = PLATFORM_LABELS.get(check.platform, check.platform)
-            reason = ERROR_LABELS.get(check.error_kind or "network", "сеть")
-            typer.echo(f"{label}: не удалось проверить ({reason}) — {check.detail}", err=True)
-        now = time.monotonic()
-        if now - last_print >= 2:
-            typer.echo(f"Проверено {count}/{total} · {now - started:.0f} с", err=True)
-            last_print = now
+        """Update one transient bar without printing unavailable sources."""
+        bar.update(task, completed=count, total=max(total, count, 1))
 
     try:
         roots = plan_seeds(seed, platforms, extra or [])
-        if out is None:
-            typer.echo(f"Проверяем {len(roots)} источников…", err=True)
-        result = asyncio.run(
-            execute(
-                roots,
-                repository_url,
-                depth,
-                activity,
-                on_profile=(
-                    lambda p: typer.echo(
-                        f"{PLATFORM_LABELS.get(p.platform, p.platform)}: {p.url}", err=True
-                    )
+        bar.update(task, total=max(len(roots), 1))
+        with bar:
+            result = asyncio.run(
+                execute(
+                    roots,
+                    repository_url,
+                    depth,
+                    activity,
+                    on_profile=None,
+                    allowed_platforms=frozenset(p for p, _ in roots) if restrict_sources else None,
+                    timeout=timeout,
+                    on_check=progress if out is None else None,
+                    respect_robots=respect_robots,
                 )
-                if out is None
-                else None,
-                allowed_platforms=frozenset(p for p, _ in roots) if restrict_sources else None,
-                timeout=timeout,
-                on_check=progress if out is None else None,
-                respect_robots=respect_robots,
             )
-        )
         if out is not None:
             write_report(result.report, out)
     except ValueError as exc:
@@ -137,30 +131,7 @@ def run(
         key=lambda node: (PLATFORM_LABELS.get(node.platform, node.platform).casefold(), node.id),
     ):
         typer.echo(f"{PLATFORM_LABELS.get(node.platform, node.platform)}: {node.id}")
-    if out is None:
-        errors = sum(c.status == "error" for c in result.report.checks)
-        typer.echo(
-            f"Найдено: {len(result.report.nodes)}. Проверено: {len(result.report.checks)}. "
-            f"Недоступно: {errors}. "
-            f"Неподтверждено: {sum(c.status == 'unverified' for c in result.report.checks)}.",
-            err=True,
-        )
-        counts = {
-            key: sum(
-                c.status == "error" and (c.error_kind or "network") == key
-                for c in result.report.checks
-            )
-            for key in ERROR_LABELS
-        }
-        if errors:
-            typer.echo(
-                "Причины: "
-                + "; ".join(
-                    f"{ERROR_LABELS[key]}: {count}" for key, count in counts.items() if count
-                ),
-                err=True,
-            )
-    else:
+    if out is not None:
         for warning in result.report.warnings:
             typer.echo(warning, err=True)
         for identifier, edge in result.report.edges.items():
