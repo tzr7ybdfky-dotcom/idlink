@@ -89,6 +89,11 @@ for source in SOURCES:
         source.automatic = False
         source.reason = "robots.txt запрещает выбранный API. Автопроверка отключена."
         source.template = f"https://{source.host}/wiki/User:{{}}"
+for source in SOURCES:
+    if source.name == "telegram":
+        source.reason = (
+            "Автосбор отключён: условия Telegram запрещают scraping. Только ручная ссылка."
+        )
 existing = {s.label.casefold() for s in SOURCES}
 SOURCES.extend(s for s in manual_sources if s.label.casefold() not in existing)
 USERNAME_PLATFORMS = frozenset(

@@ -69,3 +69,50 @@ async def test_habr_partial_failure_is_reported() -> None:
     assert result.has_errors
     assert result.report.nodes == []
     assert "Habr" in result.report.warnings[0]
+
+
+@pytest.mark.parametrize(
+    "url,expected",
+    [
+        ("https://keybase.io/demo", ("keybase", "demo")),
+        ("https://news.ycombinator.com/user?id=Demo", ("hackernews", "Demo")),
+        ("https://bsky.app/profile/demo.bsky.social", ("bluesky", "demo")),
+        ("https://bsky.app/profile/example.org", None),
+        ("https://news.ycombinator.com/user?id=demo&id=other", None),
+        ("https://keybase.io/docs", None),
+        ("https://t.me/demo", None),
+    ],
+)
+def test_recognize_public_api_links(url: str, expected: tuple[str, str] | None) -> None:
+    assert linked_seed(url) == expected
+
+
+async def test_link_discovery_continues_after_missing_profile() -> None:
+    """An absent linked account must not prevent a later valid account being fetched."""
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/robots.txt":
+            return httpx.Response(404)
+        if request.url.host == "example.org":
+            return httpx.Response(
+                200,
+                headers={"content-type": "text/html"},
+                text='<a rel="me" href="https://keybase.io/missing">me</a>'
+                '<a rel="me" href="https://bsky.app/profile/demo.bsky.social">me</a>',
+            )
+        if request.url.host == "keybase.io":
+            return httpx.Response(200, json={"status": {"code": 0}, "them": [None]})
+        return httpx.Response(200, json={"handle": "demo.bsky.social", "did": "did:plc:demo"})
+
+    async def sleep(delay: float) -> None:
+        pass
+
+    async with PublicHTTP(
+        "https://example.org/idlink",
+        transport=httpx.MockTransport(handler),
+        limiter=DomainRateLimiter(sleep=sleep),
+    ) as http:
+        result = await collect(http, [("website", "example.org")], depth=1)
+    assert {n.platform for n in result.report.nodes} == {"website", "bluesky"}
+    assert any(c.platform == "keybase" and c.status == "missing" for c in result.report.checks)
+    assert not result.has_errors

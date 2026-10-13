@@ -28,7 +28,7 @@ function drawCatalog(){
    const row=el('div','',rows,'source');el('strong',source.label,row);
    const checks=currentReport?currentReport.checks.filter(c=>c.platform===source.name):[];
    if(checks.length){for(const c of checks){el('p',statusLabels[c.status]+': '+c.detail,row);if(c.status==='found')row.classList.add('found');}}
-   else el('p',source.automatic?'Автоматически для подходящего типа запроса':'Ручная проверка',row);
+   else el('p',source.automatic?'Автоматически для подходящего типа запроса':source.reason,row);
    if(!source.automatic && source.template && kind()==='username' && $('seed').value.trim()){
     const a=el('a','Открыть ссылку по нику ↗',row);a.href=source.template.replace('{}',encodeURIComponent($('seed').value.trim()));a.target='_blank';a.rel='noopener noreferrer';
    }
