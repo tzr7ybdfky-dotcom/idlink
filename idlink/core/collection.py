@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from urllib.parse import parse_qs, urlsplit
 
 from idlink.core.cache import ProfileCache
+from idlink.core.case import case_candidates
 from idlink.core.catalog import PROBE_SOURCES, SOURCES, USERNAME_PLATFORMS, WIKI_HOSTS
 from idlink.core.graph import Report, SourceCheck, make_report
 from idlink.core.http import PublicHTTP
@@ -164,6 +165,7 @@ async def _fetch_queue(
     limit: int,
     concurrency: int = 256,
     check_timeout: float | None = None,
+    check_case: bool = False,
 ) -> AsyncGenerator[tuple[str, str, int, Profile | None | ValueError | PluginError], None]:
     """Refill a freed slot immediately; one slow host never stalls the next wave."""
 
@@ -173,9 +175,16 @@ async def _fetch_queue(
         platform, seed, level = item
         try:
             async with asyncio.timeout(check_timeout):
-                result: Profile | None | ValueError | PluginError = await plugins[platform].fetch(
-                    seed
+                candidates = (
+                    case_candidates(platform, seed)
+                    if check_case and platform in USERNAME_PLATFORMS
+                    else (seed,)
                 )
+                result: Profile | None | ValueError | PluginError = None
+                for candidate in candidates:
+                    result = await plugins[platform].fetch(candidate)
+                    if result is not None:
+                        break
         except TimeoutError:
             result = PluginError(
                 f"Общий лимит проверки {check_timeout} с, включая очередь и robots.txt; "
@@ -220,6 +229,7 @@ async def collect(
     allowed_platforms: frozenset[str] | None = None,
     concurrency: int = 256,
     on_check: Callable[[SourceCheck, int, int], None] | None = None,
+    check_case: bool = False,
 ) -> Collection:
     """Check every selected source and at most 16 additional self-links."""
     if not 1 <= concurrency <= 256:
@@ -254,7 +264,13 @@ async def collect(
     queue = deque((platform, seed, 0) for platform, seed in roots)
     limit = len(roots) + 16
     async for platform, _seed, level, profile in _fetch_queue(
-        plugins, queue, visited, limit, concurrency=concurrency, check_timeout=4 * http.timeout
+        plugins,
+        queue,
+        visited,
+        limit,
+        concurrency=concurrency,
+        check_timeout=4 * http.timeout,
+        check_case=check_case,
     ):
         if isinstance(profile, ValueError):
             record(

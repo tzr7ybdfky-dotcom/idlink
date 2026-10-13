@@ -1,6 +1,7 @@
 """Serialize request starts per hostname and enforce server cooldowns."""
 
 import asyncio
+import math
 import time
 from collections.abc import Awaitable, Callable
 from urllib.parse import urlsplit
@@ -20,8 +21,8 @@ class DomainRateLimiter:
         clock: Callable[[], float] = time.monotonic,
         sleep: Callable[[float], Awaitable[None]] = asyncio.sleep,
     ) -> None:
-        if interval < 2.0:
-            raise ValueError("minimum interval is 2 seconds")
+        if not math.isfinite(interval) or interval < 0.25:
+            raise ValueError("minimum interval is 0.25 seconds")
         self.interval = interval
         self.clock = clock
         self.sleep = sleep

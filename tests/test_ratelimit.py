@@ -25,9 +25,10 @@ async def test_spacing_and_domain_independence() -> None:
         await limiter.wait("https://api.github.com/users/y")
 
 
-def test_interval_cannot_be_lowered() -> None:
+@pytest.mark.parametrize("interval", [0, -1, 0.24, float("nan"), float("inf")])
+def test_invalid_interval_is_rejected(interval: float) -> None:
     with pytest.raises(ValueError):
-        DomainRateLimiter(interval=1)
+        DomainRateLimiter(interval=interval)
 
 
 async def test_search_bucket_keeps_both_route_and_hostname_limits() -> None:
@@ -44,3 +45,19 @@ async def test_search_bucket_keeps_both_route_and_hostname_limits() -> None:
     assert now[0] == 2
     await limiter.wait(url, bucket="search", bucket_interval=6)
     assert now[0] == 6
+
+
+async def test_custom_interval_spaces_requests_and_keeps_server_delay() -> None:
+    """A faster local interval never weakens a server-imposed delay."""
+    now = [0.0]
+
+    async def sleep(delay: float) -> None:
+        now[0] += delay
+
+    limiter = DomainRateLimiter(interval=0.5, clock=lambda: now[0], sleep=sleep)
+    await limiter.wait("https://example.org/a")
+    await limiter.wait("https://example.org/b")
+    assert now[0] == 0.5
+    limiter.set_delay("https://example.org/robots.txt", 3)
+    await limiter.wait("https://example.org/c")
+    assert now[0] == 3.5

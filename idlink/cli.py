@@ -16,6 +16,7 @@ from idlink.core.collection import Collection, collect, plan_seeds
 from idlink.core.graph import SourceCheck
 from idlink.core.http import PublicHTTP
 from idlink.core.models import Profile
+from idlink.core.ratelimit import DomainRateLimiter
 from idlink.core.report import read_report, write_report
 from idlink.plugins.base import PluginError
 
@@ -56,9 +57,12 @@ async def execute(
     timeout: float = 6.0,
     on_check: Callable[[SourceCheck, int, int], None] | None = None,
     respect_robots: bool = True,
+    request_interval: float = 2.0,
+    check_case: bool = False,
 ) -> Collection:
     """Share one policy-aware client and limiter across all sources."""
     async with PublicHTTP(repository_url, timeout=timeout, respect_robots=respect_robots) as http:
+        http.limiter = DomainRateLimiter(interval=request_interval)
         return await collect(
             http,
             roots,
@@ -68,6 +72,7 @@ async def execute(
             on_profile=on_profile,
             allowed_platforms=allowed_platforms,
             on_check=on_check,
+            check_case=check_case,
         )
 
 
@@ -82,6 +87,8 @@ def run(
     restrict_sources: bool = False,
     timeout: float = 6.0,
     respect_robots: bool = True,
+    request_interval: float = 2.0,
+    check_case: bool = False,
 ) -> None:
     """Validate inputs first, emit a report and preserve partial-failure exit status."""
     console = Console(stderr=True)
@@ -114,6 +121,8 @@ def run(
                     timeout=timeout,
                     on_check=progress if out is None else None,
                     respect_robots=respect_robots,
+                    request_interval=request_interval,
+                    check_case=check_case,
                 )
             )
         if out is not None:
@@ -168,6 +177,19 @@ def search(
             help="Сетевой таймаут в секундах; ожидание лимита не включается.",
         ),
     ] = 6.0,
+    request_interval: Annotated[
+        float,
+        typer.Option(
+            "--request-interval",
+            min=0.25,
+            max=120,
+            help="Интервал запросов к одному hostname в секундах; по умолчанию 2.",
+        ),
+    ] = 2.0,
+    case_variants: Annotated[
+        bool,
+        typer.Option("--case-variants/--exact-case", help="До четырёх вариантов регистра ника."),
+    ] = True,
     purpose: Annotated[str | None, typer.Option("--purpose")] = None,
     depth: Annotated[int, typer.Option("--depth", min=0, max=1)] = 1,
     platforms: Platforms = "all",
@@ -216,6 +238,8 @@ def search(
         restrict_sources=any(ctx.params.get(k) for k in CATEGORIES),
         timeout=timeout,
         respect_robots=respect_robots,
+        request_interval=request_interval,
+        check_case=case_variants,
     )
 
 

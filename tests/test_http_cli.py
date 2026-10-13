@@ -71,6 +71,8 @@ def test_search_without_options_uses_all_sources(monkeypatch: pytest.MonkeyPatch
         restrict_sources: bool = False,
         timeout: float = 6.0,
         respect_robots: bool = True,
+        request_interval: float = 2.0,
+        check_case: bool = False,
     ) -> None:
         calls.append((seed, repository_url, platforms))
 

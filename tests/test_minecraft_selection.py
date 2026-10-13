@@ -60,6 +60,8 @@ def test_failed_minecraft_lookup_keeps_failure_exit_code_without_listing_errors(
         allowed_platforms: frozenset[str] | None = None,
         timeout: float = 6.0,
         respect_robots: bool = True,
+        request_interval: float = 2.0,
+        check_case: bool = False,
         on_check: Callable[[SourceCheck, int, int], None] | None = None,
     ) -> Collection:
         check = SourceCheck(

@@ -29,6 +29,8 @@ def test_search_prints_final_english_list_without_duplicates_or_html(
         allowed_platforms: frozenset[str] | None = None,
         timeout: float = 6.0,
         respect_robots: bool = True,
+        request_interval: float = 2.0,
+        check_case: bool = False,
         on_check: Callable[[SourceCheck, int, int], None] | None = None,
     ) -> Collection:
         from datetime import UTC, datetime
@@ -41,6 +43,8 @@ def test_search_prints_final_english_list_without_duplicates_or_html(
             url="https://www.tiktok.com/@alice",
             fetched_at=datetime.now(UTC),
         )
+        assert request_interval == 0.5
+        assert check_case
         assert on_profile is None
         assert on_check is not None
         on_check(SourceCheck(platform="tiktok", status="found", detail="found"), 1, 2)
@@ -57,7 +61,7 @@ def test_search_prints_final_english_list_without_duplicates_or_html(
         )
 
     monkeypatch.setattr(cli, "execute", execute)
-    result = CliRunner().invoke(app, ["search", "alice"])
+    result = CliRunner().invoke(app, ["search", "alice", "--request-interval", "0.5"])
     assert result.exit_code == 0
     assert result.stdout.strip().splitlines() == [
         "Telegram: https://t.me/alice",
@@ -81,6 +85,8 @@ def test_visual_prefills_seed_and_opens_browser(monkeypatch: pytest.MonkeyPatch)
         initial_platforms: str = "all",
         timeout: float = 6.0,
         respect_robots: bool = True,
+        request_interval: float = 2.0,
+        check_case: bool = False,
     ) -> None:
         calls.append((initial_seed, open_browser))
 
