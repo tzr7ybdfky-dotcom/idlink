@@ -210,7 +210,7 @@ async def test_telegram_robots_refusal_prevents_profile_request() -> None:
     [
         ('{"id":"123","username":"alice","marker":"public-profile"}', "found"),
         ("login form", "error"),
-        ("public-profile missing", "missing"),
+        ("public-profile User not found", "missing"),
     ],
 )
 async def test_maigret_requires_presence_and_prioritizes_absence(body: str, outcome: str) -> None:
@@ -230,7 +230,7 @@ async def test_maigret_requires_presence_and_prioritizes_absence(body: str, outc
         probe="https://fixture.example/{}",
         kind="message",
         presence=["public-profile"],
-        errors=["missing"],
+        errors=["User not found"],
     )
     async with PublicHTTP(
         "https://example.org/idlink",

@@ -1,0 +1,68 @@
+[
+  {
+    "name": "forum-godot-forum",
+    "label": "Godot Forum",
+    "host": "forum.godotengine.org",
+    "reference_url": "https://forum.godotengine.org/u/wchc"
+  },
+  {
+    "name": "forum-ubuntu-discourse",
+    "label": "Ubuntu Discourse",
+    "host": "discourse.ubuntu.com",
+    "reference_url": "https://discourse.ubuntu.com/u/paelzer"
+  },
+  {
+    "name": "forum-fedora-discussion",
+    "label": "Fedora Discussion",
+    "host": "discussion.fedoraproject.org",
+    "reference_url": "https://discussion.fedoraproject.org/u/py0xc3"
+  },
+  {
+    "name": "forum-kde-discuss",
+    "label": "KDE Discuss",
+    "host": "discuss.kde.org",
+    "reference_url": "https://discuss.kde.org/u/meven"
+  },
+  {
+    "name": "forum-gnome-discourse",
+    "label": "GNOME Discourse",
+    "host": "discourse.gnome.org",
+    "reference_url": "https://discourse.gnome.org/u/bragefuglseth"
+  },
+  {
+    "name": "forum-endeavouros-forum",
+    "label": "EndeavourOS Forum",
+    "host": "forum.endeavouros.com",
+    "reference_url": "https://forum.endeavouros.com/u/BluishHumility"
+  },
+  {
+    "name": "forum-kakoune-discuss",
+    "label": "Kakoune Discuss",
+    "host": "discuss.kakoune.com",
+    "reference_url": "https://discuss.kakoune.com/u/alexherbo2"
+  },
+  {
+    "name": "forum-haskell-discourse",
+    "label": "Haskell Discourse",
+    "host": "discourse.haskell.org",
+    "reference_url": "https://discourse.haskell.org/u/DavidB"
+  },
+  {
+    "name": "forum-clojureverse",
+    "label": "ClojureVerse",
+    "host": "clojureverse.org",
+    "reference_url": "https://clojureverse.org/u/seancorfield"
+  },
+  {
+    "name": "forum-nixos-discourse",
+    "label": "NixOS Discourse",
+    "host": "discourse.nixos.org",
+    "reference_url": "https://discourse.nixos.org/u/Aleksanaa"
+  },
+  {
+    "name": "forum-zorin-forum",
+    "label": "Zorin Forum",
+    "host": "forum.zorin.com",
+    "reference_url": "https://forum.zorin.com/u/zorink"
+  }
+]

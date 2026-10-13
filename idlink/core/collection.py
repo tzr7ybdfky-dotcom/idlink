@@ -15,6 +15,7 @@ from idlink.core.inputs import seed_kind
 from idlink.core.models import Profile
 from idlink.plugins.base import PlatformPlugin, PluginError
 from idlink.plugins.bluesky import BlueskyPlugin
+from idlink.plugins.discourse import DISCOURSE_HOSTS, DiscoursePlugin
 from idlink.plugins.github import GitHubPlugin
 from idlink.plugins.gravatar import GravatarPlugin
 from idlink.plugins.habr import HabrPlugin
@@ -230,8 +231,12 @@ async def collect(
         "habr": HabrPlugin(),
         **{
             name: PublicAPIPlugin(http, name, WIKI_HOSTS.get(name, ""))
-            for name in USERNAME_PLATFORMS - {"github", "bluesky"} - PROBE_SOURCES.keys()
+            for name in USERNAME_PLATFORMS
+            - {"github", "bluesky"}
+            - PROBE_SOURCES.keys()
+            - DISCOURSE_HOSTS.keys()
         },
+        **{name: DiscoursePlugin(http, name, host) for name, host in DISCOURSE_HOSTS.items()},
     }
     plugins.update({name: SherlockPlugin(http, name, rule) for name, rule in PROBE_SOURCES.items()})
     profiles: dict[str, Profile] = {}

@@ -3,11 +3,9 @@
 import json
 import re
 from html import unescape
-from urllib.parse import unquote
+from urllib.parse import unquote, urlsplit
 
 from bs4 import BeautifulSoup, SoupStrainer
-
-from idlink.signals.links import canonical_url
 
 ABSENT = re.compile(
     r"(?:^404(?:\s|:|$)|page\s*(?:not found|doesn.t exist)|"
@@ -20,10 +18,16 @@ ABSENT = re.compile(
 def soft_404(body: str) -> bool:
     """Inspect visible page headings, never error strings embedded in JavaScript bundles."""
     headings = re.findall(r"<(?:title|h[12])\b[^>]*>(.*?)</(?:title|h[12])>", body, re.I | re.S)
-    return any(ABSENT.search(unescape(re.sub(r"<[^>]*>", " ", text)).strip()) for text in headings)
+    if not any(ABSENT.search(unescape(re.sub(r"<[^>]*>", " ", text)).strip()) for text in headings):
+        return False
+    # Raw templates inside scripts can contain <title>404</title>; only DOM headings count.
+    soup = BeautifulSoup(body, "html.parser", parse_only=SoupStrainer(["title", "h1", "h2"]))
+    return any(
+        ABSENT.search(tag.get_text(" ", strip=True)) for tag in soup.find_all(["title", "h1", "h2"])
+    )
 
 
-def json_identity(value: object, username: str) -> bool:
+def json_identity(value: object, username: str, *, allow_name: bool = False) -> bool:
     """Require an identity and stable account ID in the same object, ignoring route parameters."""
     pending = [value]
     name = username.casefold().lstrip("@")
@@ -53,7 +57,7 @@ def json_identity(value: object, username: str) -> bool:
                     "handle",
                     "uniqueId",
                     "screen_name",
-                    "name",
+                    *(("name",) if allow_name else ()),
                 )
             )
             if has_id and matches:
@@ -66,15 +70,19 @@ def json_identity(value: object, username: str) -> bool:
 
 def identifies_profile(body: str, username: str, url: str) -> bool:
     """Bind public account metadata to the requested identity; URL echoes are insufficient."""
-    if username.casefold() not in unquote(body).casefold():
-        return False
     try:
-        if json_identity(json.loads(body), username):
+        if json_identity(json.loads(body), username, allow_name=minecraft_endpoint(url)):
             return True
     except ValueError:
         pass
+    if body.lstrip().startswith("<?xml"):
+        return False
+    if username.casefold() not in unescape(unquote(body)).casefold():
+        return False
     soup = BeautifulSoup(
-        body, "html.parser", parse_only=SoupStrainer(["title", "h1", "meta", "link", "script"])
+        body,
+        "html.parser",
+        parse_only=SoupStrainer(["title", "h1", "h2", "meta", "link", "script"]),
     )
     for script in soup.find_all("script", attrs={"type": "application/json"}):
         try:
@@ -88,12 +96,43 @@ def identifies_profile(body: str, username: str, url: str) -> bool:
     ):
         return True
     identity = re.compile(r"(?<![\w.-])@?" + re.escape(username) + r"(?![\w.-])", re.I)
-    labels = [tag.get_text(" ", strip=True) for tag in soup.find_all(["title", "h1"])]
+    labels = [tag.get_text(" ", strip=True) for tag in soup.find_all(["title", "h1", "h2"])]
     labels.extend(str(tag.get("content", "")) for tag in soup.select('meta[property="og:title"]'))
-    if not any(identity.search(label) for label in labels):
-        return False
-    locators = [str(tag.get("content", "")) for tag in soup.select('meta[property="og:url"]')]
-    locators.extend(str(tag.get("href", "")) for tag in soup.select('link[rel="canonical"]'))
-    return bool(canonical_url(url)) and any(
-        canonical_url(locator) == canonical_url(url) for locator in locators
+    labels.extend(str(tag.get("content", "")) for tag in soup.select('meta[name="twitter:title"]'))
+    if any(identity.search(label) for label in labels):
+        return True
+    return False
+
+
+def minecraft_endpoint(url: str) -> bool:
+    """Only Mojang's documented account route uses name as its username field."""
+    parsed = urlsplit(url)
+    return parsed.hostname == "api.mojang.com" and parsed.path.startswith(
+        "/users/profiles/minecraft/"
     )
+
+
+def absence_marker(body: str, markers: list[str]) -> bool:
+    """Require visible error phrases; JavaScript templates and metadata keys are ambiguous."""
+    candidates = [marker for marker in markers if marker in body]
+    if not candidates:
+        return False
+    try:
+        value = json.loads(body)
+        if isinstance(value, dict):
+            errors = json.dumps([value.get("error"), value.get("errors")], ensure_ascii=False)
+            if value.get("statusCode") in (404, 410, 10221) or re.search(
+                r"not[_ -]found|no such user|unknown user|does not exist", errors, re.I
+            ):
+                return True
+    except ValueError:
+        pass
+    if body.lstrip().startswith("<?xml"):
+        return False
+    soup = BeautifulSoup(body, "html.parser")
+    visible = soup.get_text(" ", strip=True).casefold()
+    for marker in candidates:
+        phrase = BeautifulSoup(marker, "html.parser").get_text(" ", strip=True).casefold()
+        if len(phrase) >= 8 and len(phrase.split()) >= 2 and phrase in visible:
+            return True
+    return False

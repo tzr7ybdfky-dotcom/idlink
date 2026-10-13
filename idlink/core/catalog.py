@@ -4,6 +4,7 @@ from importlib.resources import files
 
 from pydantic import BaseModel, TypeAdapter
 
+from idlink.plugins.discourse import FORUMS
 from idlink.plugins.sherlock import RULES
 
 
@@ -80,6 +81,17 @@ SOURCES = [
         ]
     ],
 ]
+SOURCES.extend(
+    Source(
+        name=forum.name,
+        label=forum.label,
+        category="Форумы",
+        tags=frozenset({"forum"}),
+        template=f"https://{forum.host}/u/{{}}",
+        reason="Публичный Discourse API; проверены положительный и отрицательный контроль.",
+    )
+    for forum in FORUMS
+)
 manual_sources = TypeAdapter(list[Source]).validate_json(
     files("idlink.data").joinpath("platforms.json").read_bytes()
 )

@@ -13,7 +13,14 @@ from pydantic import BaseModel, Field, TypeAdapter
 from idlink.core.http import PublicHTTP
 from idlink.core.models import Profile
 from idlink.plugins.base import PlatformPlugin, PluginError
-from idlink.plugins.evidence import identifies_profile, json_identity, soft_404
+from idlink.plugins.evidence import (
+    absence_marker,
+    identifies_profile,
+    json_identity,
+    minecraft_endpoint,
+    soft_404,
+)
+from idlink.plugins.pages import public_page
 
 
 class ProbeRule(BaseModel):
@@ -153,7 +160,9 @@ class SherlockPlugin(PlatformPlugin):
         # A nickname cannot introduce a host label separator or credentials.
         if urlsplit(probe).scheme != "https" or urlsplit(probe).username:
             raise PluginError("unsafe probe URL", kind="policy")
-        response = await self.http.get(probe)
+        response = await public_page(self.http, probe)
+        if probe == url:
+            url = str(response.request.url)
         status = response.status_code
         if status in {401, 403, 429}:
             raise PluginError(f"access blocked: HTTP {status}", kind="blocked")
@@ -185,7 +194,7 @@ class SherlockPlugin(PlatformPlugin):
             raise PluginError("empty response; existence unknown", kind="response")
         if soft_404(plain):
             return None
-        if rule.kind == "message" and any(error in plain for error in rule.errors):
+        if rule.kind == "message" and absence_marker(plain, rule.errors):
             return None
         if rule.presence and not any(marker in plain for marker in rule.presence):
             raise PluginError(
@@ -201,7 +210,9 @@ class SherlockPlugin(PlatformPlugin):
             if not identifies_profile(plain, username, url):
                 raise PluginError("HTTP 200 without account identity evidence", kind="unverified")
             try:
-                api_identity = json_identity(json.loads(plain), username)
+                api_identity = json_identity(
+                    json.loads(plain), username, allow_name=minecraft_endpoint(probe)
+                )
             except ValueError:
                 api_identity = False
             if not api_identity:
@@ -209,13 +220,14 @@ class SherlockPlugin(PlatformPlugin):
             if probe != url and urlsplit(probe)._replace(query="") != urlsplit(url)._replace(
                 query=""
             ):
-                page = await self.http.get(url)
+                page = await public_page(self.http, url)
                 if page.status_code in {404, 410} or soft_404(page.text):
                     return None
                 if page.status_code != 200 or not identifies_profile(page.text, username, url):
                     raise PluginError(
                         "profile URL not confirmed by API evidence", kind="unverified"
                     )
+                url = str(page.request.url)
         return Profile(
             platform=self.name,
             username=username,
@@ -237,12 +249,10 @@ class SherlockPlugin(PlatformPlugin):
         )
         if name is None:
             raise PluginError("cannot form a safe negative control", kind="unverified")
-        response = await self.http.get(self.rule.probe.replace("{}", quote(name, safe="")))
+        response = await public_page(self.http, self.rule.probe.replace("{}", quote(name, safe="")))
         if response.status_code in {404, 410} or (
             response.status_code == 200
-            and (
-                soft_404(response.text) or any(error in response.text for error in self.rule.errors)
-            )
+            and (soft_404(response.text) or absence_marker(response.text, self.rule.errors))
         ):
             return
         raise PluginError(
