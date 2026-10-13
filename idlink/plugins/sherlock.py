@@ -1,6 +1,8 @@
 """Anonymous Sherlock-compatible existence heuristics, not identity verification."""
 
+import json
 import re
+import secrets
 from datetime import UTC, datetime
 from importlib.resources import files
 from urllib.parse import quote, urlsplit
@@ -11,6 +13,7 @@ from pydantic import BaseModel, Field, TypeAdapter
 from idlink.core.http import PublicHTTP
 from idlink.core.models import Profile
 from idlink.plugins.base import PlatformPlugin, PluginError
+from idlink.plugins.evidence import identifies_profile, json_identity, soft_404
 
 
 class ProbeRule(BaseModel):
@@ -110,9 +113,18 @@ def page_evidence(rule: ProbeRule, body: str, username: str, url: str) -> bool:
             and str(kind.get("content")) == "profile"
             and str(locator.get("content")).rstrip("/") == url.rstrip("/")
         )
-    key = re.escape(rule.evidence)
-    name = re.escape(username)
-    return bool(re.search(r'"' + key + r'"\s*:\s*"' + name + r'"', body, re.IGNORECASE))
+    try:
+        if json_identity(json.loads(body), username):
+            return True
+    except ValueError:
+        pass
+    for script in soup.find_all("script", attrs={"type": "application/json"}):
+        try:
+            if json_identity(json.loads(script.get_text()), username):
+                return True
+        except ValueError:
+            continue
+    return False
 
 
 class SherlockPlugin(PlatformPlugin):
@@ -130,20 +142,20 @@ class SherlockPlugin(PlatformPlugin):
         url, probe = rule.url.replace("{}", encoded), rule.probe.replace("{}", encoded)
         # A nickname cannot introduce a host label separator or credentials.
         if urlsplit(probe).scheme != "https" or urlsplit(probe).username:
-            raise PluginError("unsafe probe URL")
+            raise PluginError("unsafe probe URL", kind="policy")
         response = await self.http.get(probe)
         status = response.status_code
         if status in {401, 403, 429}:
-            raise PluginError(f"access blocked: HTTP {status}")
-        if status == 404:
+            raise PluginError(f"access blocked: HTTP {status}", kind="blocked")
+        if status in {404, 410}:
             return None
         if 300 <= status < 400:
             location = response.headers.get("location", "")
             if rule.kind == "response_url" and rule.error_url and location == rule.error_url:
                 return None
-            raise PluginError("redirect not followed; existence unknown")
+            raise PluginError("redirect not followed; existence unknown", kind="redirect")
         if status != 200:
-            raise PluginError(f"unexpected HTTP {status}; existence unknown")
+            raise PluginError(f"unexpected HTTP {status}; existence unknown", kind="http")
         plain = response.text
         lower = plain.lower()
         if any(
@@ -158,20 +170,71 @@ class SherlockPlugin(PlatformPlugin):
                 "access denied",
             )
         ):
-            raise PluginError("challenge or access restriction; existence unknown")
+            raise PluginError("challenge or access restriction; existence unknown", kind="blocked")
         if not plain.strip():
-            raise PluginError("empty response; existence unknown")
+            raise PluginError("empty response; existence unknown", kind="response")
+        if soft_404(plain):
+            return None
         if rule.kind == "message" and any(error in plain for error in rule.errors):
             return None
         if rule.presence and not any(marker in plain for marker in rule.presence):
-            raise PluginError("positive detection marker missing; existence unknown")
+            raise PluginError(
+                "positive detection marker missing; existence unknown", kind="unverified"
+            )
         if not page_evidence(rule, plain, username, url):
-            raise PluginError("public profile evidence missing; existence unknown")
+            raise PluginError(
+                "public profile evidence missing; existence unknown", kind="unverified"
+            )
         if rule.kind not in {"message", "status_code", "response_url"}:
-            raise PluginError("unsupported detection rule")
+            raise PluginError("unsupported detection rule", kind="response")
+        if not rule.evidence or rule.evidence == "profile-meta":
+            if not identifies_profile(plain, username, url):
+                raise PluginError("HTTP 200 without account identity evidence", kind="unverified")
+            try:
+                api_identity = json_identity(json.loads(plain), username)
+            except ValueError:
+                api_identity = False
+            if not api_identity:
+                await self._negative_control(username)
+            if probe != url and urlsplit(probe)._replace(query="") != urlsplit(url)._replace(
+                query=""
+            ):
+                page = await self.http.get(url)
+                if page.status_code in {404, 410} or soft_404(page.text):
+                    return None
+                if page.status_code != 200 or not identifies_profile(page.text, username, url):
+                    raise PluginError(
+                        "profile URL not confirmed by API evidence", kind="unverified"
+                    )
         return Profile(
             platform=self.name,
             username=username,
             url=url,
             fetched_at=datetime.now(UTC),
+        )
+
+    async def _negative_control(self, username: str) -> None:
+        """A second, rare handle must explicitly be absent; catch-all pages remain unverified."""
+        candidates = [secrets.token_hex(length) for length in (16, 12, 8, 6, 4)]
+        name = next(
+            (
+                candidate
+                for candidate in candidates
+                if candidate != username
+                and (not self.rule.pattern or re.fullmatch(self.rule.pattern, candidate))
+            ),
+            None,
+        )
+        if name is None:
+            raise PluginError("cannot form a safe negative control", kind="unverified")
+        response = await self.http.get(self.rule.probe.replace("{}", quote(name, safe="")))
+        if response.status_code in {404, 410} or (
+            response.status_code == 200
+            and (
+                soft_404(response.text) or any(error in response.text for error in self.rule.errors)
+            )
+        ):
+            return
+        raise PluginError(
+            "control page does not establish absence; catch-all possible", kind="unverified"
         )

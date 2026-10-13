@@ -62,3 +62,19 @@ def test_native_engine_selection(tmp_path: Path, monkeypatch: pytest.MonkeyPatch
     monkeypatch.setenv("IDLINK_HTTP_ENGINE", "invalid")
     with pytest.raises(ValueError):
         native_binary()
+
+
+@pytest.mark.parametrize("kind", ["dns", "timeout", "policy", "response"])
+async def test_native_error_categories_survive_ipc(tmp_path: Path, kind: str) -> None:
+    from idlink.core.native import NativeRequestError
+
+    binary = helper(
+        tmp_path,
+        "import sys,json\nfor line in sys.stdin:\n"
+        " item=json.loads(line)\n"
+        f" print(json.dumps(dict(id=item['id'],error='failed',error_kind={kind!r})),flush=True)\n",
+    )
+    async with httpx.AsyncClient(transport=GoTransport(sys.executable, (binary,))) as client:
+        with pytest.raises(NativeRequestError) as exc:
+            await client.get("https://example.org/")
+    assert exc.value.kind == kind

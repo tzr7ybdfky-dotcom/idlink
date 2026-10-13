@@ -1,12 +1,30 @@
 """Contract for public, unauthenticated platform plugins."""
 
 from abc import ABC, abstractmethod
+from typing import Literal
 
 from idlink.core.models import Profile
 
+ErrorKind = Literal[
+    "network",
+    "dns",
+    "timeout",
+    "robots",
+    "blocked",
+    "http",
+    "response",
+    "redirect",
+    "unverified",
+    "policy",
+]
+
 
 class PluginError(Exception):
-    """Network, access-policy or malformed upstream response failure."""
+    """Network, access-policy or evidence failure with a machine-readable reason."""
+
+    def __init__(self, message: str, *, kind: ErrorKind = "network") -> None:
+        super().__init__(message)
+        self.kind = kind
 
 
 class PlatformPlugin(ABC):

@@ -46,11 +46,14 @@ class GitHubPlugin(PlatformPlugin):
             f"https://api.github.com/users/{username}/events/public?per_page=100"
         )
         if response.status_code != 200:
-            raise PluginError(f"GitHub events returned HTTP {response.status_code}")
+            raise PluginError(
+                f"GitHub events returned HTTP {response.status_code}",
+                kind="blocked" if response.status_code in {401, 403, 429} else "http",
+            )
         try:
             events = TypeAdapter(list[PublicEvent]).validate_json(response.content)
         except ValidationError as exc:
-            raise PluginError("invalid GitHub event response") from exc
+            raise PluginError("invalid GitHub event response", kind="response") from exc
         observed = {event.id: event.created_at for event in events if event.public}
         return histogram(observed.values())
 
@@ -64,7 +67,10 @@ class GitHubPlugin(PlatformPlugin):
         if response.status_code == 404:
             return None
         if response.status_code != 200:
-            raise PluginError(f"GitHub returned HTTP {response.status_code}")
+            raise PluginError(
+                f"GitHub returned HTTP {response.status_code}",
+                kind="blocked" if response.status_code in {401, 403, 429} else "http",
+            )
         try:
             user = GitHubUser.model_validate_json(response.content)
             if user.login.casefold() != username.casefold():
@@ -72,7 +78,7 @@ class GitHubPlugin(PlatformPlugin):
             if user.html_url.rstrip("/").casefold() != f"https://github.com/{username}".casefold():
                 raise ValueError("unexpected profile URL")
         except (ValidationError, ValueError) as exc:
-            raise PluginError("invalid GitHub response") from exc
+            raise PluginError("invalid GitHub response", kind="response") from exc
         if user.type != "User":
             return None
         bio = user.bio or ""

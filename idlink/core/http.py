@@ -8,10 +8,10 @@ from urllib.parse import urlsplit
 import httpx
 
 from idlink import __version__
-from idlink.core.native import GoTransport, native_binary
-from idlink.core.ratelimit import DomainRateLimiter
+from idlink.core.native import GoTransport, NativeRequestError, native_binary
+from idlink.core.ratelimit import DomainBlocked, DomainRateLimiter
 from idlink.core.robots import RobotsPolicy
-from idlink.plugins.base import PluginError
+from idlink.plugins.base import ErrorKind, PluginError
 
 
 class PublicHTTP:
@@ -101,10 +101,19 @@ class PublicHTTP:
                     )
         except (TimeoutError, httpx.TimeoutException) as exc:
             raise PluginError(
-                f"таймаут {self.timeout:g} с; существование профиля неизвестно"
+                f"таймаут {self.timeout:g} с; существование профиля неизвестно", kind="timeout"
             ) from exc
-        except (httpx.HTTPError, OSError, ValueError) as exc:
-            raise PluginError("request failed or domain blocked") from exc
+        except NativeRequestError as exc:
+            raise PluginError("native request failed", kind=exc.kind) from exc
+        except DomainBlocked as exc:
+            raise PluginError(str(exc), kind="blocked") from exc
+        except socket.gaierror as exc:
+            raise PluginError("DNS lookup failed", kind="dns") from exc
+        except ValueError as exc:
+            kind: ErrorKind = "response" if "response exceeds" in str(exc) else "policy"
+            raise PluginError(str(exc), kind=kind) from exc
+        except (httpx.HTTPError, OSError) as exc:
+            raise PluginError("request failed", kind="network") from exc
         if response.status_code in {401, 403, 429} or (
             response.headers.get("x-ratelimit-remaining") == "0"
             or "retry-after" in response.headers
@@ -123,16 +132,20 @@ class PublicHTTP:
                     parser = RobotsPolicy("")
                 elif response.status_code == 200:
                     if not response.text.strip() or "<html" in response.text.lower():
-                        raise PluginError("unusable robots.txt; request stopped")
+                        raise PluginError("unusable robots.txt; request stopped", kind="robots")
                     try:
                         parser = RobotsPolicy(response.text)
                     except ValueError as exc:
-                        raise PluginError("unusable robots.txt; request stopped") from exc
+                        raise PluginError(
+                            "unusable robots.txt; request stopped", kind="robots"
+                        ) from exc
                 else:
-                    raise PluginError("robots.txt unavailable; request stopped")
+                    raise PluginError(
+                        f"robots.txt unavailable: HTTP {response.status_code}", kind="robots"
+                    )
                 self._robots[origin] = parser
             policy = self._robots[origin]
             if not policy.can_fetch(url):
-                raise PluginError("robots.txt disallows this resource")
+                raise PluginError("robots.txt disallows this resource", kind="robots")
             self.limiter.set_delay(url, policy.delay)
         return await self._request(url)

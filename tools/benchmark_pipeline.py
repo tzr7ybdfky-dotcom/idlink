@@ -37,7 +37,7 @@ async def measure(timeout: float, concurrency: int) -> tuple[float, int, int]:
         return (
             httpx.Response(404)
             if request.url.path == "/robots.txt"
-            else httpx.Response(200, text="public profile")
+            else httpx.Response(200, json={"id": str(index), "username": "alice"})
         )
 
     async def sleep(delay: float) -> None:

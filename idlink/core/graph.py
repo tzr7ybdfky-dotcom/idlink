@@ -11,6 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from idlink.core.models import Edge, Profile
 from idlink.core.scoring import score
+from idlink.plugins.base import ErrorKind
 from idlink.signals.links import canonical_url
 
 
@@ -33,8 +34,9 @@ class SourceCheck(BaseModel):
     """Record a lookup outcome separately from person-link probabilities."""
 
     platform: str
-    status: Literal["found", "missing", "error", "invalid"]
+    status: Literal["found", "missing", "error", "invalid", "unverified"]
     detail: str
+    error_kind: ErrorKind | None = None
     url: str | None = None
 
 

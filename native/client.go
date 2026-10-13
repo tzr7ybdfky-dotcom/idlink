@@ -14,6 +14,9 @@ import (
 )
 
 // Private and reserved targets are never reachable through the native transport.
+var errDNS = errors.New("DNS unavailable")
+var errTarget = errors.New("non-public network target")
+
 var forbidden = []string{
 	"0.0.0.0/8", "100.64.0.0/10", "192.0.0.0/24", "192.0.2.0/24", "198.18.0.0/15",
 	"198.51.100.0/24", "203.0.113.0/24", "240.0.0.0/4", "2001::/23", "2001:db8::/32", "2002::/16", "64:ff9b:1::/48", "fec0::/10",
@@ -40,11 +43,11 @@ func resolveAndDial(ctx context.Context, network, address string) (net.Conn, err
 	}
 	answers, err := net.DefaultResolver.LookupNetIP(ctx, "ip", host)
 	if err != nil || len(answers) == 0 {
-		return nil, errors.New("DNS unavailable")
+		return nil, errDNS
 	}
 	for _, answer := range answers {
 		if !publicAddress(answer) {
-			return nil, errors.New("non-public network target")
+			return nil, errTarget
 		}
 	}
 	var dialer net.Dialer
@@ -77,7 +80,7 @@ func probe(client *http.Client, input request) response {
 	target, err := url.Parse(input.URL)
 	if err != nil || target.Scheme != "https" || target.Hostname() == "" || target.User != nil ||
 		(target.Port() != "" && target.Port() != "443") || strings.ContainsAny(input.UserAgent, "\r\n") {
-		output.Error = "invalid request"
+		output.Error, output.ErrorKind = "invalid request", "policy"
 		return output
 	}
 	timeout := input.TimeoutMS
@@ -85,27 +88,38 @@ func probe(client *http.Client, input request) response {
 		timeout = 6000
 	}
 	if timeout < 1 || timeout > 120000 {
-		output.Error = "invalid timeout"
+		output.Error, output.ErrorKind = "invalid timeout", "policy"
 		return output
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(timeout)*time.Millisecond)
 	defer cancel()
 	req, err := http.NewRequestWithContext(ctx, "GET", input.URL, nil)
 	if err != nil {
-		output.Error = "invalid request"
+		output.Error, output.ErrorKind = "invalid request", "policy"
 		return output
 	}
 	req.Header.Set("User-Agent", input.UserAgent)
 	req.Header.Set("Cookie", "")
 	result, err := client.Do(req)
 	if err != nil {
-		output.Error = "request failed"
+		output.Error, output.ErrorKind = "request failed", "network"
+		switch {
+		case ctx.Err() != nil || errors.Is(err, context.DeadlineExceeded):
+			output.ErrorKind = "timeout"
+		case errors.Is(err, errDNS):
+			output.ErrorKind = "dns"
+		case errors.Is(err, errTarget):
+			output.ErrorKind = "policy"
+		}
 		return output
 	}
 	defer result.Body.Close()
 	body, err := io.ReadAll(io.LimitReader(result.Body, 5_000_001))
 	if err != nil || len(body) > 5_000_000 {
-		output.Error = "invalid response size"
+		output.Error, output.ErrorKind = "invalid response size", "response"
+		if ctx.Err() != nil {
+			output.ErrorKind = "timeout"
+		}
 		return output
 	}
 	output.Status, output.Body = result.StatusCode, body

@@ -104,7 +104,10 @@ class PublicAPIPlugin(PlatformPlugin):
         if response.status_code == 404:
             return None
         if response.status_code != 200:
-            raise PluginError(f"{self.name} returned HTTP {response.status_code}")
+            raise PluginError(
+                f"{self.name} returned HTTP {response.status_code}",
+                kind="blocked" if response.status_code in {401, 403, 429} else "http",
+            )
         try:
             bio = ""
             if self.name == "hackernews":
@@ -139,7 +142,7 @@ class PublicAPIPlugin(PlatformPlugin):
                     raise ValueError("unexpected username")
                 url = f"https://{self.host}/wiki/User:{quote(name.replace(' ', '_'), safe='')}"
         except (ValidationError, ValueError) as exc:
-            raise PluginError(f"invalid {self.name} response") from exc
+            raise PluginError(f"invalid {self.name} response", kind="response") from exc
         soup = BeautifulSoup("<div>" + bio + "</div>", "html.parser")
         links = {
             str(a.get("href"))

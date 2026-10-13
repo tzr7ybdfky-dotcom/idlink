@@ -19,7 +19,7 @@ const initialSeed = __INITIAL_SEED__;
 const initialPlatforms = __INITIAL_PLATFORMS__;
 const $=id=>document.getElementById(id);
 let artifact='',currentReport=null;
-const statusLabels={found:'Найден',missing:'Не найден по правилу площадки',error:'Ошибка доступа',invalid:'Неподходящий ввод'};
+const statusLabels={found:'Найден',missing:'Не найден по правилу площадки',unverified:'Существование не подтверждено',error:'Недоступно',invalid:'Неподходящий ввод'};
 function el(tag,value,parent,cls){const n=document.createElement(tag);n.textContent=value;if(cls)n.className=cls;if(parent)parent.appendChild(n);return n;}
 function kind(){const s=$('seed').value.trim();return s.includes('@') || /^(?:[a-f\d]{32}|[a-f\d]{64})$/i.test(s)?'gravatar':s.includes('.')||s.includes('://')?'website':'username';}
 function drawCatalog(){

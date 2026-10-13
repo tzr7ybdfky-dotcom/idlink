@@ -36,7 +36,10 @@ class GravatarPlugin(PlatformPlugin):
         if response.status_code == 404:
             return None
         if response.status_code != 200:
-            raise PluginError(f"Gravatar returned HTTP {response.status_code}")
+            raise PluginError(
+                f"Gravatar returned HTTP {response.status_code}",
+                kind="blocked" if response.status_code in {401, 403, 429} else "http",
+            )
         try:
             phash = phash_bytes(response.content)
         except ValueError as exc:

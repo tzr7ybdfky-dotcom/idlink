@@ -100,9 +100,34 @@ def run(
         errors = sum(c.status == "error" for c in result.report.checks)
         typer.echo(
             f"Найдено: {len(result.report.nodes)}. Проверено: {len(result.report.checks)}. "
-            f"Ошибок доступа: {errors}.",
+            f"Недоступно: {errors}. "
+            f"Неподтверждено: {sum(c.status == 'unverified' for c in result.report.checks)}.",
             err=True,
         )
+        reasons = {
+            "robots": "robots.txt",
+            "blocked": "блокировки",
+            "timeout": "таймауты",
+            "dns": "DNS",
+            "network": "сеть",
+            "http": "HTTP",
+            "response": "ответ сервера",
+            "redirect": "редиректы",
+            "policy": "политика доступа",
+        }
+        counts = {
+            key: sum(
+                c.status == "error" and (c.error_kind or "network") == key
+                for c in result.report.checks
+            )
+            for key in reasons
+        }
+        if errors:
+            typer.echo(
+                "Причины: "
+                + "; ".join(f"{reasons[key]}: {count}" for key, count in counts.items() if count),
+                err=True,
+            )
     else:
         for node in result.report.nodes:
             typer.echo(f"{node.platform}: {node.id}")

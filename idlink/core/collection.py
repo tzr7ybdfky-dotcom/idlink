@@ -250,9 +250,16 @@ async def collect(
             )
             continue
         if isinstance(profile, PluginError):
-            has_errors = True
+            has_errors |= profile.kind != "unverified"
             warnings.append(f"{platform}: {profile}")
-            record(SourceCheck(platform=platform, status="error", detail=str(profile)))
+            record(
+                SourceCheck(
+                    platform=platform,
+                    status="unverified" if profile.kind == "unverified" else "error",
+                    error_kind=profile.kind,
+                    detail=str(profile),
+                )
+            )
             continue
         if profile is None:
             warnings.append(f"{platform}: публичный профиль не найден.")

@@ -43,12 +43,15 @@ class BlueskyPlugin(PlatformPlugin):
                 if error.get("error") == "ProfileNotFound":
                     return None
             if response.status_code != 200:
-                raise PluginError(f"bluesky returned HTTP {response.status_code}")
+                raise PluginError(
+                    f"bluesky returned HTTP {response.status_code}",
+                    kind="blocked" if response.status_code in {401, 403, 429} else "http",
+                )
             actor = PublicActor.model_validate_json(response.content)
             if actor.handle.casefold() != handle or not actor.did.startswith("did:"):
                 raise ValueError("unexpected Bluesky handle")
         except (ValidationError, ValueError, AttributeError) as exc:
-            raise PluginError("invalid bluesky response") from exc
+            raise PluginError("invalid bluesky response", kind="response") from exc
         return Profile(
             platform=self.name,
             username=username.lower(),

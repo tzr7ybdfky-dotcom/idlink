@@ -11,6 +11,8 @@ from pathlib import Path
 import httpx
 from pydantic import BaseModel, Field
 
+from idlink.plugins.base import ErrorKind
+
 
 class NativeFrame(BaseModel):
     """Validate response frames before passing them to a platform adapter."""
@@ -20,6 +22,7 @@ class NativeFrame(BaseModel):
     headers: dict[str, str] = Field(default_factory=dict)
     body: str = ""
     error: str = ""
+    error_kind: ErrorKind = "network"
 
 
 def native_binary() -> str | None:
@@ -42,6 +45,14 @@ def native_binary() -> str | None:
     if engine == "go":
         raise ValueError("Go helper is not installed; build native/idlink-http first")
     return None
+
+
+class NativeRequestError(httpx.TransportError):
+    """Preserve the native failure category without exposing response bodies."""
+
+    def __init__(self, kind: ErrorKind) -> None:
+        super().__init__("native request failed")
+        self.kind = kind
 
 
 class GoTransport(httpx.AsyncBaseTransport):
@@ -114,7 +125,7 @@ class GoTransport(httpx.AsyncBaseTransport):
             try:
                 frame = await future
                 if frame.error or not 100 <= frame.status <= 599:
-                    raise httpx.TransportError("native request failed")
+                    raise NativeRequestError(frame.error_kind)
                 body = base64.b64decode(frame.body, validate=True)
                 if len(body) > 5_000_000:
                     raise httpx.TransportError("native response exceeds size limit")

@@ -29,7 +29,10 @@ class WebsitePlugin(PlatformPlugin):
         if response.status_code == 404:
             return None
         if response.status_code != 200:
-            raise PluginError(f"Website returned HTTP {response.status_code}")
+            raise PluginError(
+                f"Website returned HTTP {response.status_code}",
+                kind="blocked" if response.status_code in {401, 403, 429} else "http",
+            )
         if "html" not in response.headers.get("content-type", "").lower():
             raise PluginError("website did not return HTML")
         soup = BeautifulSoup(response.content, "html.parser")

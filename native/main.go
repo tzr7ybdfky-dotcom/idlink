@@ -17,11 +17,12 @@ type request struct {
 }
 
 type response struct {
-	ID      uint64            `json:"id"`
-	Status  int               `json:"status"`
-	Headers map[string]string `json:"headers,omitempty"`
-	Body    []byte            `json:"body,omitempty"`
-	Error   string            `json:"error,omitempty"`
+	ID        uint64            `json:"id"`
+	Status    int               `json:"status"`
+	Headers   map[string]string `json:"headers,omitempty"`
+	Body      []byte            `json:"body,omitempty"`
+	ErrorKind string            `json:"error_kind,omitempty"`
+	Error     string            `json:"error,omitempty"`
 }
 
 // run multiplexes at most 256 requests and serializes complete response frames.

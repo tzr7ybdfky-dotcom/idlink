@@ -87,3 +87,23 @@ def test_cli_audit_success(tmp_path: Path) -> None:
         )
     assert result.exit_code == 0
     assert "Отчёт:" in result.output
+
+
+def test_search_distinguishes_unverified_from_access_reasons() -> None:
+    from idlink.core.graph import SourceCheck
+
+    checks = [
+        SourceCheck(platform="one", status="unverified", error_kind="unverified", detail="shell"),
+        SourceCheck(platform="two", status="error", error_kind="robots", detail="disallowed"),
+        SourceCheck(platform="three", status="error", error_kind="timeout", detail="deadline"),
+        SourceCheck(platform="four", status="missing", detail="404"),
+    ]
+    with patch(
+        "idlink.cli.execute",
+        return_value=Collection(Report(nodes=[], edges={}, checks=checks), True),
+    ):
+        result = CliRunner().invoke(app, ["search", "alice"])
+    assert result.exit_code == 3
+    assert not result.stdout.strip()
+    assert "Недоступно: 2. Неподтверждено: 1." in result.stderr
+    assert "robots.txt: 1; таймауты: 1" in result.stderr

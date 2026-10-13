@@ -14,9 +14,9 @@ from idlink.plugins.sherlock import ProbeRule, SherlockPlugin
 @pytest.mark.parametrize(
     "kind,status,body,headers,outcome",
     [
-        ("message", 200, "public demo profile", {}, "found"),
+        ("message", 200, '{"id":"123","username":"demo"}', {}, "found"),
         ("message", 200, "User not found", {}, "missing"),
-        ("status_code", 200, "public demo profile", {}, "found"),
+        ("status_code", 200, '{"id":"123","username":"demo"}', {}, "found"),
         ("status_code", 404, "missing", {}, "missing"),
         ("status_code", 200, "<title>Just a moment</title>", {}, "error"),
         ("message", 200, "hcaptcha", {}, "error"),
@@ -117,15 +117,15 @@ async def test_all_roots_are_checked_beyond_old_16_limit() -> None:
             "missing",
         ),
         ("telegram", "<html>Sign in</html>", "unknown"),
-        ("instagram", '{"username":"alice"}', "found"),
+        ("instagram", '{"id":"42","username":"alice"}', "found"),
         ("instagram", '{"username":"someoneelse"}', "unknown"),
         ("instagram", "Sorry, this page isn't available.", "missing"),
-        ("tiktok", '{"uniqueId":"alice"}', "found"),
+        ("tiktok", '{"id":"42","uniqueId":"alice"}', "found"),
         ("tiktok", '{"statusCode":10221}', "missing"),
-        ("x / twitter", '{"screen_name":"alice"}', "found"),
+        ("x / twitter", '{"id":"42","screen_name":"alice"}', "found"),
         (
             "facebook",
-            '<meta property="og:type" content="profile">'
+            '<title>alice profile</title><meta property="og:type" content="profile">'
             '<meta property="og:url" content="https://www.facebook.com/alice">',
             "found",
         ),
@@ -140,6 +140,8 @@ async def test_public_social_pages(label: str, body: str, outcome: str) -> None:
     def handler(request: httpx.Request) -> httpx.Response:
         calls.append(request)
         if request.url.path == "/robots.txt":
+            return httpx.Response(404)
+        if "alice" not in str(request.url):
             return httpx.Response(404)
         return httpx.Response(200, text=body)
 
@@ -159,7 +161,7 @@ async def test_public_social_pages(label: str, body: str, outcome: str) -> None:
         else:
             profile = await plugin.fetch("alice")
             assert (profile is not None) == (outcome == "found")
-    assert str(calls[-1].url) == rule.url.replace("{}", "alice")
+    assert str(calls[1].url) == rule.url.replace("{}", "alice")
     assert not calls[-1].headers.get("cookie")
 
 
@@ -187,7 +189,11 @@ async def test_telegram_robots_refusal_prevents_profile_request() -> None:
 
 @pytest.mark.parametrize(
     "body,outcome",
-    [("public-profile", "found"), ("login form", "error"), ("public-profile missing", "missing")],
+    [
+        ('{"id":"123","username":"alice","marker":"public-profile"}', "found"),
+        ("login form", "error"),
+        ("public-profile missing", "missing"),
+    ],
 )
 async def test_maigret_requires_presence_and_prioritizes_absence(body: str, outcome: str) -> None:
     async def sleep(delay: float) -> None:

@@ -58,7 +58,7 @@ func TestDeadlineCancelsUnresponsiveRequest(t *testing.T) {
 	})
 	start := time.Now()
 	output := probe(client, request{URL: "https://example.org/alice", TimeoutMS: 10})
-	if output.Error == "" || time.Since(start) > 500*time.Millisecond {
+	if output.ErrorKind != "timeout" || output.Error == "" || time.Since(start) > 500*time.Millisecond {
 		t.Fatal("deadline not enforced")
 	}
 }

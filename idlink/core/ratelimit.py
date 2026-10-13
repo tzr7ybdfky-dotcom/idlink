@@ -6,6 +6,10 @@ from collections.abc import Awaitable, Callable
 from urllib.parse import urlsplit
 
 
+class DomainBlocked(ValueError):
+    """A server refusal stops subsequent requests to this host."""
+
+
 class DomainRateLimiter:
     """One shared instance serves every plugin in a CLI process."""
 
@@ -40,7 +44,7 @@ class DomainRateLimiter:
         domain = self.domain(url)
         async with self._locks.setdefault(domain, asyncio.Lock()):
             if domain in self._blocked:
-                raise ValueError("domain blocked after access or rate-limit response")
+                raise DomainBlocked("domain blocked after access or rate-limit response")
             delay = self._next.get(domain, 0.0) - self.clock()
             if delay > 0:
                 await self.sleep(delay)
