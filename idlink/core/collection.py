@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from urllib.parse import parse_qs, urlsplit
 
 from idlink.core.cache import ProfileCache
-from idlink.core.catalog import PROBE_SOURCES, USERNAME_PLATFORMS, WIKI_HOSTS
+from idlink.core.catalog import PROBE_SOURCES, SOURCES, USERNAME_PLATFORMS, WIKI_HOSTS
 from idlink.core.graph import Report, SourceCheck, make_report
 from idlink.core.http import PublicHTTP
 from idlink.core.inputs import seed_kind
@@ -23,6 +23,35 @@ from idlink.plugins.sherlock import SherlockPlugin
 from idlink.plugins.website import WebsitePlugin
 
 PLATFORMS = USERNAME_PLATFORMS | {"gravatar", "habr", "website"}
+POPULAR = {
+    label: index
+    for index, label in enumerate(
+        [
+            "github",
+            "telegram",
+            "tiktok",
+            "instagram",
+            "reddit",
+            "facebook",
+            "x / twitter",
+            "twitter",
+            "vk",
+            "youtube",
+            "bluesky",
+            "linkedin",
+            "twitch",
+            "steam",
+            "pinterest",
+            "hacker news",
+            "keybase",
+            "stackoverflow",
+            "medium",
+            "quora",
+            "mastodon",
+        ]
+    )
+}
+SOURCE_PRIORITY = {source.name: POPULAR.get(source.label.casefold(), 100) for source in SOURCES}
 
 
 @dataclass(frozen=True)
@@ -103,7 +132,10 @@ def plan_seeds(seed: str, platforms: str, extra: list[str]) -> list[tuple[str, s
     expected = USERNAME_PLATFORMS | {"habr"} if kind == "username" else {kind}
     if not selected <= expected:
         raise ValueError("selected platforms do not accept this input kind")
-    roots = [(platform, seed) for platform in sorted(selected)]
+    roots = [
+        (platform, seed)
+        for platform in sorted(selected, key=lambda name: (SOURCE_PRIORITY.get(name, 100), name))
+    ]
     if (
         platforms != "all"
         and "github" in selected
@@ -128,7 +160,7 @@ async def _fetch_queue(
     queue: deque[tuple[str, str, int]],
     visited: set[tuple[str, str]],
     limit: int,
-    concurrency: int = 128,
+    concurrency: int = 256,
 ) -> AsyncGenerator[tuple[str, str, int, Profile | None | ValueError | PluginError], None]:
     """Refill a freed slot immediately; one slow host never stalls the next wave."""
 
@@ -174,8 +206,12 @@ async def collect(
     activity: bool = False,
     on_profile: Callable[[Profile], None] | None = None,
     allowed_platforms: frozenset[str] | None = None,
+    concurrency: int = 256,
+    on_check: Callable[[SourceCheck, int, int], None] | None = None,
 ) -> Collection:
     """Check every selected source and at most 16 additional self-links."""
+    if not 1 <= concurrency <= 256:
+        raise ValueError("concurrency must be between 1 and 256")
     plugins: dict[str, PlatformPlugin] = {
         "github": GitHubPlugin(http, collect_activity=activity),
         "bluesky": BlueskyPlugin(http),
@@ -191,13 +227,21 @@ async def collect(
     profiles: dict[str, Profile] = {}
     warnings: list[str] = []
     checks: list[SourceCheck] = []
+
+    def record(check: SourceCheck) -> None:
+        checks.append(check)
+        if on_check:
+            on_check(check, len(checks), len(roots))
+
     visited: set[tuple[str, str]] = set()
     has_errors = False
     queue = deque((platform, seed, 0) for platform, seed in roots)
     limit = len(roots) + 16
-    async for platform, _seed, level, profile in _fetch_queue(plugins, queue, visited, limit):
+    async for platform, _seed, level, profile in _fetch_queue(
+        plugins, queue, visited, limit, concurrency=concurrency
+    ):
         if isinstance(profile, ValueError):
-            checks.append(
+            record(
                 SourceCheck(
                     platform=platform,
                     status="invalid",
@@ -208,11 +252,11 @@ async def collect(
         if isinstance(profile, PluginError):
             has_errors = True
             warnings.append(f"{platform}: {profile}")
-            checks.append(SourceCheck(platform=platform, status="error", detail=str(profile)))
+            record(SourceCheck(platform=platform, status="error", detail=str(profile)))
             continue
         if profile is None:
             warnings.append(f"{platform}: публичный профиль не найден.")
-            checks.append(
+            record(
                 SourceCheck(
                     platform=platform,
                     status="missing",
@@ -223,7 +267,7 @@ async def collect(
         if profile.url not in profiles and on_profile:
             on_profile(profile)
         profiles[profile.url] = profile
-        checks.append(
+        record(
             SourceCheck(
                 platform=platform,
                 status="found",

@@ -45,7 +45,10 @@ main{grid-template-columns:minmax(0,1fr);padding:32px;gap:28px;max-width:1600px;
 <script>__D3__</script>
 <script>
 "use strict";
-const report = JSON.parse(document.getElementById("idlink-data").textContent);
+let simulation=null;
+function drawReport(report){
+ const positions=new Map(simulation?simulation.nodes().map(d=>[d.id,{x:d.x,y:d.y,fx:d.fx,fy:d.fy}]):[]);
+ if(simulation)simulation.stop();
 const nodes = report.nodes.map(d => ({...d}));
 const edges = Object.entries(report.edges).map(([id, d]) => ({...d, id, source:d.a, target:d.b}));
 const pct = p => (p * 100).toFixed(1) + "%";
@@ -75,13 +78,14 @@ function showEdge(edge) {
 function showProfile(node) {
   if(/^https?:\/\//.test(node.id))window.open(node.id,"_blank","noopener,noreferrer");
 }
-const profileList=document.getElementById("profiles");
+const profileList=document.getElementById("profiles");profileList.replaceChildren();
 for(const platform of [...new Set(nodes.map(n=>n.platform))]){
   const branch=text(profileList,"details","");branch.open=true;text(branch,"summary",platform);
   nodes.filter(n=>n.platform===platform).forEach(node=>{const b=text(branch,"button",node.username);b.onclick=()=>showProfile(node);});
 }
 if(!nodes.length)text(profileList,"p","Профили не найдены. Проверьте статусы источников.","muted");
-const list = document.getElementById("edge-list");
+const list = document.getElementById("edge-list");list.replaceChildren();
+document.getElementById("warnings").replaceChildren();
 edges.forEach(edge => {
   const button = text(list,"button",pct(edge.probability) + " · " + labels.get(edge.a) + " ↔ " + labels.get(edge.b));
   button.dataset.edgeId = edge.id; button.addEventListener("click",() => showEdge(edge));
@@ -89,6 +93,7 @@ edges.forEach(edge => {
 if (!edges.length) text(list,"p","Недостаточно профилей для сравнения.","muted");
 report.warnings.forEach(w => text(document.getElementById("warnings"),"p",w,"warning"));
 const svg=d3.select("#graph").attr("viewBox","0 0 900 540");
+const previousZoom=d3.zoomTransform(svg.node());svg.selectAll("*").remove();
 const defs=svg.append("defs"),pattern=defs.append("pattern").attr("id","dots").attr("width",24).attr("height",24).attr("patternUnits","userSpaceOnUse");
 pattern.append("circle").attr("cx",1).attr("cy",1).attr("r",1).attr("fill","#222222");
 svg.append("rect").attr("width",900).attr("height",540).attr("fill","url(#dots)");
@@ -102,8 +107,8 @@ const observations=canvas.selectAll(".observation").data(nodes).join("line").att
 const lines=canvas.selectAll(".edge").data(edges).join("line").attr("class","edge").attr("stroke-width",d=>12 * d.probability).on("click",(_,d)=>showEdge(d));
 const hits=canvas.selectAll(".hit").data(edges).join("line").attr("class","hit").attr("stroke-width",22).on("click",(_,d)=>showEdge(d));
 const percentages=canvas.selectAll(".percentage").data(edges).join("text").attr("class","percentage").attr("text-anchor","middle").text(d=>pct(d.probability));
-nodes.forEach((d,i)=>{const angle=2*Math.PI*i/Math.max(nodes.length,1)-Math.PI/2;d.x=450+260*Math.cos(angle);d.y=270+165*Math.sin(angle);});
-const simulation=d3.forceSimulation(nodes).force("link",d3.forceLink(edges).id(d=>d.id).distance(260).strength(.08)).force("collide",d3.forceCollide(110)).force("x",d3.forceX(450).strength(.015)).force("y",d3.forceY(270).strength(.015));
+nodes.forEach((d,i)=>{if(positions.has(d.id)){Object.assign(d,positions.get(d.id));return;}if(nodes.length>250){const cols=Math.ceil(Math.sqrt(nodes.length));d.x=450+(i%cols-cols/2)*210;d.y=270+(Math.floor(i/cols)-cols/2)*90;return;}const angle=2*Math.PI*i/Math.max(nodes.length,1)-Math.PI/2;d.x=450+260*Math.cos(angle);d.y=270+165*Math.sin(angle);});
+simulation=d3.forceSimulation(nodes).force("link",d3.forceLink(edges).id(d=>d.id).distance(260).strength(.08)).force("collide",d3.forceCollide(110)).force("x",d3.forceX(450).strength(.015)).force("y",d3.forceY(270).strength(.015));
 const groups=canvas.selectAll(".node").data(nodes).join("g").attr("class","node").attr("tabindex",0).attr("role","button").attr("aria-label",d=>d.platform+" / "+d.username).on("click",(_,d)=>showProfile(d)).on("keydown",(event,d)=>{if(event.key==="Enter")showProfile(d);});
 groups.append("rect").attr("x",-92).attr("y",-34).attr("width",184).attr("height",68).attr("rx",13);
 groups.append("text").attr("class","platform").attr("x",-76).attr("y",-9).text(d=>d.platform.toUpperCase());
@@ -115,7 +120,7 @@ function redraw(){
  for(const selection of [lines,hits])selection.attr("x1",d=>d.source.x).attr("y1",d=>d.source.y).attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
  percentages.attr("x",d=>(d.source.x+d.target.x)/2).attr("y",d=>(d.source.y+d.target.y)/2-12);
 }
-simulation.on("tick",redraw).stop();simulation.tick(250);redraw();
+simulation.on("tick",redraw).stop();if(nodes.length<=250)simulation.tick(20);redraw();
 function fit(){
  if(!nodes.length)return;
  const left=Math.min(415,...nodes.map(d=>d.x-110)),right=Math.max(485,...nodes.map(d=>d.x+110));
@@ -123,5 +128,12 @@ function fit(){
  const scale=Math.min(1,820/(right-left),460/(bottom-top));
  svg.call(zoom.transform,d3.zoomIdentity.translate(450-(left+right)*scale/2,270-(top+bottom)*scale/2).scale(scale));
 }
-fit();document.getElementById("reset-view").onclick=fit;
+if(positions.size)svg.call(zoom.transform,previousZoom);else fit();
+if(nodes.length<=250)simulation.alpha(.3).restart();
+document.getElementById("reset-view").onclick=fit;
+}
+drawReport(JSON.parse(document.getElementById("idlink-data").textContent));
+window.addEventListener("message",event=>{
+ if(event.source===window.parent && event.data?.type==="idlink-report" && Array.isArray(event.data.report?.nodes) && event.data.report?.edges)drawReport(event.data.report);
+});
 </script></body></html>

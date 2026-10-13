@@ -47,8 +47,11 @@ def native_binary() -> str | None:
 class GoTransport(httpx.AsyncBaseTransport):
     """Multiplex GETs through one native child without persisting response bodies."""
 
-    def __init__(self, binary: str, arguments: tuple[str, ...] = ()) -> None:
+    def __init__(
+        self, binary: str, arguments: tuple[str, ...] = (), *, timeout: float = 6.0
+    ) -> None:
         self.binary, self.arguments = binary, arguments
+        self.timeout = timeout
         self._process: asyncio.subprocess.Process | None = None
         self._reader: asyncio.Task[None] | None = None
         self._pending: dict[int, asyncio.Future[NativeFrame]] = {}
@@ -102,6 +105,7 @@ class GoTransport(httpx.AsyncBaseTransport):
                 self._pending[identifier] = future
                 payload = {
                     "id": identifier,
+                    "timeout_ms": max(1, int(self.timeout * 1000)),
                     "url": str(request.url),
                     "user_agent": request.headers.get("user-agent", ""),
                 }

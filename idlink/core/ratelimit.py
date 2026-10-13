@@ -23,6 +23,8 @@ class DomainRateLimiter:
         self.sleep = sleep
         self._locks: dict[str, asyncio.Lock] = {}
         self._next: dict[str, float] = {}
+        self._last: dict[str, float] = {}
+        self._intervals: dict[str, float] = {}
         self._blocked: set[str] = set()
 
     @staticmethod
@@ -42,7 +44,16 @@ class DomainRateLimiter:
             delay = self._next.get(domain, 0.0) - self.clock()
             if delay > 0:
                 await self.sleep(delay)
-            self._next[domain] = self.clock() + self.interval
+            self._last[domain] = self.clock()
+            self._next[domain] = self._last[domain] + self._intervals.get(domain, self.interval)
+
+    def set_delay(self, url: str, seconds: float) -> None:
+        """Apply crawl-delay to start times on this host without an extra post-response wait."""
+        domain = self.domain(url)
+        delay = max(self.interval, seconds)
+        self._intervals[domain] = delay
+        if domain in self._last:
+            self._next[domain] = max(self._next.get(domain, 0.0), self._last[domain] + delay)
 
     def block(self, url: str) -> None:
         """Stop further requests for this run after a server refusal."""

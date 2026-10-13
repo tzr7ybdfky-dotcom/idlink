@@ -69,6 +69,7 @@ def test_search_without_options_uses_all_sources(monkeypatch: pytest.MonkeyPatch
         depth: int,
         activity: bool,
         restrict_sources: bool = False,
+        timeout: float = 6.0,
     ) -> None:
         calls.append((seed, repository_url, platforms))
 
@@ -107,3 +108,50 @@ async def test_crawl_delay_does_not_slow_unrelated_hostname() -> None:
         await http.get("https://slow.example/alice")
         await http.get("https://fast.example/alice")
     assert sleeps == [20.0, 2.0]
+
+
+async def test_total_deadline_cancels_an_unresponsive_source() -> None:
+    import asyncio
+
+    cancelled = asyncio.Event()
+    calls: list[str] = []
+
+    async def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(request.url.path)
+        try:
+            await asyncio.Event().wait()
+        finally:
+            cancelled.set()
+        return httpx.Response(200)
+
+    async with PublicHTTP(
+        "https://example.org/idlink", transport=httpx.MockTransport(handler), timeout=0.02
+    ) as http:
+        with pytest.raises(PluginError, match="таймаут.*неизвестно"):
+            await http.get("https://fixture.example/alice")
+    assert calls == ["/robots.txt"] and cancelled.is_set()
+
+
+async def test_slow_robots_does_not_add_an_unnecessary_two_seconds() -> None:
+    from idlink.core.ratelimit import DomainRateLimiter
+
+    now, starts = [0.0], []
+
+    async def sleep(delay: float) -> None:
+        now[0] += delay
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        starts.append(now[0])
+        if request.url.path == "/robots.txt":
+            now[0] += 3.0
+            return httpx.Response(404)
+        return httpx.Response(200, text="public")
+
+    async with PublicHTTP(
+        "https://example.org/idlink",
+        transport=httpx.MockTransport(handler),
+        limiter=DomainRateLimiter(clock=lambda: now[0], sleep=sleep),
+    ) as http:
+        await http.get("https://fixture.example/alice")
+        await http.get("https://fixture.example/bob")
+    assert starts == [0.0, 3.0, 5.0]

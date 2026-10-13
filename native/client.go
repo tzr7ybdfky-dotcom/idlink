@@ -49,7 +49,9 @@ func resolveAndDial(ctx context.Context, network, address string) (net.Conn, err
 	}
 	var dialer net.Dialer
 	for _, answer := range answers {
-		connection, e := dialer.DialContext(ctx, network, net.JoinHostPort(answer.String(), port))
+		attempt, cancel := context.WithTimeout(ctx, 1500*time.Millisecond)
+		connection, e := dialer.DialContext(attempt, network, net.JoinHostPort(answer.String(), port))
+		cancel()
 		if e == nil {
 			return connection, nil
 		}
@@ -64,7 +66,7 @@ func nativeClient() *http.Client {
 	transport.MaxIdleConns = 256
 	transport.MaxIdleConnsPerHost = 4
 	return &http.Client{
-		Transport: transport, Timeout: 20 * time.Second,
+		Transport: transport, Timeout: 120 * time.Second,
 		CheckRedirect: func(req *http.Request, via []*http.Request) error { return http.ErrUseLastResponse },
 	}
 }
@@ -78,7 +80,17 @@ func probe(client *http.Client, input request) response {
 		output.Error = "invalid request"
 		return output
 	}
-	req, err := http.NewRequest("GET", input.URL, nil)
+	timeout := input.TimeoutMS
+	if timeout == 0 {
+		timeout = 6000
+	}
+	if timeout < 1 || timeout > 120000 {
+		output.Error = "invalid timeout"
+		return output
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(timeout)*time.Millisecond)
+	defer cancel()
+	req, err := http.NewRequestWithContext(ctx, "GET", input.URL, nil)
 	if err != nil {
 		output.Error = "invalid request"
 		return output

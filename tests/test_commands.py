@@ -8,7 +8,7 @@ from typer.testing import CliRunner
 
 from idlink.cli import app
 from idlink.core.collection import Collection
-from idlink.core.graph import Report
+from idlink.core.graph import Report, SourceCheck
 from idlink.core.models import Profile
 
 
@@ -27,6 +27,8 @@ def test_search_streams_links_without_writing_html(
         activity: bool,
         on_profile: Callable[[Profile], None] | None = None,
         allowed_platforms: frozenset[str] | None = None,
+        timeout: float = 6.0,
+        on_check: Callable[[SourceCheck, int, int], None] | None = None,
     ) -> Collection:
         from datetime import UTC, datetime
 
@@ -64,6 +66,7 @@ def test_visual_prefills_seed_and_opens_browser(monkeypatch: pytest.MonkeyPatch)
         initial_seed: str = "",
         open_browser: bool = False,
         initial_platforms: str = "all",
+        timeout: float = 6.0,
     ) -> None:
         calls.append((initial_seed, open_browser))
 

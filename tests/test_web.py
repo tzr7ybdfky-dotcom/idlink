@@ -114,7 +114,7 @@ def test_server_routes_enforce_origin_and_intent_without_sockets(
     async def sleep(delay: float) -> None:
         pass
 
-    def client(repository: str) -> PublicHTTP:
+    def client(repository: str, *, timeout: float = 6.0) -> PublicHTTP:
         return PublicHTTP(
             repository,
             transport=httpx.MockTransport(transport),
@@ -165,6 +165,11 @@ def test_server_routes_enforce_origin_and_intent_without_sockets(
             headers["Content-Length"] = str(len(body))
             result = self.request("POST", "/api/search", headers, body)
             assert "200 OK" in result and "found" in result
+            streamed = self.request("POST", "/api/search/stream", headers, body)
+            assert "application/x-ndjson" in streamed and "200 OK" in streamed
+            events = [json.loads(line) for line in streamed.split("\r\n\r\n", 1)[1].splitlines()]
+            assert events[0]["type"] == "start" and events[-1]["type"] == "done"
+            assert any(event["type"] == "progress" and "report" in event for event in events)
             count = len(upstream)
             headers["Origin"] = "https://evil.example"
             assert "403 Forbidden" in self.request("POST", "/api/search", headers, body)

@@ -60,6 +60,7 @@ def test_search_passes_categories_to_execution(monkeypatch: pytest.MonkeyPatch) 
         depth: int,
         activity: bool,
         restrict_sources: bool = False,
+        timeout: float = 6.0,
     ) -> None:
         assert restrict_sources
         captured.append(platforms)
@@ -81,6 +82,7 @@ def test_visual_carries_source_filter_to_browser(monkeypatch: pytest.MonkeyPatch
         initial_seed: str = "",
         open_browser: bool = False,
         initial_platforms: str = "all",
+        timeout: float = 6.0,
     ) -> None:
         captured.append(initial_platforms)
 

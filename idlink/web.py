@@ -14,6 +14,7 @@ from idlink.core.catalog import SOURCES
 from idlink.core.collection import collect, plan_seeds
 from idlink.core.graph import Report
 from idlink.core.http import PublicHTTP
+from idlink.core.live import stream_collection
 from idlink.core.report import render_html
 
 
@@ -65,11 +66,12 @@ def serve(
     initial_seed: str = "",
     open_browser: bool = False,
     initial_platforms: str = "all",
+    timeout: float = 6.0,
 ) -> None:
     """Serve only on IPv4 loopback; requests are serialized and not logged."""
     token = secrets.token_urlsafe(32)
     with asyncio.Runner() as runner:
-        http = PublicHTTP(repository_url)
+        http = PublicHTTP(repository_url, timeout=timeout)
         runner.run(http.__aenter__())
 
         class Handler(BaseHTTPRequestHandler):
@@ -131,7 +133,7 @@ def serve(
                 ):
                     self.reply(403, '{"error":"Недопустимый источник запроса."}')
                     return
-                if self.path != "/api/search":
+                if self.path not in {"/api/search", "/api/search/stream"}:
                     self.reply(404, '{"error":"Маршрут не найден."}')
                     return
                 try:
@@ -146,17 +148,53 @@ def serve(
                 except ValueError:
                     self.reply(400, '{"error":"Проверьте ник, домен или почту."}')
                     return
+                streaming = self.path.endswith("/stream")
+
+                def emit(event: dict[str, object]) -> None:
+                    self.wfile.write((json.dumps(event, ensure_ascii=False) + "\n").encode())
+                    self.wfile.flush()
+
                 try:
-                    report = runner.run(search_report(http, request))
-                    self.reply(
-                        200,
-                        json.dumps(
-                            {"report": report.model_dump(mode="json"), "html": render_html(report)},
-                            ensure_ascii=False,
-                        ),
-                    )
+                    if streaming:
+                        self.send_response(200)
+                        self.send_header("Content-Type", "application/x-ndjson; charset=utf-8")
+                        self.send_header("Cache-Control", "no-store")
+                        self.send_header("X-Content-Type-Options", "nosniff")
+                        self.send_header("Connection", "close")
+                        self.end_headers()
+                        self.close_connection = True
+                        roots = request.roots()
+                        runner.run(
+                            stream_collection(
+                                http,
+                                roots,
+                                emit,
+                                depth=request.depth,
+                                allowed_platforms=frozenset(name for name, _ in roots)
+                                if request.platforms not in {"all", "auto"}
+                                else None,
+                            )
+                        )
+                    else:
+                        report = runner.run(search_report(http, request))
+                        self.reply(
+                            200,
+                            json.dumps(
+                                {
+                                    "report": report.model_dump(mode="json"),
+                                    "html": render_html(report),
+                                },
+                                ensure_ascii=False,
+                            ),
+                        )
+                except (BrokenPipeError, ConnectionResetError):
+                    pass
                 except Exception:
-                    self.reply(500, '{"error":"Поиск прерван. Проверьте терминал и источники."}')
+                    message = "Поиск прерван. Проверьте терминал и источники."
+                    if streaming:
+                        emit({"type": "error", "error": message})
+                    else:
+                        self.reply(500, json.dumps({"error": message}))
 
         try:
             with HTTPServer(("127.0.0.1", port), Handler) as server:

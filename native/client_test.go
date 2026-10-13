@@ -6,6 +6,7 @@ import (
 	"net/netip"
 	"strings"
 	"testing"
+	"time"
 )
 
 type fixtureTransport func(*http.Request) (*http.Response, error)
@@ -45,6 +46,29 @@ func TestUnsafeURLNeverCallsTransport(t *testing.T) {
 	for _, value := range []string{"http://example.org", "https://user:pass@example.org", "https://example.org:8080"} {
 		if probe(client, request{URL: value}).Error == "" {
 			t.Fatal("unsafe URL accepted")
+		}
+	}
+}
+
+func TestDeadlineCancelsUnresponsiveRequest(t *testing.T) {
+	client := nativeClient()
+	client.Transport = fixtureTransport(func(r *http.Request) (*http.Response, error) {
+		<-r.Context().Done()
+		return nil, r.Context().Err()
+	})
+	start := time.Now()
+	output := probe(client, request{URL: "https://example.org/alice", TimeoutMS: 10})
+	if output.Error == "" || time.Since(start) > 500*time.Millisecond {
+		t.Fatal("deadline not enforced")
+	}
+}
+
+func TestInvalidDeadlineNeverCallsTransport(t *testing.T) {
+	client := nativeClient()
+	client.Transport = fixtureTransport(func(r *http.Request) (*http.Response, error) { t.Fatal("unexpected request"); return nil, nil })
+	for _, timeout := range []int{-1, 120001} {
+		if probe(client, request{URL: "https://example.org/alice", TimeoutMS: timeout}).Error == "" {
+			t.Fatal("invalid deadline accepted")
 		}
 	}
 }

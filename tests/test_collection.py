@@ -194,3 +194,10 @@ async def test_source_filter_prevents_cross_category_link_expansion() -> None:
         )
     assert len(result.report.nodes) == 1
     assert set(calls) == {"example.org"}
+
+
+def test_popular_social_pages_are_not_left_behind_thousands_of_niche_sites() -> None:
+    plan = plan_seeds("alice", "all", [])
+    first = {name for name, _ in plan[:25]}
+    assert {"github", "telegram", "tiktok", "instagram", "reddit"} <= first
+    assert len(plan) > 2000

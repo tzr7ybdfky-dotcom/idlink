@@ -1,6 +1,7 @@
 """Audit-first CLI with bounded search and offline edge explanations."""
 
 import asyncio
+import time
 from collections.abc import Callable
 from pathlib import Path
 from typing import Annotated
@@ -10,6 +11,7 @@ import typer
 from idlink.core.cache import ProfileCache
 from idlink.core.categories import CATEGORIES, selected_platforms
 from idlink.core.collection import Collection, collect, plan_seeds
+from idlink.core.graph import SourceCheck
 from idlink.core.http import PublicHTTP
 from idlink.core.models import Profile
 from idlink.core.report import read_report, write_report
@@ -30,9 +32,11 @@ async def execute(
     activity: bool,
     on_profile: Callable[[Profile], None] | None = None,
     allowed_platforms: frozenset[str] | None = None,
+    timeout: float = 6.0,
+    on_check: Callable[[SourceCheck, int, int], None] | None = None,
 ) -> Collection:
     """Share one policy-aware client and limiter across all sources."""
-    async with PublicHTTP(repository_url) as http:
+    async with PublicHTTP(repository_url, timeout=timeout) as http:
         return await collect(
             http,
             roots,
@@ -41,6 +45,7 @@ async def execute(
             cache=ProfileCache(Path(".cache/idlink")),
             on_profile=on_profile,
             allowed_platforms=allowed_platforms,
+            on_check=on_check,
         )
 
 
@@ -53,8 +58,18 @@ def run(
     depth: int,
     activity: bool,
     restrict_sources: bool = False,
+    timeout: float = 6.0,
 ) -> None:
     """Validate inputs first, emit a report and preserve partial-failure exit status."""
+    started, last_print = time.monotonic(), 0.0
+
+    def progress(check: SourceCheck, count: int, total: int) -> None:
+        nonlocal last_print
+        now = time.monotonic()
+        if now - last_print >= 2:
+            typer.echo(f"Проверено {count}/{total} · {now - started:.0f} с", err=True)
+            last_print = now
+
     try:
         roots = plan_seeds(seed, platforms, extra or [])
         if out is None:
@@ -67,6 +82,8 @@ def run(
                 activity,
                 on_profile=(lambda p: typer.echo(p.url)) if out is None else None,
                 allowed_platforms=frozenset(p for p, _ in roots) if restrict_sources else None,
+                timeout=timeout,
+                on_check=progress if out is None else None,
             )
         )
         if out is not None:
@@ -116,6 +133,15 @@ def search(
     ctx: typer.Context,
     username: str,
     repository_url: Repo = "https://github.com/tzr7ybdfky-dotcom/idlink",
+    timeout: Annotated[
+        float,
+        typer.Option(
+            "--timeout",
+            min=1,
+            max=120,
+            help="Сетевой таймаут в секундах; ожидание лимита не включается.",
+        ),
+    ] = 6.0,
     purpose: Annotated[str | None, typer.Option("--purpose")] = None,
     depth: Annotated[int, typer.Option("--depth", min=0, max=1)] = 1,
     platforms: Platforms = "all",
@@ -161,6 +187,7 @@ def search(
         depth,
         activity,
         restrict_sources=any(ctx.params.get(k) for k in CATEGORIES),
+        timeout=timeout,
     )
 
 
@@ -170,6 +197,7 @@ def visual(
     username: str,
     repository_url: Repo = "https://github.com/tzr7ybdfky-dotcom/idlink",
     port: Annotated[int, typer.Option("--port", min=0, max=65535)] = 0,
+    timeout: Annotated[float, typer.Option("--timeout", min=1, max=120)] = 6.0,
     platforms: Platforms = "all",
     forums: Annotated[bool, typer.Option("--forums", help="Только: Форумы.")] = False,
     social: Annotated[bool, typer.Option("--social", help="Только: Социальные сети.")] = False,
@@ -201,6 +229,7 @@ def visual(
             initial_seed=username,
             open_browser=True,
             initial_platforms=platforms,
+            timeout=timeout,
         )
     except (ValueError, OSError) as exc:
         raise typer.BadParameter(str(exc)) from exc
@@ -247,7 +276,9 @@ def show_help() -> None:
     for flag, (label, _) in CATEGORIES.items():
         typer.echo(f"  --{flag:12} {label}")
     typer.echo("\nДругие флаги: --platforms, --purpose, --depth, --out, --profile, --activity,")
-    typer.echo("--repository-url; у visual также --port. Подробности: idlink search --help.")
+    typer.echo(
+        "--repository-url, --timeout; у visual также --port. Подробности: idlink search --help."
+    )
     typer.echo("\nidlink search alice --forums --social\nidlink visual alice --gaming")
 
 

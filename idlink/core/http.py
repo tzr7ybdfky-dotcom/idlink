@@ -23,6 +23,7 @@ class PublicHTTP:
         *,
         transport: httpx.AsyncBaseTransport | None = None,
         limiter: DomainRateLimiter | None = None,
+        timeout: float = 6.0,
     ) -> None:
         parsed = urlsplit(repository_url)
         if (
@@ -32,15 +33,18 @@ class PublicHTTP:
             or any(char.isspace() for char in repository_url)
         ):
             raise ValueError("repository URL must be a valid HTTPS URL")
+        if not 0 < timeout <= 120:
+            raise ValueError("timeout must be positive and at most 120 seconds")
+        self.timeout = timeout
         self.user_agent = f"idlink/{__version__} (+{repository_url})"
         self.limiter = limiter or DomainRateLimiter()
         if transport is None and (binary := native_binary()):
-            transport = GoTransport(binary)
+            transport = GoTransport(binary, timeout=timeout)
         self._resolve_public_hosts = transport is None
         self.client = httpx.AsyncClient(
             transport=transport,
-            timeout=20,
-            limits=httpx.Limits(max_connections=128, max_keepalive_connections=128),
+            timeout=timeout,
+            limits=httpx.Limits(max_connections=256, max_keepalive_connections=256),
             follow_redirects=False,
             trust_env=False,
             headers={"User-Agent": self.user_agent},
@@ -70,30 +74,35 @@ class PublicHTTP:
                 address = None
             if address is not None and not address.is_global:
                 raise ValueError("private addresses are forbidden")
-            if self._resolve_public_hosts:
-                addresses = await asyncio.get_running_loop().getaddrinfo(
-                    host, 443, type=socket.SOCK_STREAM
-                )
-                if not addresses or any(
-                    not ipaddress.ip_address(item[4][0]).is_global for item in addresses
-                ):
-                    raise ValueError("host resolves to a private address")
             await self.limiter.wait(url)
-            async with self.client.stream("GET", url, headers={"Cookie": ""}) as streamed:
-                content = bytearray()
-                async for chunk in streamed.aiter_bytes():
-                    content.extend(chunk)
-                    if len(content) > 5_000_000:
-                        raise ValueError("response exceeds 5 MB")
-                headers = dict(streamed.headers)
-                for field in ("content-encoding", "content-length", "transfer-encoding"):
-                    headers.pop(field, None)
-                response = httpx.Response(
-                    streamed.status_code,
-                    headers=headers,
-                    content=bytes(content),
-                    request=streamed.request,
-                )
+            async with asyncio.timeout(self.timeout):
+                if self._resolve_public_hosts:
+                    addresses = await asyncio.get_running_loop().getaddrinfo(
+                        host, 443, type=socket.SOCK_STREAM
+                    )
+                    if not addresses or any(
+                        not ipaddress.ip_address(item[4][0]).is_global for item in addresses
+                    ):
+                        raise ValueError("host resolves to a private address")
+                async with self.client.stream("GET", url, headers={"Cookie": ""}) as streamed:
+                    content = bytearray()
+                    async for chunk in streamed.aiter_bytes():
+                        content.extend(chunk)
+                        if len(content) > 5_000_000:
+                            raise ValueError("response exceeds 5 MB")
+                    headers = dict(streamed.headers)
+                    for field in ("content-encoding", "content-length", "transfer-encoding"):
+                        headers.pop(field, None)
+                    response = httpx.Response(
+                        streamed.status_code,
+                        headers=headers,
+                        content=bytes(content),
+                        request=streamed.request,
+                    )
+        except (TimeoutError, httpx.TimeoutException) as exc:
+            raise PluginError(
+                f"таймаут {self.timeout:g} с; существование профиля неизвестно"
+            ) from exc
         except (httpx.HTTPError, OSError, ValueError) as exc:
             raise PluginError("request failed or domain blocked") from exc
         if response.status_code in {401, 403, 429} or (
@@ -125,5 +134,5 @@ class PublicHTTP:
             policy = self._robots[origin]
             if not policy.can_fetch(url):
                 raise PluginError("robots.txt disallows this resource")
-            self.limiter.defer(url, max(self.limiter.interval, policy.delay))
+            self.limiter.set_delay(url, policy.delay)
         return await self._request(url)
