@@ -14,8 +14,8 @@ def test_all_sources_and_purpose_validation() -> None:
     assert {p for p, _ in plan_seeds("demo", "all", [])} == USERNAME_PLATFORMS
     assert plan_seeds("example.org", "all", []) == [("website", "example.org")]
     assert SearchRequest(seed="demo").mode == "audit"
-    with pytest.raises(ValueError):
-        SearchRequest(seed="demo", mode="search").roots()
+    assert len(SearchRequest(seed="demo", mode="search").roots()) == 3
+    assert SearchRequest(seed="user@example.org").roots()[0][0] == "gravatar"
     with pytest.raises(ValueError):
         SearchRequest(seed="demo", platforms="instagram").roots()
     assert len(SearchRequest(seed="demo", mode="search", purpose="Research").roots()) == 3
@@ -146,7 +146,7 @@ def test_server_routes_enforce_origin_and_intent_without_sockets(
                 "X-idlink-token": match[1],
                 "Content-Type": "application/json",
             }
-            body = json.dumps({"seed": "demo", "mode": "search", "platforms": "github"})
+            body = json.dumps({"seed": "demo", "platforms": "instagram"})
             headers["Content-Length"] = str(len(body))
             assert "400 Bad Request" in self.request("POST", "/api/search", headers, body)
             assert not upstream

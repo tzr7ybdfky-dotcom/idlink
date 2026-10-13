@@ -23,14 +23,16 @@ a{color:#a8decf}.warning,.counter{color:#e6bd89}.node circle{fill:#b3a1ff;stroke
 .node text{fill:#edeef5}.edge{stroke:#9c91c0}.percentage{fill:#edeef5;stroke:#181a23}
 .signal{border-color:#303343}#profiles{display:grid;gap:8px;margin:16px 0}#profiles details{border-left:1px solid #73648f;padding-left:16px}
 #profiles button{display:block;width:100%;margin:8px 0}summary{cursor:pointer;color:#c7b8f7}
+
+main{grid-template-columns:minmax(0,3fr) minmax(270px,1fr);padding:20px;gap:16px}.panel{background:#141b26;border-color:#273246}body{background:#0c1017}.node{cursor:grab}.node:active{cursor:grabbing}.node rect{fill:#18263a;stroke:#7da8df;stroke-width:1.5}.node text{pointer-events:none}.node .platform{fill:#8dbaff;font-size:11px;letter-spacing:1px}.node .username{fill:#eff4ff;font-size:14px;font-weight:650}.edge{stroke:#7fb3ef;stroke-opacity:.7}.percentage{fill:#c6dcfa;stroke:#0c1017;stroke-width:7px}.observation{stroke:#394960;stroke-width:1;stroke-dasharray:4 6}.hub circle{fill:#142439;stroke:#527da9}.hub text{fill:#8dbaff;font-size:12px}svg{height:520px;border-radius:12px;background:#0c1017;touch-action:none}h2{font-size:20px}.panel h2{margin-top:0}header{padding:20px 24px;background:#101722}header h1{font-size:23px}header p{font-size:12px;margin:8px 0 0}#edge-list button{font-size:12px}#reset-view{font-size:12px;padding:7px 12px;margin-bottom:12px}@media(max-width:800px){main{grid-template-columns:1fr}svg{height:450px}}
 </style></head><body>
 <header><h1>idlink · публичные профили</h1>
 <p>Оценки — эвристика, а не измеренная вероятность. Ложные совпадения могут причинить вред.
 Максимальный вывод: «вероятно связаны». Проверяйте причины и контрдоводы каждой связи.</p></header>
-<main><section class="panel"><h2>Граф наблюдений</h2>
-<details open><summary>Профили по площадкам</summary><div id="profiles"></div></details>
-<p class="muted">Толщина ребра пропорциональна оценке. Выберите связь на графе или в списке.</p>
-<svg id="graph" role="img" aria-label="Граф вероятностных связей"></svg>
+<main><section class="panel"><h2>Карта найденных профилей</h2>
+<details><summary>Профили по площадкам</summary><div id="profiles"></div></details>
+<p class="muted">Перетаскивайте узлы, масштабируйте колёсиком. Толщина связи — её оценка. Пунктир группирует наблюдения без оценки личности.</p>
+<button id="reset-view" type="button">Сбросить масштаб</button><svg id="graph" role="img" aria-label="Граф вероятностных связей"></svg>
 <div id="warnings"></div><h3>Связи</h3><div id="edge-list"></div></section>
 <aside class="panel" id="details" aria-live="polite"><h2>Разбор связи</h2>
 <p class="muted">Выберите ребро. Связи не переносятся автоматически на соседние профили.</p></aside></main>
@@ -89,25 +91,31 @@ edges.forEach(edge => {
 });
 if (!edges.length) text(list,"p","Недостаточно профилей для сравнения.","muted");
 report.warnings.forEach(w => text(document.getElementById("warnings"),"p",w,"warning"));
-const svg = d3.select("#graph").attr("viewBox","0 0 760 470");
-const simulation = d3.forceSimulation(nodes)
-  .force("link",d3.forceLink(edges).id(d => d.id).distance(200))
-  .force("charge",d3.forceManyBody().strength(-600))
-  .force("center",d3.forceCenter(380,235)).force("collide",d3.forceCollide(65)).stop();
-simulation.tick(250);
-nodes.forEach(d => {d.x=Math.max(85,Math.min(675,d.x));d.y=Math.max(60,Math.min(410,d.y));});
-svg.selectAll(".edge").data(edges).join("line").attr("class","edge")
-  .attr("x1",d=>d.source.x).attr("y1",d=>d.source.y).attr("x2",d=>d.target.x).attr("y2",d=>d.target.y)
-  .attr("stroke-width",d => 12 * d.probability).on("click",(_,d)=>showEdge(d));
-svg.selectAll(".hit").data(edges).join("line").attr("class","hit").attr("stroke-width",18)
-  .attr("x1",d=>d.source.x).attr("y1",d=>d.source.y).attr("x2",d=>d.target.x).attr("y2",d=>d.target.y)
-  .on("click",(_,d)=>showEdge(d));
-svg.selectAll(".percentage").data(edges).join("text").attr("class","percentage")
-  .attr("x",d=>(d.source.x+d.target.x)/2).attr("y",d=>(d.source.y+d.target.y)/2-8)
-  .text(d=>pct(d.probability));
-const groups = svg.selectAll(".node").data(nodes).join("g").attr("class","node")
-  .attr("transform",d=>`translate(${d.x},${d.y})`).on("click",(_,d)=>showProfile(d));
-groups.append("circle").attr("r",17);
-groups.append("text").attr("text-anchor","middle").attr("y",38).text(d=>d.platform);
-groups.append("text").attr("text-anchor","middle").attr("y",55).text(d=>d.username.slice(0,25));
+const svg=d3.select("#graph").attr("viewBox","0 0 900 540");
+const defs=svg.append("defs"),pattern=defs.append("pattern").attr("id","dots").attr("width",24).attr("height",24).attr("patternUnits","userSpaceOnUse");
+pattern.append("circle").attr("cx",1).attr("cy",1).attr("r",1).attr("fill","#253247");
+svg.append("rect").attr("width",900).attr("height",540).attr("fill","url(#dots)");
+const canvas=svg.append("g");
+const zoom=d3.zoom().scaleExtent([.35,3]).on("zoom",event=>canvas.attr("transform",event.transform));
+svg.call(zoom);document.getElementById("reset-view").onclick=()=>svg.transition().duration(300).call(zoom.transform,d3.zoomIdentity);
+if(!nodes.length){canvas.append("text").attr("x",450).attr("y",270).attr("text-anchor","middle").attr("fill","#8b9ab1").text("Нет найденных профилей. Проверьте статусы источников.");}
+const hub=canvas.append("g").attr("class","hub").attr("transform","translate(450,270)").style("display",nodes.length?null:"none");
+hub.append("circle").attr("r",35);hub.append("text").attr("text-anchor","middle").attr("y",4).text("Профили");
+const observations=canvas.selectAll(".observation").data(nodes).join("line").attr("class","observation").attr("x1",450).attr("y1",270);
+const lines=canvas.selectAll(".edge").data(edges).join("line").attr("class","edge").attr("stroke-width",d=>12 * d.probability).on("click",(_,d)=>showEdge(d));
+const hits=canvas.selectAll(".hit").data(edges).join("line").attr("class","hit").attr("stroke-width",22).on("click",(_,d)=>showEdge(d));
+const percentages=canvas.selectAll(".percentage").data(edges).join("text").attr("class","percentage").attr("text-anchor","middle").text(d=>pct(d.probability));
+nodes.forEach((d,i)=>{const angle=2*Math.PI*i/Math.max(nodes.length,1)-Math.PI/2;d.x=450+260*Math.cos(angle);d.y=270+165*Math.sin(angle);});
+const simulation=d3.forceSimulation(nodes).force("link",d3.forceLink(edges).id(d=>d.id).distance(260).strength(.08)).force("collide",d3.forceCollide(110)).force("x",d3.forceX(450).strength(.015)).force("y",d3.forceY(270).strength(.015));
+const groups=canvas.selectAll(".node").data(nodes).join("g").attr("class","node").attr("tabindex",0).attr("role","button").attr("aria-label",d=>d.platform+" / "+d.username).on("click",(_,d)=>showProfile(d)).on("keydown",(event,d)=>{if(event.key==="Enter")showProfile(d);});
+groups.append("rect").attr("x",-92).attr("y",-34).attr("width",184).attr("height",68).attr("rx",13);
+groups.append("text").attr("class","platform").attr("x",-76).attr("y",-9).text(d=>d.platform.toUpperCase());
+groups.append("text").attr("class","username").attr("x",-76).attr("y",16).text(d=>d.username.length>19?d.username.slice(0,18)+"…":d.username);
+groups.call(d3.drag().on("start",(event,d)=>{if(!event.active)simulation.alphaTarget(.1).restart();d.fx=d.x;d.fy=d.y;}).on("drag",(event,d)=>{d.fx=event.x;d.fy=event.y;}).on("end",(event,d)=>{if(!event.active)simulation.alphaTarget(0);d.fx=event.x;d.fy=event.y;}));
+simulation.on("tick",()=>{
+ groups.attr("transform",d=>`translate(${d.x},${d.y})`);
+ observations.attr("x2",d=>d.x).attr("y2",d=>d.y);
+ for(const selection of [lines,hits])selection.attr("x1",d=>d.source.x).attr("y1",d=>d.source.y).attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
+ percentages.attr("x",d=>(d.source.x+d.target.x)/2).attr("y",d=>(d.source.y+d.target.y)/2-12);
+});
 </script></body></html>

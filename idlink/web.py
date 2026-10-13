@@ -27,9 +27,7 @@ class SearchRequest(BaseModel):
     depth: int = Field(default=0, ge=0, le=1)
 
     def roots(self) -> list[tuple[str, str]]:
-        """Search always needs an explicit purpose; no empty source selection."""
-        if self.mode == "search" and not self.purpose.strip():
-            raise ValueError("Укажите цель поиска.")
+        """Classify the input automatically and validate source selection."""
         if not self.platforms:
             raise ValueError("Выберите хотя бы одну площадку.")
         return plan_seeds(self.seed, self.platforms, [])
@@ -123,7 +121,7 @@ def serve(repository_url: str, port: int = 8765) -> None:
                     request = SearchRequest.model_validate_json(self.rfile.read(length))
                     request.roots()
                 except ValueError:
-                    self.reply(400, '{"error":"Проверьте ник, цель и выбранные площадки."}')
+                    self.reply(400, '{"error":"Проверьте ник, домен или почту."}')
                     return
                 try:
                     report = runner.run(search_report(http, request))
