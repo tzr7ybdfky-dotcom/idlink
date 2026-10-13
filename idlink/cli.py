@@ -11,7 +11,7 @@ import typer
 from idlink.core.cache import ProfileCache
 from idlink.core.catalog import SOURCES
 from idlink.core.categories import CATEGORIES, selected_platforms
-from idlink.core.collection import Collection, collect, plan_seeds
+from idlink.core.collection import SOURCE_PRIORITY, Collection, collect, plan_seeds
 from idlink.core.graph import SourceCheck
 from idlink.core.http import PublicHTTP
 from idlink.core.models import Profile
@@ -70,6 +70,12 @@ def run(
 
     def progress(check: SourceCheck, count: int, total: int) -> None:
         nonlocal last_print
+        if (
+            check.status in {"error", "unverified"}
+            and SOURCE_PRIORITY.get(check.platform, 100) < 100
+        ):
+            label = PLATFORM_LABELS.get(check.platform, check.platform)
+            typer.echo(f"{label}: не удалось проверить — {check.detail}", err=True)
         now = time.monotonic()
         if now - last_print >= 2:
             typer.echo(f"Проверено {count}/{total} · {now - started:.0f} с", err=True)
@@ -190,7 +196,7 @@ def search(
     forums: Annotated[bool, typer.Option("--forums", help="Только: Форумы.")] = False,
     social: Annotated[bool, typer.Option("--social", help="Только: Социальные сети.")] = False,
     dev: Annotated[bool, typer.Option("--dev", help="Только: Разработка.")] = False,
-    gaming: Annotated[bool, typer.Option("--gaming", help="Только: Игры.")] = False,
+    gaming: Annotated[bool, typer.Option("--gaming", "--games", help="Только: Игры.")] = False,
     music: Annotated[bool, typer.Option("--music", help="Только: Музыка.")] = False,
     video: Annotated[bool, typer.Option("--video", help="Только: Видео и стримы.")] = False,
     photo: Annotated[bool, typer.Option("--photo", help="Только: Фотография.")] = False,
@@ -241,7 +247,7 @@ def visual(
     forums: Annotated[bool, typer.Option("--forums", help="Только: Форумы.")] = False,
     social: Annotated[bool, typer.Option("--social", help="Только: Социальные сети.")] = False,
     dev: Annotated[bool, typer.Option("--dev", help="Только: Разработка.")] = False,
-    gaming: Annotated[bool, typer.Option("--gaming", help="Только: Игры.")] = False,
+    gaming: Annotated[bool, typer.Option("--gaming", "--games", help="Только: Игры.")] = False,
     music: Annotated[bool, typer.Option("--music", help="Только: Музыка.")] = False,
     video: Annotated[bool, typer.Option("--video", help="Только: Видео и стримы.")] = False,
     photo: Annotated[bool, typer.Option("--photo", help="Только: Фотография.")] = False,

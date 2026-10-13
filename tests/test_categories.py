@@ -68,6 +68,8 @@ def test_search_passes_categories_to_execution(monkeypatch: pytest.MonkeyPatch) 
     monkeypatch.setattr(cli, "run", run)
     assert CliRunner().invoke(app, ["search", "alice", "--forums", "--social"]).exit_code == 0
     assert captured == [selected_platforms("all", {"forums": True, "social": True})]
+    assert CliRunner().invoke(app, ["search", "alice", "--games"]).exit_code == 0
+    assert captured[-1] == selected_platforms("all", {"gaming": True})
 
 
 def test_visual_carries_source_filter_to_browser(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -89,3 +91,5 @@ def test_visual_carries_source_filter_to_browser(monkeypatch: pytest.MonkeyPatch
     monkeypatch.setattr(web, "serve", serve)
     assert CliRunner().invoke(app, ["visual", "alice", "--gaming"]).exit_code == 0
     assert captured == [selected_platforms("all", {"gaming": True})]
+    assert CliRunner().invoke(app, ["visual", "alice", "--games"]).exit_code == 0
+    assert captured[-1] == captured[0]

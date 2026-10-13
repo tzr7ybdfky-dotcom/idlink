@@ -42,6 +42,7 @@ POPULAR = {
             "linkedin",
             "twitch",
             "steam",
+            "minecraft",
             "pinterest",
             "hacker news",
             "keybase",
