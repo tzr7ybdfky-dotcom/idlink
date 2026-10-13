@@ -13,25 +13,16 @@ Python 3.11+, MIT. Каждый результат содержит процен
 Ниже выберите **один** вариант: существующая папка или установка с нуля.
 Команды выполняйте по порядку; если появилась ошибка, остановитесь и исправьте её.
 
-### Вариант 1. Проект уже находится на этом Mac
+### Если проект уже скачан
 
-Для текущей рабочей папки `/Users/USER/Desktop/Danya/idlink-project` откройте
-**Terminal** и вставьте:
+Откройте терминал и перейдите в папку проекта, где находится `pyproject.toml`.
+Путь зависит от того, куда вы распаковали архив или клонировали репозиторий.
+В инструкции для своей ОС ниже пропустите скачивание и создание рабочей папки:
+начните с проверки `pyproject.toml`, затем создайте `.venv`, установите зависимости
+и запустите сервер. Если окружение уже создано и проект установлен, используйте
+раздел «Повторный запуск после перезагрузки» с путём к своей папке.
 
-```sh
-cd /Users/USER/Desktop/Danya/idlink-project
-ls pyproject.toml
-python3 --version
-python3 -m venv .venv
-./.venv/bin/python -m pip install '.[dev]'
-./.venv/bin/python -m idlink serve --repository-url https://github.com/tzr7ybdfky-dotcom/idlink
-```
-
-После строки `idlink: http://127.0.0.1:8765` откройте этот адрес в браузере.
-Терминал оставьте открытым. Если папка у вас другая, замените путь после `cd`
-на путь к папке, **внутри которой лежит `pyproject.toml`**.
-
-### Вариант 2. Установка с нуля без Git и токенов
+### Установка с нуля без Git и токенов
 
 1. Установите Python **3.11 или новее**, если его ещё нет. На Windows при установке
    включите добавление Python в PATH. Проверка версии есть в командах ниже.
@@ -48,26 +39,6 @@ python3 -m venv .venv
 к репозиторию. Вход в браузере не авторизует автоматически `git clone` в терминале.
 Пароль GitHub вместо токена для клонирования использовать нельзя; вариант ZIP
 не требует настраивать авторизацию Git.
-
-#### macOS — полный запуск через ZIP
-
-Откройте Terminal и сначала создайте папку:
-
-```sh
-mkdir -p "$HOME/idlink-work"
-open "$HOME/idlink-work"
-```
-
-Скачайте и распакуйте ZIP в открывшуюся папку, затем выполните:
-
-```sh
-cd "$HOME/idlink-work/idlink-main"
-ls pyproject.toml
-python3 --version
-python3 -m venv .venv
-./.venv/bin/python -m pip install '.[dev]'
-./.venv/bin/python -m idlink serve --repository-url https://github.com/tzr7ybdfky-dotcom/idlink
-```
 
 #### Linux — полный запуск через ZIP
 
@@ -91,6 +62,26 @@ python3 -m venv .venv
 Если Python сообщает, что `venv` или `ensurepip` отсутствует, установите пакет
 поддержки venv для своей версии Python через пакетный менеджер дистрибутива,
 затем повторите создание окружения и установку.
+
+#### macOS — полный запуск через ZIP
+
+Откройте Terminal и сначала создайте папку:
+
+```sh
+mkdir -p "$HOME/idlink-work"
+open "$HOME/idlink-work"
+```
+
+Скачайте и распакуйте ZIP в открывшуюся папку, затем выполните:
+
+```sh
+cd "$HOME/idlink-work/idlink-main"
+ls pyproject.toml
+python3 --version
+python3 -m venv .venv
+./.venv/bin/python -m pip install '.[dev]'
+./.venv/bin/python -m idlink serve --repository-url https://github.com/tzr7ybdfky-dotcom/idlink
+```
 
 #### Windows — полный запуск через ZIP
 
@@ -139,7 +130,7 @@ py -3 -m venv .venv
 Устанавливать зависимости каждый раз не нужно. Откройте терминал, перейдите
 в папку проекта и запустите сервер. Для варианта ZIP:
 
-macOS / Linux:
+Linux / macOS:
 
 ```sh
 cd "$HOME/idlink-work/idlink-main"
@@ -153,8 +144,7 @@ Set-Location "$HOME\idlink-work\idlink-main"
 .\.venv\Scripts\python.exe -m idlink serve --repository-url https://github.com/tzr7ybdfky-dotcom/idlink
 ```
 
-Для уже существующей папки на этом Mac используйте вместо первой строки
-`cd /Users/USER/Desktop/Danya/idlink-project`.
+Если проект находится в другой папке, замените путь в первой строке на свой.
 
 ### Какие папки и файлы нужны
 
@@ -214,7 +204,7 @@ idlink-work/
 статусы проверок, найденные профили и граф с объяснениями. Это локальное приложение;
 автономный `report.html` показывает готовый результат, а новый поиск выполняется через сервер.
 
-После установки (инструкции по ОС ниже) запустите сервер:
+После установки по инструкции для своей ОС запустите сервер:
 
 ```sh
 idlink serve --repository-url https://github.com/tzr7ybdfky-dotcom/idlink
@@ -290,25 +280,6 @@ URL-шаблоны взяты из [Sherlock](https://github.com/sherlock-projec
 Если в терминале уже активно другое виртуальное окружение (например, созданное в `~`),
 сначала выполните `deactivate`.
 
-### macOS (Terminal, zsh или bash)
-
-```sh
-cd ~
-mkdir -p idlink-work
-cd idlink-work
-git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
-cd idlink
-ls pyproject.toml
-python3 --version
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install '.[dev]'
-export IDLINK_REPOSITORY_URL=https://github.com/tzr7ybdfky-dotcom/idlink
-
-idlink audit tzr7ybdfky-dotcom --platforms github --out report.html
-open report.html
-```
-
 ### Linux (bash или zsh)
 
 ```sh
@@ -332,6 +303,25 @@ xdg-open report.html
 пакет поддержки venv для своей версии Python через пакетный менеджер дистрибутива.
 На Linux без графического интерфейса перенесите `report.html` на компьютер с браузером;
 если `xdg-open` отсутствует, откройте файл вручную.
+
+### macOS (Terminal, zsh или bash)
+
+```sh
+cd ~
+mkdir -p idlink-work
+cd idlink-work
+git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
+cd idlink
+ls pyproject.toml
+python3 --version
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install '.[dev]'
+export IDLINK_REPOSITORY_URL=https://github.com/tzr7ybdfky-dotcom/idlink
+
+idlink audit tzr7ybdfky-dotcom --platforms github --out report.html
+open report.html
+```
 
 ### Windows (PowerShell)
 
@@ -371,9 +361,9 @@ idlink-work/
     └── report.html     # результат, создаёт команда audit
 ```
 
-В новом терминале перейдите в `~/idlink-work/idlink` (macOS/Linux) или
+В новом терминале перейдите в `~/idlink-work/idlink` (Linux/macOS) или
 `$HOME\idlink-work\idlink` (PowerShell), снова задайте переменную URL и запустите аудит.
-На macOS/Linux перед запуском активируйте окружение через `source .venv/bin/activate`;
+На Linux/macOS перед запуском активируйте окружение через `source .venv/bin/activate`;
 на Windows используйте путь `.\.venv\Scripts\python.exe -m idlink`, как в блоке выше.
 
 ### Частые ошибки и другие команды
