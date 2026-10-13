@@ -12,7 +12,7 @@ from idlink.core.graph import Report, SourceCheck
 from idlink.core.models import Profile
 
 
-def test_search_streams_links_without_writing_html(
+def test_search_prints_final_english_list_without_duplicates_or_html(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -35,22 +35,32 @@ def test_search_streams_links_without_writing_html(
         from idlink.core.graph import Node
 
         profile = Profile(
-            platform="fixture",
+            platform="tiktok",
             username="alice",
-            url="https://example.org/alice",
+            url="https://www.tiktok.com/@alice",
             fetched_at=datetime.now(UTC),
         )
         assert on_profile is not None
         on_profile(profile)
         return Collection(
-            Report(nodes=[Node(id=profile.url, platform="fixture", username="alice")], edges={}),
+            Report(
+                nodes=[
+                    Node(id=profile.url, platform="tiktok", username="alice"),
+                    Node(id="https://t.me/alice", platform="telegram", username="alice"),
+                ],
+                edges={},
+            ),
             False,
         )
 
     monkeypatch.setattr(cli, "execute", execute)
     result = CliRunner().invoke(app, ["search", "alice"])
     assert result.exit_code == 0
-    assert result.stdout.strip() == "https://example.org/alice"
+    assert result.stdout.strip().splitlines() == [
+        "Telegram: https://t.me/alice",
+        "TikTok: https://www.tiktok.com/@alice",
+    ]
+    assert "TikTok: https://www.tiktok.com/@alice" in result.stderr
     assert not (tmp_path / "report.html").exists()
 
 

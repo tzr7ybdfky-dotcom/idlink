@@ -9,6 +9,7 @@ from typing import Annotated
 import typer
 
 from idlink.core.cache import ProfileCache
+from idlink.core.catalog import SOURCES
 from idlink.core.categories import CATEGORIES, selected_platforms
 from idlink.core.collection import Collection, collect, plan_seeds
 from idlink.core.graph import SourceCheck
@@ -16,6 +17,10 @@ from idlink.core.http import PublicHTTP
 from idlink.core.models import Profile
 from idlink.core.report import read_report, write_report
 from idlink.plugins.base import PluginError
+
+PLATFORM_LABELS = {source.name: source.label for source in SOURCES}
+PLATFORM_LABELS["website"] = "Website"
+
 
 app = typer.Typer(no_args_is_help=True)
 Repo = Annotated[str, typer.Option("--repository-url", envvar="IDLINK_REPOSITORY_URL")]
@@ -80,7 +85,13 @@ def run(
                 repository_url,
                 depth,
                 activity,
-                on_profile=(lambda p: typer.echo(p.url)) if out is None else None,
+                on_profile=(
+                    lambda p: typer.echo(
+                        f"{PLATFORM_LABELS.get(p.platform, p.platform)}: {p.url}", err=True
+                    )
+                )
+                if out is None
+                else None,
                 allowed_platforms=frozenset(p for p, _ in roots) if restrict_sources else None,
                 timeout=timeout,
                 on_check=progress if out is None else None,
@@ -96,6 +107,11 @@ def run(
     except OSError as exc:
         typer.echo(f"Ошибка записи отчёта или кэша: {exc}", err=True)
         raise typer.Exit(2) from exc
+    for node in sorted(
+        result.report.nodes,
+        key=lambda node: (PLATFORM_LABELS.get(node.platform, node.platform).casefold(), node.id),
+    ):
+        typer.echo(f"{PLATFORM_LABELS.get(node.platform, node.platform)}: {node.id}")
     if out is None:
         errors = sum(c.status == "error" for c in result.report.checks)
         typer.echo(
@@ -129,8 +145,6 @@ def run(
                 err=True,
             )
     else:
-        for node in result.report.nodes:
-            typer.echo(f"{node.platform}: {node.id}")
         for warning in result.report.warnings:
             typer.echo(warning, err=True)
         for identifier, edge in result.report.edges.items():
