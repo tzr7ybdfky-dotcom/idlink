@@ -11,6 +11,7 @@ from idlink.core.http import PublicHTTP
 from idlink.core.inputs import seed_kind
 from idlink.core.models import Profile
 from idlink.plugins.base import PlatformPlugin, PluginError
+from idlink.plugins.bluesky import BlueskyPlugin
 from idlink.plugins.github import GitHubPlugin
 from idlink.plugins.gravatar import GravatarPlugin
 from idlink.plugins.habr import HabrPlugin
@@ -97,12 +98,13 @@ async def collect(
     """Fetch at most 16 profiles and follow at most one layer of explicit links."""
     plugins: dict[str, PlatformPlugin] = {
         "github": GitHubPlugin(http, collect_activity=activity),
+        "bluesky": BlueskyPlugin(http),
         "gravatar": GravatarPlugin(http),
         "website": WebsitePlugin(http),
         "habr": HabrPlugin(),
         **{
             name: PublicAPIPlugin(http, name, WIKI_HOSTS.get(name, ""))
-            for name in USERNAME_PLATFORMS - {"github"}
+            for name in USERNAME_PLATFORMS - {"github", "bluesky"}
         },
     }
     profiles: dict[str, Profile] = {}

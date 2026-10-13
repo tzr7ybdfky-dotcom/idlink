@@ -20,6 +20,7 @@ class Source(BaseModel):
 
 SOURCES = [
     Source(name="github", label="GitHub", category="Разработка"),
+    Source(name="bluesky", label="Bluesky", category="Социальные сети"),
     Source(name="hackernews", label="Hacker News", category="Сообщества"),
     Source(name="keybase", label="Keybase", category="Публичные идентификаторы"),
     Source(name="wikipedia", label="Wikipedia (EN)", category="Вики", host="en.wikipedia.org"),

@@ -14,11 +14,13 @@ def test_all_sources_and_purpose_validation() -> None:
     assert {p for p, _ in plan_seeds("demo", "all", [])} == USERNAME_PLATFORMS
     assert plan_seeds("example.org", "all", []) == [("website", "example.org")]
     assert SearchRequest(seed="demo").mode == "audit"
-    assert len(SearchRequest(seed="demo", mode="search").roots()) == 3
+    assert len(SearchRequest(seed="demo", mode="search").roots()) == len(USERNAME_PLATFORMS)
     assert SearchRequest(seed="user@example.org").roots()[0][0] == "gravatar"
     with pytest.raises(ValueError):
         SearchRequest(seed="demo", platforms="instagram").roots()
-    assert len(SearchRequest(seed="demo", mode="search", purpose="Research").roots()) == 3
+    assert len(SearchRequest(seed="demo", mode="search", purpose="Research").roots()) == len(
+        USERNAME_PLATFORMS
+    )
 
 
 @pytest.mark.parametrize(

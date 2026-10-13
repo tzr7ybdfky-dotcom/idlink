@@ -25,6 +25,8 @@ a{color:#dddddd}.warning,.counter{color:#bbbbbb}.node circle{fill:#eeeeee;stroke
 #profiles button{display:block;width:100%;margin:8px 0}summary{cursor:pointer;color:#dddddd}
 
 main{grid-template-columns:minmax(0,3fr) minmax(270px,1fr);padding:20px;gap:16px}.panel{background:#0d0d0d;border-color:#282828}body{background:#000000}.node{cursor:grab}.node:active{cursor:grabbing}.node rect{fill:#141414;stroke:#666666;stroke-width:1.5}.node text{pointer-events:none}.node .platform{fill:#eeeeee;font-size:11px;letter-spacing:1px}.node .username{fill:#f4f4f4;font-size:14px;font-weight:650}.edge{stroke:#bbbbbb;stroke-opacity:.7}.percentage{fill:#eeeeee;stroke:#000000;stroke-width:7px}.observation{stroke:#444444;stroke-width:1;stroke-dasharray:4 6}.hub circle{fill:#151515;stroke:#777777}.hub text{fill:#eeeeee;font-size:12px}svg{height:520px;border-radius:12px;background:#000000;touch-action:none}h2{font-size:20px}.panel h2{margin-top:0}header{padding:20px 24px;background:#080808}header h1{font-size:23px}header p{font-size:12px;margin:8px 0 0}#edge-list button{font-size:12px}#reset-view{font-size:12px;padding:7px 12px;margin-bottom:12px}@media(max-width:800px){main{grid-template-columns:1fr}svg{height:450px}}
+
+main{grid-template-columns:minmax(0,1fr);padding:32px;gap:28px;max-width:1600px;margin:auto}.panel{padding:28px}.with-details{grid-template-columns:minmax(0,3fr) minmax(300px,1fr)}#details[hidden]{display:none}#details{line-height:1.65;overflow-wrap:anywhere}#details h2{margin-top:24px}.signal{padding:24px 0}.signal p{margin:14px 0}svg{margin:20px 0 28px}#edge-list{gap:12px}#edge-list button{padding:14px 18px}header{padding:28px 32px}footer{padding:24px 32px}@media(max-width:900px){main,.with-details{grid-template-columns:1fr;padding:20px;gap:20px}.panel{padding:20px}}
 </style></head><body>
 <header><h1>idlink · публичные профили</h1>
 <p>Оценки — эвристика, а не измеренная вероятность. Ложные совпадения могут причинить вред.
@@ -34,7 +36,7 @@ main{grid-template-columns:minmax(0,3fr) minmax(270px,1fr);padding:20px;gap:16px
 <p class="muted">Перетаскивайте узлы, масштабируйте колёсиком. Толщина связи — её оценка. Пунктир группирует наблюдения без оценки личности.</p>
 <button id="reset-view" type="button">Сбросить масштаб</button><svg id="graph" role="img" aria-label="Граф вероятностных связей"></svg>
 <div id="warnings"></div><h3>Связи</h3><div id="edge-list"></div></section>
-<aside class="panel" id="details" aria-live="polite"><h2>Разбор связи</h2>
+<aside hidden class="panel" id="details" aria-live="polite"><h2>Разбор связи</h2>
 <p class="muted">Выберите ребро. Связи не переносятся автоматически на соседние профили.</p></aside></main>
 <noscript>Для графа нужен JavaScript. Текстовый разбор доступен через idlink explain.</noscript>
 <footer>Отчёт работает офлайн. Изображения и исходные тексты профилей не сохранены.
@@ -54,6 +56,8 @@ function text(parent, tag, value, cls) {
 }
 function showEdge(edge) {
   const box = document.getElementById("details"); box.replaceChildren();
+  box.hidden=false;document.querySelector("main").classList.add("with-details");
+  const close=text(box,"button","Закрыть разбор ×");close.onclick=()=>{box.hidden=true;document.querySelector("main").classList.remove("with-details");};
   text(box,"h2",pct(edge.probability) + " · " + edge.verdict);
   text(box,"p","ID: " + edge.id,"muted");
   [edge.a,edge.b].forEach(url => {
@@ -69,14 +73,7 @@ function showEdge(edge) {
   });
 }
 function showProfile(node) {
-  const box=document.getElementById("details");box.replaceChildren();
-  text(box,"h2",node.platform + " / " + node.username);
-  text(box,"p","Найден публичный профиль. Совпадение ника не доказывает принадлежность человеку.","muted");
-  const link=text(box,"a",node.id);
-  if (/^https?:\/\//.test(node.id)){link.href=node.id;link.target="_blank";link.rel="noopener noreferrer";}
-  const related=edges.filter(e=>e.a===node.id || e.b===node.id);
-  related.forEach(edge=>{const b=text(box,"button",pct(edge.probability)+" · "+edge.verdict);b.onclick=()=>showEdge(edge);});
-  if(!related.length)text(box,"p","Других профилей для сравнения нет.","muted");
+  if(/^https?:\/\//.test(node.id))window.open(node.id,"_blank","noopener,noreferrer");
 }
 const profileList=document.getElementById("profiles");
 for(const platform of [...new Set(nodes.map(n=>n.platform))]){
