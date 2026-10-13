@@ -50,8 +50,14 @@ def native_binary() -> str | None:
 class NativeRequestError(httpx.TransportError):
     """Preserve the native failure category without exposing response bodies."""
 
-    def __init__(self, kind: ErrorKind) -> None:
-        super().__init__("native request failed")
+    def __init__(self, kind: ErrorKind, code: str = "") -> None:
+        descriptions = {
+            "dns_not_found": "DNS: домен не разрешается",
+            "dns_temporary": "DNS: временная ошибка DNS-сервера",
+            "dns_timeout": "DNS: сервер не ответил вовремя",
+            "local_file_limit": "исчерпан локальный лимит открытых файлов/соединений",
+        }
+        super().__init__(descriptions.get(code, "native request failed"))
         self.kind = kind
 
 
@@ -125,7 +131,7 @@ class GoTransport(httpx.AsyncBaseTransport):
             try:
                 frame = await future
                 if frame.error or not 100 <= frame.status <= 599:
-                    raise NativeRequestError(frame.error_kind)
+                    raise NativeRequestError(frame.error_kind, frame.error)
                 body = base64.b64decode(frame.body, validate=True)
                 if len(body) > 5_000_000:
                     raise httpx.TransportError("native response exceeds size limit")

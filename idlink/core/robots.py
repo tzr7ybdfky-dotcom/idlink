@@ -59,7 +59,7 @@ class RobotsPolicy:
             )
 
         highest = max((specificity(g) for g in groups), default=-1)
-        selected = [g for g in groups if specificity(g) == highest]
+        selected = [g for g in groups if highest >= 0 and specificity(g) == highest]
         self.rules = [rule for g in selected for rule in g.rules]
         self.delay = max((g.delay for g in selected), default=0.0)
 

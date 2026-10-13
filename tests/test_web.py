@@ -114,7 +114,7 @@ def test_server_routes_enforce_origin_and_intent_without_sockets(
     async def sleep(delay: float) -> None:
         pass
 
-    def client(repository: str, *, timeout: float = 6.0) -> PublicHTTP:
+    def client(repository: str, *, timeout: float = 6.0, respect_robots: bool = True) -> PublicHTTP:
         return PublicHTTP(
             repository,
             transport=httpx.MockTransport(transport),

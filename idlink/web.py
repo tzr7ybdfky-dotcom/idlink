@@ -67,11 +67,12 @@ def serve(
     open_browser: bool = False,
     initial_platforms: str = "all",
     timeout: float = 6.0,
+    respect_robots: bool = False,
 ) -> None:
     """Serve only on IPv4 loopback; requests are serialized and not logged."""
     token = secrets.token_urlsafe(32)
     with asyncio.Runner() as runner:
-        http = PublicHTTP(repository_url, timeout=timeout)
+        http = PublicHTTP(repository_url, timeout=timeout, respect_robots=respect_robots)
         runner.run(http.__aenter__())
 
         class Handler(BaseHTTPRequestHandler):

@@ -78,3 +78,11 @@ async def test_native_error_categories_survive_ipc(tmp_path: Path, kind: str) ->
         with pytest.raises(NativeRequestError) as exc:
             await client.get("https://example.org/")
     assert exc.value.kind == kind
+
+
+def test_native_error_descriptions_are_whitelisted() -> None:
+    from idlink.core.native import NativeRequestError
+
+    assert "временная ошибка" in str(NativeRequestError("dns", "dns_temporary"))
+    assert "домен не разрешается" in str(NativeRequestError("dns", "dns_not_found"))
+    assert str(NativeRequestError("dns", "untrusted response text")) == "native request failed"

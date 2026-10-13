@@ -1,13 +1,38 @@
 package main
 
 import (
+	"fmt"
 	"io"
+	"net"
 	"net/http"
 	"net/netip"
 	"strings"
+	"syscall"
 	"testing"
 	"time"
 )
+
+func TestFailureDescriptionsDoNotExposeDNSAnswers(t *testing.T) {
+	cases := []struct {
+		cause             error
+		kind, description string
+	}{
+		{fmt.Errorf("%w: %w", errDNS, &net.DNSError{IsNotFound: true}), "dns", "dns_not_found"},
+		{fmt.Errorf("%w: %w", errDNS, &net.DNSError{IsTemporary: true}), "dns", "dns_temporary"},
+		{fmt.Errorf("%w: %w", errDNS, &net.DNSError{IsTimeout: true}), "dns", "dns_timeout"},
+		{fmt.Errorf("%w: %w", errDNS, syscall.EMFILE), "network", "local_file_limit"},
+	}
+	for _, item := range cases {
+		client := nativeClient()
+		client.Transport = fixtureTransport(func(r *http.Request) (*http.Response, error) {
+			return nil, item.cause
+		})
+		result := probe(client, request{URL: "https://example.org/alice"})
+		if result.ErrorKind != item.kind || result.Error != item.description {
+			t.Fatalf("unexpected failure: %+v", result)
+		}
+	}
+}
 
 type fixtureTransport func(*http.Request) (*http.Response, error)
 

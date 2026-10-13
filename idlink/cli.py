@@ -40,6 +40,9 @@ Platforms = Annotated[str, typer.Option("--platforms")]
 Out = Annotated[Path, typer.Option("--out")]
 Profiles = Annotated[list[str] | None, typer.Option("--profile")]
 Activity = Annotated[bool, typer.Option("--activity")]
+RespectRobots = Annotated[
+    bool, typer.Option("--respect-robots", help="Проверять и соблюдать robots.txt площадок.")
+]
 
 
 async def execute(
@@ -51,9 +54,10 @@ async def execute(
     allowed_platforms: frozenset[str] | None = None,
     timeout: float = 6.0,
     on_check: Callable[[SourceCheck, int, int], None] | None = None,
+    respect_robots: bool = True,
 ) -> Collection:
     """Share one policy-aware client and limiter across all sources."""
-    async with PublicHTTP(repository_url, timeout=timeout) as http:
+    async with PublicHTTP(repository_url, timeout=timeout, respect_robots=respect_robots) as http:
         return await collect(
             http,
             roots,
@@ -76,6 +80,7 @@ def run(
     activity: bool,
     restrict_sources: bool = False,
     timeout: float = 6.0,
+    respect_robots: bool = True,
 ) -> None:
     """Validate inputs first, emit a report and preserve partial-failure exit status."""
     started, last_print = time.monotonic(), 0.0
@@ -114,6 +119,7 @@ def run(
                 allowed_platforms=frozenset(p for p, _ in roots) if restrict_sources else None,
                 timeout=timeout,
                 on_check=progress if out is None else None,
+                respect_robots=respect_robots,
             )
         )
         if out is not None:
@@ -194,6 +200,7 @@ def search(
     purpose: Annotated[str | None, typer.Option("--purpose")] = None,
     depth: Annotated[int, typer.Option("--depth", min=0, max=1)] = 1,
     platforms: Platforms = "all",
+    respect_robots: RespectRobots = False,
     out: Annotated[Path | None, typer.Option("--out")] = None,
     profile: Profiles = None,
     activity: Activity = False,
@@ -237,6 +244,7 @@ def search(
         activity,
         restrict_sources=any(ctx.params.get(k) for k in CATEGORIES),
         timeout=timeout,
+        respect_robots=respect_robots,
     )
 
 
@@ -248,6 +256,7 @@ def visual(
     port: Annotated[int, typer.Option("--port", min=0, max=65535)] = 0,
     timeout: Annotated[float, typer.Option("--timeout", min=1, max=120)] = 6.0,
     platforms: Platforms = "all",
+    respect_robots: RespectRobots = False,
     forums: Annotated[bool, typer.Option("--forums", help="Только: Форумы.")] = False,
     social: Annotated[bool, typer.Option("--social", help="Только: Социальные сети.")] = False,
     dev: Annotated[bool, typer.Option("--dev", help="Только: Разработка.")] = False,
@@ -279,6 +288,7 @@ def visual(
             open_browser=True,
             initial_platforms=platforms,
             timeout=timeout,
+            respect_robots=respect_robots,
         )
     except (ValueError, OSError) as exc:
         raise typer.BadParameter(str(exc)) from exc
@@ -288,12 +298,13 @@ def visual(
 def serve(
     repository_url: Repo,
     port: Annotated[int, typer.Option("--port", min=1024, max=65535)] = 8765,
+    respect_robots: RespectRobots = False,
 ) -> None:
     """Открыть локальный веб-интерфейс поиска на http://127.0.0.1:8765."""
     from idlink.web import serve as serve_web
 
     try:
-        serve_web(repository_url, port)
+        serve_web(repository_url, port, respect_robots=respect_robots)
     except (ValueError, OSError) as exc:
         raise typer.BadParameter(str(exc)) from exc
 

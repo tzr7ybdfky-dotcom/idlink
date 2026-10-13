@@ -59,6 +59,7 @@ def test_failed_minecraft_lookup_is_visible_without_reporting_absence(
         on_profile: Callable[[Profile], None] | None = None,
         allowed_platforms: frozenset[str] | None = None,
         timeout: float = 6.0,
+        respect_robots: bool = True,
         on_check: Callable[[SourceCheck, int, int], None] | None = None,
     ) -> Collection:
         check = SourceCheck(

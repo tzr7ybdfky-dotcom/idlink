@@ -28,3 +28,19 @@ async def test_spacing_and_domain_independence() -> None:
 def test_interval_cannot_be_lowered() -> None:
     with pytest.raises(ValueError):
         DomainRateLimiter(interval=1)
+
+
+async def test_search_bucket_keeps_both_route_and_hostname_limits() -> None:
+    now = [0.0]
+
+    async def sleep(delay: float) -> None:
+        now[0] += delay
+
+    limiter = DomainRateLimiter(clock=lambda: now[0], sleep=sleep)
+    url = "https://api.github.com/search/users"
+    await limiter.wait(url, bucket="search", bucket_interval=6)
+    assert now[0] == 0
+    await limiter.wait("https://api.github.com/users/alice")
+    assert now[0] == 2
+    await limiter.wait(url, bucket="search", bucket_interval=6)
+    assert now[0] == 6

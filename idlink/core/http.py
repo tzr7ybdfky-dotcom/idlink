@@ -24,6 +24,7 @@ class PublicHTTP:
         transport: httpx.AsyncBaseTransport | None = None,
         limiter: DomainRateLimiter | None = None,
         timeout: float = 6.0,
+        respect_robots: bool = True,
     ) -> None:
         parsed = urlsplit(repository_url)
         if (
@@ -36,6 +37,7 @@ class PublicHTTP:
         if not 0 < timeout <= 120:
             raise ValueError("timeout must be positive and at most 120 seconds")
         self.timeout = timeout
+        self.respect_robots = respect_robots
         self.user_agent = f"idlink/{__version__} (+{repository_url})"
         self.limiter = limiter or DomainRateLimiter()
         if transport is None and (binary := native_binary()):
@@ -74,7 +76,12 @@ class PublicHTTP:
                 address = None
             if address is not None and not address.is_global:
                 raise ValueError("private addresses are forbidden")
-            await self.limiter.wait(url)
+            search_bucket = host == "api.github.com" and parsed.path.startswith("/search/")
+            await self.limiter.wait(
+                url,
+                bucket="github-search" if search_bucket else "",
+                bucket_interval=6 if search_bucket else 0,
+            )
             async with asyncio.timeout(self.timeout):
                 if self._resolve_public_hosts:
                     addresses = await asyncio.get_running_loop().getaddrinfo(
@@ -104,7 +111,7 @@ class PublicHTTP:
                 f"таймаут {self.timeout:g} с; существование профиля неизвестно", kind="timeout"
             ) from exc
         except NativeRequestError as exc:
-            raise PluginError("native request failed", kind=exc.kind) from exc
+            raise PluginError(str(exc), kind=exc.kind) from exc
         except DomainBlocked as exc:
             raise PluginError(str(exc), kind="blocked") from exc
         except socket.gaierror as exc:
@@ -123,6 +130,8 @@ class PublicHTTP:
 
     async def get(self, url: str) -> httpx.Response:
         """Check robots before each resource; fail closed on ambiguous policies."""
+        if not self.respect_robots:
+            return await self._request(url)
         parsed = urlsplit(url)
         origin = f"{parsed.scheme}://{parsed.netloc}"
         async with self._locks.setdefault(origin, asyncio.Lock()):
@@ -131,7 +140,7 @@ class PublicHTTP:
                 if response.status_code in {404, 410}:
                     parser = RobotsPolicy("")
                 elif response.status_code == 200:
-                    if not response.text.strip() or "<html" in response.text.lower():
+                    if "<html" in response.text.lower():
                         raise PluginError("unusable robots.txt; request stopped", kind="robots")
                     try:
                         parser = RobotsPolicy(response.text)

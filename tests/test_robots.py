@@ -22,3 +22,9 @@ def test_specific_agent_groups_merge_and_override_wildcard() -> None:
     assert policy.can_fetch("https://example.org/x")
     assert not policy.can_fetch("https://example.org/y")
     assert policy.can_fetch("https://example.org/z")
+
+
+def test_other_crawlers_rules_do_not_apply_to_idlink() -> None:
+    policy = RobotsPolicy("User-agent: otherbot\nDisallow: /\nCrawl-delay: 60")
+    assert policy.can_fetch("https://example.org/alice")
+    assert policy.delay == 0

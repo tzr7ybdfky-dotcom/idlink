@@ -30,6 +30,7 @@ class DomainRateLimiter:
         self._last: dict[str, float] = {}
         self._intervals: dict[str, float] = {}
         self._blocked: set[str] = set()
+        self._buckets: dict[tuple[str, str], float] = {}
 
     @staticmethod
     def domain(url: str) -> str:
@@ -39,16 +40,24 @@ class DomainRateLimiter:
             raise ValueError("only HTTPS URLs are supported")
         return parsed.hostname.lower()
 
-    async def wait(self, url: str) -> None:
+    async def wait(self, url: str, *, bucket: str = "", bucket_interval: float = 0) -> None:
         """Reserve a request slot without racing concurrent callers."""
         domain = self.domain(url)
         async with self._locks.setdefault(domain, asyncio.Lock()):
             if domain in self._blocked:
                 raise DomainBlocked("domain blocked after access or rate-limit response")
-            delay = self._next.get(domain, 0.0) - self.clock()
+            delay = (
+                max(
+                    self._next.get(domain, 0.0),
+                    self._buckets.get((domain, bucket), 0.0) if bucket else 0.0,
+                )
+                - self.clock()
+            )
             if delay > 0:
                 await self.sleep(delay)
             self._last[domain] = self.clock()
+            if bucket:
+                self._buckets[domain, bucket] = self._last[domain] + bucket_interval
             self._next[domain] = self._last[domain] + self._intervals.get(domain, self.interval)
 
     def set_delay(self, url: str, seconds: float) -> None:

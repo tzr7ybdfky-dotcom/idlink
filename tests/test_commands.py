@@ -28,6 +28,7 @@ def test_search_prints_final_english_list_without_duplicates_or_html(
         on_profile: Callable[[Profile], None] | None = None,
         allowed_platforms: frozenset[str] | None = None,
         timeout: float = 6.0,
+        respect_robots: bool = True,
         on_check: Callable[[SourceCheck, int, int], None] | None = None,
     ) -> Collection:
         from datetime import UTC, datetime
@@ -77,6 +78,7 @@ def test_visual_prefills_seed_and_opens_browser(monkeypatch: pytest.MonkeyPatch)
         open_browser: bool = False,
         initial_platforms: str = "all",
         timeout: float = 6.0,
+        respect_robots: bool = True,
     ) -> None:
         calls.append((initial_seed, open_browser))
 

@@ -4,12 +4,14 @@ package main
 import (
 	"context"
 	"errors"
+	"fmt"
 	"io"
 	"net"
 	"net/http"
 	"net/netip"
 	"net/url"
 	"strings"
+	"syscall"
 	"time"
 )
 
@@ -42,7 +44,10 @@ func resolveAndDial(ctx context.Context, network, address string) (net.Conn, err
 		return nil, errors.New("invalid network target")
 	}
 	answers, err := net.DefaultResolver.LookupNetIP(ctx, "ip", host)
-	if err != nil || len(answers) == 0 {
+	if err != nil {
+		return nil, fmt.Errorf("%w: %w", errDNS, err)
+	}
+	if len(answers) == 0 {
 		return nil, errDNS
 	}
 	for _, answer := range answers {
@@ -51,6 +56,7 @@ func resolveAndDial(ctx context.Context, network, address string) (net.Conn, err
 		}
 	}
 	var dialer net.Dialer
+	var lastError error
 	for _, answer := range answers {
 		attempt, cancel := context.WithTimeout(ctx, 1500*time.Millisecond)
 		connection, e := dialer.DialContext(attempt, network, net.JoinHostPort(answer.String(), port))
@@ -58,8 +64,9 @@ func resolveAndDial(ctx context.Context, network, address string) (net.Conn, err
 		if e == nil {
 			return connection, nil
 		}
+		lastError = e
 	}
-	return nil, errors.New("connection failed")
+	return nil, fmt.Errorf("connection failed: %w", lastError)
 }
 
 func nativeClient() *http.Client {
@@ -103,11 +110,24 @@ func probe(client *http.Client, input request) response {
 	result, err := client.Do(req)
 	if err != nil {
 		output.Error, output.ErrorKind = "request failed", "network"
+		var dnsFailure *net.DNSError
 		switch {
 		case ctx.Err() != nil || errors.Is(err, context.DeadlineExceeded):
 			output.ErrorKind = "timeout"
+		case errors.Is(err, syscall.EMFILE) || errors.Is(err, syscall.ENFILE):
+			output.Error = "local_file_limit"
 		case errors.Is(err, errDNS):
 			output.ErrorKind = "dns"
+			if errors.As(err, &dnsFailure) {
+				switch {
+				case dnsFailure.IsNotFound:
+					output.Error = "dns_not_found"
+				case dnsFailure.IsTimeout:
+					output.Error = "dns_timeout"
+				case dnsFailure.IsTemporary:
+					output.Error = "dns_temporary"
+				}
+			}
 		case errors.Is(err, errTarget):
 			output.ErrorKind = "policy"
 		}

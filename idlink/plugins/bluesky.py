@@ -40,7 +40,10 @@ class BlueskyPlugin(PlatformPlugin):
         try:
             if response.status_code == 400:
                 error = response.json()
-                if error.get("error") == "ProfileNotFound":
+                if error.get("error") == "ProfileNotFound" or (
+                    error.get("error") == "InvalidRequest"
+                    and error.get("message") == "Profile not found"
+                ):
                     return None
             if response.status_code != 200:
                 raise PluginError(

@@ -106,8 +106,7 @@ for source in SOURCES:
     if imported:
         source.template = imported.template
     if source.host:
-        source.automatic = False
-        source.reason = "robots.txt запрещает выбранный API. Автопроверка отключена."
+        source.reason = "Официальный публичный MediaWiki API; доступ проверяется при запросе."
         source.template = f"https://{source.host}/wiki/User:{{}}"
 existing = {s.label.casefold() for s in SOURCES}
 SOURCES.extend(s for s in manual_sources if s.label.casefold() not in existing)
