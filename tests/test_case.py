@@ -17,7 +17,12 @@ def test_case_insensitive_platform_uses_one_lookup(name: str) -> None:
 
 
 def test_unknown_platform_uses_bounded_spellings_without_typos() -> None:
-    assert case_candidates("hackernews", "deMoUser") == ("deMoUser", "demouser", "DEMOUSER", "Demouser")
+    assert case_candidates("hackernews", "deMoUser") == (
+        "deMoUser",
+        "demouser",
+        "DEMOUSER",
+        "Demouser",
+    )
     assert case_candidates("hackernews", "123") == ("123",)
 
 

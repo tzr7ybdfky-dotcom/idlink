@@ -1,0 +1,2939 @@
+[
+  {
+    "name": "wmn-d7cd09c8fb0b580a",
+    "label": "247sports",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://247sports.com/User/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-6092ba9da3988def",
+    "label": "35photo",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://35photo.pro/@{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-5d4261eba3138e51",
+    "label": "ADVFN",
+    "category": "Работа и бизнес",
+    "tags": [
+      "finance"
+    ],
+    "automatic": false,
+    "template": "https://uk.advfn.com/forum/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-1df319f14071fd8e",
+    "label": "alik",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.alik.cz/u/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-0f4058e3d315be48",
+    "label": "Arch Linux GitLab",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://gitlab.archlinux.org/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-e358b1eb63018612",
+    "label": "Arsmate",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://arsmate.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-7a37a214e4fe1c12",
+    "label": "Artbreeder",
+    "category": "Искусство и дизайн",
+    "tags": [
+      "art"
+    ],
+    "automatic": false,
+    "template": "https://www.artbreeder.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-e6867840b78ee2f8",
+    "label": "babepedia",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://www.babepedia.com/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-13096990239f1981",
+    "label": "BabyPips",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://forums.babypips.com/u/{}/summary",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-65a035d884a564a6",
+    "label": "bdsmsingles",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://www.bdsmsingles.com/members/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-e42803b53fddea1f",
+    "label": "BIGO Live",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.bigo.tv/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-1e51421490ebcb10",
+    "label": "Bimpos",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://ask.bimpos.com/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-45512e65520fa769",
+    "label": "Bio Site",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://bio.site/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-3498118c7120f1ba",
+    "label": "biolink",
+    "category": "Другие сообщества",
+    "tags": [
+      "misc"
+    ],
+    "automatic": false,
+    "template": "https://bio.link/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-12497ce4b50de3e0",
+    "label": "Bluesky Domain as User",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://bsky.app/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-9809fd3ca57b2b76",
+    "label": "Booknode",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://booknode.com/profil/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-1eeebec320a702f1",
+    "label": "Brickset",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://brickset.com/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-d900ca8e026f187e",
+    "label": "cafecito",
+    "category": "Другие сообщества",
+    "tags": [
+      "misc"
+    ],
+    "automatic": false,
+    "template": "https://cafecito.app/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-21c862509a591957",
+    "label": "Cameo",
+    "category": "Магазины",
+    "tags": [
+      "shopping"
+    ],
+    "automatic": false,
+    "template": "https://www.cameo.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-b49d85d3a3365870",
+    "label": "Chocolatey",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://community.chocolatey.org/profiles/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-da6f637117672952",
+    "label": "Choko.Link",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://choko.link/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-ae8107d3571585a7",
+    "label": "Chyoa",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://chyoa.com/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-66b635c2c3aa589f",
+    "label": "Coda",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://coda.io/@{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-5d1b142f8fd45cdc",
+    "label": "Commudle",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://www.commudle.com/users/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-5de28ba004938838",
+    "label": "cowboys4angels",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://cowboys4angels.com/cowboy/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-6676f64a958c1038",
+    "label": "Cropty",
+    "category": "Работа и бизнес",
+    "tags": [
+      "finance"
+    ],
+    "automatic": false,
+    "template": "https://www.cropty.io/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-a53d4452f15d9568",
+    "label": "darudar",
+    "category": "Другие сообщества",
+    "tags": [
+      "misc"
+    ],
+    "automatic": false,
+    "template": "https://darudar.org/users/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-75e1b879a2d1f0d5",
+    "label": "dateinasia",
+    "category": "Другие сообщества",
+    "tags": [
+      "dating"
+    ],
+    "automatic": false,
+    "template": "https://www.dateinasia.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-3e24e3f825dbd2db",
+    "label": "datezone",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://en.datezone.com/users/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-0145b2738ae07548",
+    "label": "Dating.ru",
+    "category": "Другие сообщества",
+    "tags": [
+      "dating"
+    ],
+    "automatic": false,
+    "template": "https://dating.ru/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-40cfd205da130fff",
+    "label": "Designspriation",
+    "category": "Искусство и дизайн",
+    "tags": [
+      "art"
+    ],
+    "automatic": false,
+    "template": "https://www.designspiration.com/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-7b678287119e91d1",
+    "label": "destream",
+    "category": "Работа и бизнес",
+    "tags": [
+      "finance"
+    ],
+    "automatic": false,
+    "template": "https://destream.net/live/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-2c60862a0b6cd748",
+    "label": "Destructoid",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.destructoid.com/?name={}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-8885340ffd3d154f",
+    "label": "DFG",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.dfg.com.br/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-9161ee8c59a8d5c8",
+    "label": "Diablo",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://diablo2.io/member/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-aff0f68330277585",
+    "label": "DIBIZ",
+    "category": "Работа и бизнес",
+    "tags": [
+      "business"
+    ],
+    "automatic": false,
+    "template": "https://www.dibiz.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-11d9352326c2e961",
+    "label": "Discord (Invite)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://discord.com/invite/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-8e6b9e03e03f3bbf",
+    "label": "Donatello",
+    "category": "Работа и бизнес",
+    "tags": [
+      "finance"
+    ],
+    "automatic": false,
+    "template": "https://donatello.to/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-8254f15f234e5c57",
+    "label": "DonationPay",
+    "category": "Работа и бизнес",
+    "tags": [
+      "finance"
+    ],
+    "automatic": false,
+    "template": "https://give.donationpay.org/hopewell-fund/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-3275acbedb9cd033",
+    "label": "Donatty",
+    "category": "Работа и бизнес",
+    "tags": [
+      "business"
+    ],
+    "automatic": false,
+    "template": "https://donatty.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-5b15ac2468da1f86",
+    "label": "dot.cards",
+    "category": "Работа и бизнес",
+    "tags": [
+      "business"
+    ],
+    "automatic": false,
+    "template": "https://dot.cards/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-94423849a608f9f1",
+    "label": "Dota2.ru",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://dota2.ru/forum/search/?type=user&keywords={}&sort_by=username",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-2706b786bd9e1245",
+    "label": "DOTAFire",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.dotafire.com/ajax/searchSite?text={}&search=members",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-7bad9198b87317f1",
+    "label": "eBay",
+    "category": "Магазины",
+    "tags": [
+      "shopping"
+    ],
+    "automatic": false,
+    "template": "https://www.ebay.com/usr/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-97d7416579e0039f",
+    "label": "ebay_stores",
+    "category": "Магазины",
+    "tags": [
+      "shopping"
+    ],
+    "automatic": false,
+    "template": "https://www.ebay.com/str/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-efe1d32d011e84a4",
+    "label": "Etoro",
+    "category": "Работа и бизнес",
+    "tags": [
+      "finance"
+    ],
+    "automatic": false,
+    "template": "https://www.etoro.com/people/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-669d797dc07a8467",
+    "label": "Etsy",
+    "category": "Магазины",
+    "tags": [
+      "shopping"
+    ],
+    "automatic": false,
+    "template": "https://www.etsy.com/people/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-c9a1d97e8b0c4831",
+    "label": "Evolution CMS",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://community.evocms.ru/users/?search={}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-0f5ba5e2392aad80",
+    "label": "Expressional.social (Mastodon Instance)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://expressional.social/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-46bdc4e021c7fa1d",
+    "label": "Facebook",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.facebook.com/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-c16cd2168a7e39e7",
+    "label": "Fanslist (OnlyFans)",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://fanslist.com/search?q={}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-4c4e09c367c4a0e8",
+    "label": "Fark",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.fark.com/users/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-107cf5e0925560bb",
+    "label": "Federated.press (Mastodon Instance)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://federated.press/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-fe325ad73a9f7a34",
+    "label": "Filmot Channel Search",
+    "category": "Другие сообщества",
+    "tags": [
+      "archived"
+    ],
+    "automatic": false,
+    "template": "https://filmot.com/channelsearch/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-4eca8a8b566bde87",
+    "label": "Filmot Unlisted Videos",
+    "category": "Другие сообщества",
+    "tags": [
+      "archived"
+    ],
+    "automatic": false,
+    "template": "https://filmot.com/unlistedSearch?channelQuery={}&sortField=uploaddate&sortOrder=desc&",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-2c01d6840c8a5736",
+    "label": "fine_art_america",
+    "category": "Магазины",
+    "tags": [
+      "shopping"
+    ],
+    "automatic": false,
+    "template": "https://fineartamerica.com/profiles/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-9d0e6bfe3750f973",
+    "label": "FL.ru",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.fl.ru/users/{}/portfolio/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-1b35a05110bb33c5",
+    "label": "flowcode",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.flow.page/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-c037bd09376d29ac",
+    "label": "Folkd",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.folkd.com/search/?q={}&quick=1&type=core_members",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-d4fb5d02d0881e8d",
+    "label": "forumprawne.org",
+    "category": "Другие сообщества",
+    "tags": [
+      "misc"
+    ],
+    "automatic": false,
+    "template": "https://forumprawne.org/members/{}.html",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-906edbc809e463f9",
+    "label": "Fotolog Archived Profile",
+    "category": "Другие сообщества",
+    "tags": [
+      "archived"
+    ],
+    "automatic": false,
+    "template": "https://web.archive.org/web/2/fotolog.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-fe71b67480e89f1b",
+    "label": "Foursquare",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://foursquare.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-5bcf67b6d2eee334",
+    "label": "Freelancehunt (Employer)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://freelancehunt.com/en/employer/{}.html",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-43f36a756ffb8b4f",
+    "label": "Freelancehunt (Freelancer)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://freelancehunt.com/en/freelancer/{}.html",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-602affc36a65cf76",
+    "label": "FriendFinder",
+    "category": "Другие сообщества",
+    "tags": [
+      "dating"
+    ],
+    "automatic": false,
+    "template": "https://friendfinder.com/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-526094d6f288e1fb",
+    "label": "Gab",
+    "category": "Другие сообщества",
+    "tags": [
+      "political"
+    ],
+    "automatic": false,
+    "template": "https://gab.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-ac5ee3fd39a6e561",
+    "label": "Game Jolt",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://gamejolt.com/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-9b768ab0872e8997",
+    "label": "game_debate",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.game-debate.com/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-f461d1515c74c0a1",
+    "label": "Gamer DVR",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://gamerdvr.com/gamer/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-58e109c70b8d4d26",
+    "label": "Garmin Connect",
+    "category": "Другие сообщества",
+    "tags": [
+      "health"
+    ],
+    "automatic": false,
+    "template": "https://connect.garmin.com/app/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-eee027728683b17e",
+    "label": "GDBrowser",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://gdbrowser.com/u/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-7186f748f46b0c58",
+    "label": "getmonero",
+    "category": "Другие сообщества",
+    "tags": [
+      "misc"
+    ],
+    "automatic": false,
+    "template": "https://forum.getmonero.org/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-d4312fd916473f1b",
+    "label": "Gettr",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://gettr.com/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-f79598afb38f6a47",
+    "label": "Giphy (Channel)",
+    "category": "Фотография",
+    "tags": [
+      "images"
+    ],
+    "automatic": false,
+    "template": "https://giphy.com/channel/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-0492295e27c3bf5e",
+    "label": "GNOME (Shell Extensions)",
+    "category": "Разработка",
+    "tags": [
+      "coding"
+    ],
+    "automatic": false,
+    "template": "https://extensions.gnome.org/accounts/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-568aac98be49eb3f",
+    "label": "grandprof",
+    "category": "Другие сообщества",
+    "tags": [
+      "misc"
+    ],
+    "automatic": false,
+    "template": "https://grandprof.org/communaute/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-feeb9826ec6f79d2",
+    "label": "Graphics.social (Mastodon Instance)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://graphics.social/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-1a1aa945c03971b7",
+    "label": "Gravatar",
+    "category": "Фотография",
+    "tags": [
+      "images"
+    ],
+    "automatic": false,
+    "template": "https://en.gravatar.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-e1555d76bb3780e6",
+    "label": "GTAinside.com",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.gtainside.com/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-ef90a457b5b4980d",
+    "label": "Habbo.com",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.habbo.com/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-62857579246670a8",
+    "label": "Habbo.de",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.habbo.de/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-21dbd8bf1dd7956c",
+    "label": "Habbo.es",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.habbo.es/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-7b575fefe176cc84",
+    "label": "Habbo.fi",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.habbo.fi/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-3f50665dbf1d7fbc",
+    "label": "Habbo.fr",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.habbo.fr/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-1c9a0490924b4b8e",
+    "label": "Habbo.it",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.habbo.it/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-91c8b10490105e19",
+    "label": "Habbo.nl",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.habbo.nl/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-48858a429824cf9a",
+    "label": "Habr (Q&A)",
+    "category": "Разработка",
+    "tags": [
+      "coding"
+    ],
+    "automatic": false,
+    "template": "https://qna.habr.com/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-f4f29daee81b746c",
+    "label": "Habtium",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://habtium.es/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-ccd73a3077d059bc",
+    "label": "HackAdvisor",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://hackadvisor.io/hacker/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-0120763ecab8bcf2",
+    "label": "hamaha",
+    "category": "Работа и бизнес",
+    "tags": [
+      "finance"
+    ],
+    "automatic": false,
+    "template": "https://hamaha.net/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-da19c0d1541fa5e8",
+    "label": "Hanime",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://hanime.tv/channels/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-04f0a4bc906a79dc",
+    "label": "Heylink",
+    "category": "Другие сообщества",
+    "tags": [
+      "misc"
+    ],
+    "automatic": false,
+    "template": "https://heylink.me/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-17f1dc16730730ba",
+    "label": "hiberworld",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://hiberworld.com/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-7035d911cab9a421",
+    "label": "HiHello",
+    "category": "Работа и бизнес",
+    "tags": [
+      "business"
+    ],
+    "automatic": false,
+    "template": "https://www.hihello.com/author/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-b24c64ad8d3d7071",
+    "label": "Home Design 3D",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://www.homedesign3d.net/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-cea6d54d55b079f6",
+    "label": "Hometech.social (Mastodon Instance)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://hometech.social/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-18e21c19762324dc",
+    "label": "hoo.be",
+    "category": "Работа и бизнес",
+    "tags": [
+      "business"
+    ],
+    "automatic": false,
+    "template": "https://hoo.be/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-c0440e32ed4f406b",
+    "label": "Hostux.social (Mastodon Instance)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://hostux.social/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-bdfa499e8206c362",
+    "label": "HulkShare",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.hulkshare.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-eebd0905abcc3041",
+    "label": "icq-chat",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://icq.icqchat.co/members/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-0c2b689c0151f033",
+    "label": "igromania",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://forum.igromania.ru/member.php?username={}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-df0dc959168ef1fb",
+    "label": "ILGM Growers Forum",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://ilgmforum.com/u/{}/summary",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-9a283ac3c3bb316f",
+    "label": "Immunefi",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://immunefi.com/profile/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-655addbf392e955b",
+    "label": "Instagram (Imginn)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://imginn.com/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-1d7cdc17aa5a31cd",
+    "label": "Instagram_archives",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://archive.org/wayback/available?url=https://instagram.com/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-8aa2793358f24890",
+    "label": "Internet Archive User Contribution Search",
+    "category": "Другие сообщества",
+    "tags": [
+      "misc"
+    ],
+    "automatic": false,
+    "template": "https://archive.org/search.php?query=creator:{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-3cde28f69fedd675",
+    "label": "Internet Archive Username Mentions",
+    "category": "Другие сообщества",
+    "tags": [
+      "misc"
+    ],
+    "automatic": false,
+    "template": "https://archive.org/search.php?query={}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-276963eae9902ee0",
+    "label": "iXBT Forum",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://forum.ixbt.com/users.cgi?id=info:{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-e348ce0d422d16f1",
+    "label": "JapanDict",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://forum.japandict.com/u/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-aa92d7e62d07589b",
+    "label": "kipin",
+    "category": "Работа и бизнес",
+    "tags": [
+      "business"
+    ],
+    "automatic": false,
+    "template": "https://kipin.app/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-3080b66f18b36dff",
+    "label": "KnowYourMeme",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://knowyourmeme.com/users/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-0ff1950cd6d8e15b",
+    "label": "Kwai",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.kwai.com/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-25bbe0da6a346a5b",
+    "label": "LeakIX",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://leakix.net/u/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-6a16005127368144",
+    "label": "Lemon8",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.lemon8-app.com/{}?region=us",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-140fd4a3a6da9e3e",
+    "label": "Libretooth.gr (Mastodon Instance)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://libretooth.gr/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-8d9f568f280d02b9",
+    "label": "livemaster.ru",
+    "category": "Магазины",
+    "tags": [
+      "shopping"
+    ],
+    "automatic": false,
+    "template": "https://www.livemaster.ru/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-57947e35403a61f2",
+    "label": "LoLProfile",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://lolprofile.net/search/world/{}-world",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-8a26a0d535dc06ed",
+    "label": "Lor.sh (Mastodon Instance)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://lor.sh/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-515ec7ef746fe3cb",
+    "label": "Magix",
+    "category": "Музыка",
+    "tags": [
+      "music"
+    ],
+    "automatic": false,
+    "template": "https://www.magix.info/us/users/profile/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-f09629182a3c5fc2",
+    "label": "Magnific",
+    "category": "Искусство и дизайн",
+    "tags": [
+      "art"
+    ],
+    "automatic": false,
+    "template": "https://www.magnific.com/app/creator/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-6325b6dd904d0059",
+    "label": "Malpedia Actors",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://malpedia.caad.fkie.fraunhofer.de/actor/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-14a969630ecc73de",
+    "label": "Mapstodon.space (Mastodon Instance)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://mapstodon.space/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-072d6277756380a9",
+    "label": "Maroc_nl",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.maroc.nl/forums/members/{}.html",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-d6b57bde30f48a37",
+    "label": "Masto.nyc (Mastodon Instance)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://masto.nyc/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-2f32ff834ab18092",
+    "label": "Mastodon API",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://mastodon.social/api/v2/search?q={}&type=accounts",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-167467082a650c88",
+    "label": "Mastodon-Defcon",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://defcon.social/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-b0e02603cf756811",
+    "label": "Mastodon-meow.social",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://meow.social/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-3c7c13cfbfda4935",
+    "label": "Mastodonbooks.net (Mastodon Instance)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://mastodonbooks.net/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-afa6b5e075e6a13d",
+    "label": "MCUUID (Minecraft)",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://mcuuid.net/?q={}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-31edc93312c54f83",
+    "label": "Metacritic",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://www.metacritic.com/user/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-ab01f65f4b5df3fe",
+    "label": "mintme",
+    "category": "Работа и бизнес",
+    "tags": [
+      "finance"
+    ],
+    "automatic": false,
+    "template": "https://www.mintme.com/token/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-9b3073e7f1bbf2c6",
+    "label": "Mixlr",
+    "category": "Музыка",
+    "tags": [
+      "music"
+    ],
+    "automatic": false,
+    "template": "https://mixlr.com/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-3b6c1a8192a52610",
+    "label": "MobileGTA.net",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.mobilegta.net/en/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-2520d0aa9761dcba",
+    "label": "MODX.im",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://modx.evo.im/profile/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-df58bc4e49f87bb9",
+    "label": "Moto Trip",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://moto-trip.com/profil/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-1b55f796a9b2a7bf",
+    "label": "Moxfield",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.moxfield.com/users/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-a8dae93969a9b4af",
+    "label": "Muck Rack",
+    "category": "Новости",
+    "tags": [
+      "news"
+    ],
+    "automatic": false,
+    "template": "https://muckrack.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-9f02077ff4145138",
+    "label": "Musician.social (Mastodon Instance)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://musician.social/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-98d3c8b1f4bea6a6",
+    "label": "musictraveler",
+    "category": "Музыка",
+    "tags": [
+      "music"
+    ],
+    "automatic": false,
+    "template": "https://www.musictraveler.com/en/users/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-73b6449200bd451b",
+    "label": "MUYZORRAS",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://www.muyzorras.com/usuarios/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-ca0ace28a512b134",
+    "label": "my_instants",
+    "category": "Музыка",
+    "tags": [
+      "music"
+    ],
+    "automatic": false,
+    "template": "https://www.myinstants.com/en/profile/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-40de3f45b868fec6",
+    "label": "MyBuilder.com",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.mybuilder.com/profile/view/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-06e1d2963a6c7de6",
+    "label": "MyFitnessPal Author",
+    "category": "Другие сообщества",
+    "tags": [
+      "health"
+    ],
+    "automatic": false,
+    "template": "https://blog.myfitnesspal.com/author/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-cb573783dd850351",
+    "label": "MyFitnessPal Community",
+    "category": "Другие сообщества",
+    "tags": [
+      "health"
+    ],
+    "automatic": false,
+    "template": "https://community.myfitnesspal.com/en/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-3002b96c7e6f3368",
+    "label": "MyNickname",
+    "category": "Другие сообщества",
+    "tags": [
+      "misc"
+    ],
+    "automatic": false,
+    "template": "https://mynickname.com/en/search?q={}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-a0485404592e0826",
+    "label": "naija_planet",
+    "category": "Другие сообщества",
+    "tags": [
+      "dating"
+    ],
+    "automatic": false,
+    "template": "https://naijaplanet.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-e22e6c9887a8c6a3",
+    "label": "Neocities",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://neocities.org/site/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-d8f29bf56fcc9250",
+    "label": "newmeet",
+    "category": "Другие сообщества",
+    "tags": [
+      "dating"
+    ],
+    "automatic": false,
+    "template": "https://www.newmeet.com/en/profile/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-5737a4b199084193",
+    "label": "Nifty Gateway",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.niftygateway.com/profile/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-1d86ba8d6d8724c8",
+    "label": "Nih Buat Jajan",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.nihbuatjajan.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-3d646398dbf6f2cd",
+    "label": "Nitecrew (Mastodon Instance)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://nitecrew.rip/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-2a8fabddb0a37c40",
+    "label": "okidoki",
+    "category": "Другие сообщества",
+    "tags": [
+      "misc"
+    ],
+    "automatic": false,
+    "template": "https://m.okidoki.ee/ru/users/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-b0285344ef01ff2b",
+    "label": "OpenStreetMap Wiki",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://wiki.openstreetmap.org/wiki/User:{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-6b1015cfa51bdc0e",
+    "label": "Oper.ru",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://oper.ru/visitors/info.php?t={}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-8ab6c0b10a2f365c",
+    "label": "OPGG",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://eune.op.gg/summoners/eune/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-ed60794422ef5dee",
+    "label": "Origins.Habbo.com",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://origins.habbo.com/api/public/users?name={}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-d0f3d8cec7e583c3",
+    "label": "Origins.Habbo.es",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://origins.habbo.es/api/public/users?name={}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-a315ad3cdc6a9238",
+    "label": "palnet",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.palnet.io/@{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-53fbda6ced15ef0c",
+    "label": "Parler",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://parler.com/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-53a2a522a5826ce3",
+    "label": "Patriots Win",
+    "category": "Другие сообщества",
+    "tags": [
+      "political"
+    ],
+    "automatic": false,
+    "template": "https://patriots.win/u/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-60b1e9b99d492065",
+    "label": "PayPal Business",
+    "category": "Работа и бизнес",
+    "tags": [
+      "finance"
+    ],
+    "automatic": false,
+    "template": "https://www.paypal.com/biz/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-e22734f4b4db11fc",
+    "label": "PCPartPicker",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://pcpartpicker.com/user/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-011cb07dc48870b0",
+    "label": "Peerlist",
+    "category": "Разработка",
+    "tags": [
+      "coding"
+    ],
+    "automatic": false,
+    "template": "https://peerlist.io/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-48588b211dea5adb",
+    "label": "Peing",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://peing.net/en/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-077b9eb7ada9d2ab",
+    "label": "Peoople (Creator)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://peoople.app/en/creator/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-2a8a92fc167a9ebe",
+    "label": "Peoople (Influencer)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://peoople.app/en/influencer/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-5e6bc09b7197179f",
+    "label": "Peoople (Star)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://peoople.app/en/star/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-245fe5d3ef3deac9",
+    "label": "Peoople (Unicorn)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://peoople.app/en/unicorn/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-018110acbbdf3939",
+    "label": "Pillowfort",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.pillowfort.social/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-f5d2f82fef094ae4",
+    "label": "Planoly",
+    "category": "Другие сообщества",
+    "tags": [
+      "misc"
+    ],
+    "automatic": false,
+    "template": "https://planoly.store/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-fb1d9f102ed608d2",
+    "label": "Plink",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://plink.gg/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-1d902d6526b2feef",
+    "label": "Poe.com",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://poe.com/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-67ec9e9ef9bcbc72",
+    "label": "Pokec",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://pokec.azet.sk/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-58eb95e181e91ab6",
+    "label": "Poll Everywhere",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://pollev.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-949c649ac422e77e",
+    "label": "popl",
+    "category": "Работа и бизнес",
+    "tags": [
+      "business"
+    ],
+    "automatic": false,
+    "template": "https://poplme.co/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-2484145d29ca349c",
+    "label": "Pornhub (Model)",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://www.pornhub.com/model/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-246dd685db494f6d",
+    "label": "Pornhub (User)",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://www.pornhub.com/users/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-7ae9efed158770eb",
+    "label": "postcrossing",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.postcrossing.com/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-92413829577d255e",
+    "label": "Poweredbygay.social (Mastodon Instance)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://poweredbygay.social/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-6c1a9f413c188211",
+    "label": "Pravda.me",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://pravda.me/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-1dcc662a162a310d",
+    "label": "Privacy Guides",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://discuss.privacyguides.net/u/{}/summary",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-b72ba5590a4140c7",
+    "label": "Pronouny",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://pronouny.xyz/users/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-710463f4d8cb1f5d",
+    "label": "Prose",
+    "category": "Блоги",
+    "tags": [
+      "blog"
+    ],
+    "automatic": false,
+    "template": "https://prose.astral.camp/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-2166473d166b8f5c",
+    "label": "Public.com",
+    "category": "Работа и бизнес",
+    "tags": [
+      "finance"
+    ],
+    "automatic": false,
+    "template": "https://public.com/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-aa144c8793a4cf75",
+    "label": "Raddle.me",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://raddle.me/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-1369533c9218ba4c",
+    "label": "Rant.li",
+    "category": "Блоги",
+    "tags": [
+      "blog"
+    ],
+    "automatic": false,
+    "template": "https://rant.li/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-271d263024540ca5",
+    "label": "RedGIFs",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://www.redgifs.com/users/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-574d78a106b58097",
+    "label": "Refsheet",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://refsheet.net/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-f1d3a88b2a82689e",
+    "label": "resumes_actorsaccess",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://resumes.actorsaccess.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-53b9bdd4c5a531fc",
+    "label": "risk.ru",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://risk.ru/people/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-5662862e8f86ae91",
+    "label": "RoutineHub",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://routinehub.co/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-4a426ee43e1041f6",
+    "label": "RuTracker.org",
+    "category": "Другие сообщества",
+    "tags": [
+      "misc"
+    ],
+    "automatic": false,
+    "template": "https://rutracker.org/forum/profile.php?mode=viewprofile&u={}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-feeccbe419fddc07",
+    "label": "ruVoIP.net",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://ruvoip.net/members/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-52134e2c19ecbe98",
+    "label": "Scammer.info",
+    "category": "Другие сообщества",
+    "tags": [
+      "misc"
+    ],
+    "automatic": false,
+    "template": "https://scammer.info/u/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-131a0058f5007015",
+    "label": "Scored",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://scored.co/u/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-d159d174d3d35260",
+    "label": "Scribd (Document)",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://www.scribd.com/search?query={}&verbatim=true",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-eab3e9c962bbdf4b",
+    "label": "Searchengines",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://searchengines.guru/ru/search?keyword=&author={}&sortByDate=true",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-c4cec3cdd5ee517d",
+    "label": "sentimente",
+    "category": "Другие сообщества",
+    "tags": [
+      "dating"
+    ],
+    "automatic": false,
+    "template": "https://www.sentimente.com/amp/{}.html",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-fdf7d43df2dfef9e",
+    "label": "Sepia Search (PeerTube)",
+    "category": "Видео и стримы",
+    "tags": [
+      "video"
+    ],
+    "automatic": false,
+    "template": "https://sepiasearch.org/search?search=%22{}%22&page=1&resultType=channels",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-913b87231004379c",
+    "label": "Shesfreaky",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://www.shesfreaky.com/profile/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-de4ba6d7c54d9b6f",
+    "label": "shutterstock",
+    "category": "Фотография",
+    "tags": [
+      "images"
+    ],
+    "automatic": false,
+    "template": "https://www.shutterstock.com/g/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-6ac20a2af0aff444",
+    "label": "SimplePlanes",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.simpleplanes.com/u/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-71999533e2f49a6c",
+    "label": "SlackHoles",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://slackholes.com/actor/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-946921995abcf0f3",
+    "label": "social.bund.de",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://social.bund.de/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-5363ee70874198c0",
+    "label": "solo.to",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://solo.to/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-ad9486e598dd1087",
+    "label": "speedrun",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.speedrun.com/user/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-675e2e621501bb7b",
+    "label": "SPOJ",
+    "category": "Разработка",
+    "tags": [
+      "coding"
+    ],
+    "automatic": false,
+    "template": "https://www.spoj.com/users/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-92a2ba7bc885b47f",
+    "label": "Sports Tracker",
+    "category": "Другие сообщества",
+    "tags": [
+      "health"
+    ],
+    "automatic": false,
+    "template": "https://sports-tracker.com/view_profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-799929e126b36902",
+    "label": "StackShare",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://stackshare.io/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-aa7bd3e182e2d1eb",
+    "label": "stats.fm",
+    "category": "Музыка",
+    "tags": [
+      "music"
+    ],
+    "automatic": false,
+    "template": "https://stats.fm/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-531d1babf5a9c6a2",
+    "label": "SteamGifts",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.steamgifts.com/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-56998bc08a305f44",
+    "label": "StreamElements",
+    "category": "Работа и бизнес",
+    "tags": [
+      "finance"
+    ],
+    "automatic": false,
+    "template": "https://streamelements.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-5011b5a94d0ef67a",
+    "label": "StreamLabs",
+    "category": "Работа и бизнес",
+    "tags": [
+      "finance"
+    ],
+    "automatic": false,
+    "template": "https://streamlabs.com/{}/tip",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-cbc9b3221ca4fe66",
+    "label": "Subscribestar",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://subscribestar.adult/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-b176685905e91234",
+    "label": "sukebei.nyaa.si",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://sukebei.nyaa.si/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-c8efde8e937c20de",
+    "label": "tabletoptournament",
+    "category": "Другие сообщества",
+    "tags": [
+      "misc"
+    ],
+    "automatic": false,
+    "template": "https://www.tabletoptournaments.net/eu/player/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-37c05b142861078e",
+    "label": "TAPiTAG",
+    "category": "Работа и бизнес",
+    "tags": [
+      "business"
+    ],
+    "automatic": false,
+    "template": "https://account.tapitag.co/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-3aca522aa1eba51c",
+    "label": "Tappy",
+    "category": "Работа и бизнес",
+    "tags": [
+      "business"
+    ],
+    "automatic": false,
+    "template": "https://www.tappy.tech/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-7efe29284e8cd61d",
+    "label": "Taringa",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.taringa.net/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-5e700b06b552a0d6",
+    "label": "Taringa Archived Profile",
+    "category": "Другие сообщества",
+    "tags": [
+      "archived"
+    ],
+    "automatic": false,
+    "template": "https://web.archive.org/web/2/taringa.net/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-38e93be67c6ddea2",
+    "label": "Teamtreehouse",
+    "category": "Разработка",
+    "tags": [
+      "coding"
+    ],
+    "automatic": false,
+    "template": "https://teamtreehouse.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-87ff4903b38b5ea2",
+    "label": "TF2 Backpack Examiner",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://www.tf2items.com/id/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-46e67cb1934b1308",
+    "label": "theguardian",
+    "category": "Новости",
+    "tags": [
+      "news"
+    ],
+    "automatic": false,
+    "template": "https://www.theguardian.com/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-76784b92f4744678",
+    "label": "thoughts",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://thoughts.com/members/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-8dd657f353f041ed",
+    "label": "Tilde.zone (Mastodon Instance)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://tilde.zone/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-feab9954fe16e3bf",
+    "label": "TipeeeStream",
+    "category": "Работа и бизнес",
+    "tags": [
+      "finance"
+    ],
+    "automatic": false,
+    "template": "https://www.tipeeestream.com/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-4836ca27c3513d01",
+    "label": "Tooting.ch (Mastodon Instance)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://tooting.ch/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-50663b1079a0fb58",
+    "label": "toyhou.se",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://toyhou.se/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-d67635e8bc23ae30",
+    "label": "tripadvisor",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.tripadvisor.com/Profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-423504b8038758c5",
+    "label": "TruckersMP",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://truckersmp.com/user/search?search={}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-a2b27290ca4e73af",
+    "label": "Truth Social",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://truthsocial.com/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-296601f96bc6b903",
+    "label": "Tryst",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://tryst.link/escort/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-940ad1d320ec6046",
+    "label": "Tweetapus",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://tweeta.tiago.zip/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-287cf7171bccb879",
+    "label": "Udemy",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://www.udemy.com/user/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-ac2be811d92fb381",
+    "label": "UEF CONNECT",
+    "category": "Работа и бизнес",
+    "tags": [
+      "business"
+    ],
+    "automatic": false,
+    "template": "https://uefconnect.uef.fi/en/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-612826c06113beb3",
+    "label": "Ultimate Guitar",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://www.ultimate-guitar.com/u/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-586dd26e8e8e5c5b",
+    "label": "Unlisted Videos",
+    "category": "Другие сообщества",
+    "tags": [
+      "archived"
+    ],
+    "automatic": false,
+    "template": "https://unlistedvideos.com/search.php?user={}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-ceb8a93359ddb088",
+    "label": "utip.io",
+    "category": "Работа и бизнес",
+    "tags": [
+      "finance"
+    ],
+    "automatic": false,
+    "template": "https://utip.io/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-63fd12754cefb44b",
+    "label": "Uwumarket",
+    "category": "Работа и бизнес",
+    "tags": [
+      "business"
+    ],
+    "automatic": false,
+    "template": "https://uwumarket.us/collections/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-cd248017c9b2b40b",
+    "label": "vibilagare",
+    "category": "Другие сообщества",
+    "tags": [
+      "misc"
+    ],
+    "automatic": false,
+    "template": "https://www.vibilagare.se/users/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-85b2776db86febd3",
+    "label": "VIEWBUG",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://www.viewbug.com/member/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-3289d24e76f41437",
+    "label": "visnesscard",
+    "category": "Работа и бизнес",
+    "tags": [
+      "business"
+    ],
+    "automatic": false,
+    "template": "https://my.visnesscard.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-9f60b54fd2ddb4f2",
+    "label": "Vkl.world (Mastodon Instance)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://vkl.world/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-b357a1e296b9b17f",
+    "label": "Vmst.io (Mastodon Instance)",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://vmst.io/@{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-62cfbc54a878c42e",
+    "label": "Voices.com",
+    "category": "Работа и бизнес",
+    "tags": [
+      "business"
+    ],
+    "automatic": false,
+    "template": "https://www.voices.com/profile/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-b8b5a99a887c28cc",
+    "label": "VseTop",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://vsetop.org/user/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-0b42cfe2d29ee25b",
+    "label": "Warmerise",
+    "category": "Игры",
+    "tags": [
+      "gaming"
+    ],
+    "automatic": false,
+    "template": "https://warmerise.com/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-47825da3ded0f6e4",
+    "label": "Watchmyfeed",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://watchmyfeed.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-4b8472fa162554a4",
+    "label": "waytohey",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://waytohey.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-020286ff8b75c325",
+    "label": "weheartit",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://weheartit.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-338a68e114f52a08",
+    "label": "Weibo",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://weibo.com/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-59426c5f0486c3ce",
+    "label": "WeTransfer",
+    "category": "Искусство и дизайн",
+    "tags": [
+      "art"
+    ],
+    "automatic": false,
+    "template": "https://wepresent.wetransfer.com/artists/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-1a8e887d51fc7326",
+    "label": "Wikidot",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://www.wikidot.com/user:info/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-b45db3ac6f211f57",
+    "label": "Wikimapia",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://wikimapia.org/user/tools/users_rating/?username={}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-4b45f70e7e845835",
+    "label": "XNXX",
+    "category": "Другие сообщества",
+    "tags": [
+      "xx NSFW xx"
+    ],
+    "automatic": false,
+    "template": "https://www.xnxx.com/mobile/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-338404fa775e33c3",
+    "label": "Yahoo! JAPAN Auction",
+    "category": "Магазины",
+    "tags": [
+      "shopping"
+    ],
+    "automatic": false,
+    "template": "https://auctions.yahoo.co.jp/follow/list/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-1094db51f8684993",
+    "label": "yapishu",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://yapishu.net/user/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-a39a1693a65f3fc9",
+    "label": "Yazawaj",
+    "category": "Другие сообщества",
+    "tags": [
+      "dating"
+    ],
+    "automatic": false,
+    "template": "https://www.yazawaj.com/profile/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-5f5f67bd76058a13",
+    "label": "YesWeHack",
+    "category": "Разработка",
+    "tags": [
+      "tech"
+    ],
+    "automatic": false,
+    "template": "https://yeswehack.com/hunters/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-e354d7e040574d3a",
+    "label": "YouTube Channel",
+    "category": "Видео и стримы",
+    "tags": [
+      "video"
+    ],
+    "automatic": false,
+    "template": "https://www.youtube.com/c/{}/about",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-c84fa5a3d3dedafc",
+    "label": "YouTube User",
+    "category": "Видео и стримы",
+    "tags": [
+      "video"
+    ],
+    "automatic": false,
+    "template": "https://www.youtube.com/user/{}/about",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-85b3470a09c737bf",
+    "label": "Zenn",
+    "category": "Разработка",
+    "tags": [
+      "coding"
+    ],
+    "automatic": false,
+    "template": "https://zenn.dev/{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-f1ba4309a1ac35a1",
+    "label": "Zepeto",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://web.zepeto.me/share/user/profile/{}?language=en",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-fe21b1cbd4bf78f7",
+    "label": "Zillow",
+    "category": "Магазины",
+    "tags": [
+      "shopping"
+    ],
+    "automatic": false,
+    "template": "https://www.zillow.com/profile/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-0ce9bab82a8e0378",
+    "label": "Znanija",
+    "category": "Другие сообщества",
+    "tags": [
+      "misc"
+    ],
+    "automatic": false,
+    "template": "https://www.google.com/search?q=site:znanija.com+intext:{}",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-f9cad63ed398db4a",
+    "label": "Военное обозрение",
+    "category": "Другие сообщества",
+    "tags": [
+      "hobby"
+    ],
+    "automatic": false,
+    "template": "https://topwar.ru/user/{}/",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  },
+  {
+    "name": "wmn-4084155c01bb22b2",
+    "label": "Чатовка.net",
+    "category": "Социальные сети",
+    "tags": [
+      "social"
+    ],
+    "automatic": false,
+    "template": "https://chatovka.net/search?user_nick=+{}&user_sex_m=on&user_sex_f=on",
+    "reason": "Публичная страница; правило WhatsMyName, эвристический кандидат."
+  }
+]

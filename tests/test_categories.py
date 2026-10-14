@@ -35,10 +35,10 @@ def test_help_and_category_options_are_discoverable() -> None:
     runner = CliRunner()
     result = runner.invoke(app, ["help"])
     assert result.exit_code == 0
-    assert "idlink search" in result.stdout and "idlink visual" in result.stdout
+    assert "idlink search" in result.stdout and "idlink visual" not in result.stdout
     for name in CATEGORIES:
         assert "--" + name in result.stdout
-    for command in ("search", "visual"):
+    for command in ("search",):
         assert runner.invoke(app, [command, "--help"]).exit_code == 0
         invalid = runner.invoke(app, [command, "alice", "--music", "--platforms", "github"])
         assert invalid.exit_code == 2
@@ -73,29 +73,3 @@ def test_search_passes_categories_to_execution(monkeypatch: pytest.MonkeyPatch) 
     assert captured == [selected_platforms("all", {"forums": True, "social": True})]
     assert CliRunner().invoke(app, ["search", "alice", "--games"]).exit_code == 0
     assert captured[-1] == selected_platforms("all", {"gaming": True})
-
-
-def test_visual_carries_source_filter_to_browser(monkeypatch: pytest.MonkeyPatch) -> None:
-    import idlink.web as web
-
-    captured: list[str] = []
-
-    def serve(
-        repository_url: str,
-        port: int = 8765,
-        *,
-        initial_seed: str = "",
-        open_browser: bool = False,
-        initial_platforms: str = "all",
-        timeout: float = 6.0,
-        respect_robots: bool = True,
-        request_interval: float = 2.0,
-        check_case: bool = False,
-    ) -> None:
-        captured.append(initial_platforms)
-
-    monkeypatch.setattr(web, "serve", serve)
-    assert CliRunner().invoke(app, ["visual", "alice", "--gaming"]).exit_code == 0
-    assert captured == [selected_platforms("all", {"gaming": True})]
-    assert CliRunner().invoke(app, ["visual", "alice", "--games"]).exit_code == 0
-    assert captured[-1] == captured[0]

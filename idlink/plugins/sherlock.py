@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field, TypeAdapter
 
 from idlink.core.http import PublicHTTP
 from idlink.core.models import Profile
+from idlink.core.profile_urls import PROFILE_PAGES, is_api_url
 from idlink.plugins.base import PlatformPlugin, PluginError
 from idlink.plugins.evidence import (
     absence_marker,
@@ -54,6 +55,16 @@ RULES.update(
 
 
 # Check original public pages, never unofficial mirrors used by some upstream rules.
+RULES.update(
+    {
+        r.label.casefold(): r
+        for r in TypeAdapter(list[ProbeRule]).validate_json(
+            files("idlink.data").joinpath("wmn_probe_rules.json").read_bytes()
+        )
+    }
+)
+
+
 SOCIAL_RULES = {
     "telegram": ProbeRule(
         label="Telegram",
@@ -95,6 +106,46 @@ SOCIAL_RULES = {
 }
 RULES.update(SOCIAL_RULES)
 RULES["twitter"] = SOCIAL_RULES["x / twitter"]
+for label, rule in RULES.items():
+    if is_api_url(rule.url) and label in PROFILE_PAGES:
+        rule.url = PROFILE_PAGES[label]
+
+
+def engine_identity(body: str, username: str, kind: str) -> bool:
+    """Validate the exact account object, not arbitrary usernames elsewhere in JSON."""
+    try:
+        data = json.loads(body)
+        if not isinstance(data, dict) or data.get("error") or data.get("errors"):
+            raise ValueError("invalid account response")
+        if kind == "discourse-user":
+            account, name_key, id_key = data["user"], "username", "id"
+        elif kind == "mastodon-user":
+            account, name_key, id_key = data, "username", "id"
+            if data.get("acct", "").casefold() != username.casefold():
+                raise ValueError("not a local account")
+        elif kind == "lemmy-user":
+            account, name_key, id_key = data["person_view"]["person"], "name", "id"
+            if account.get("local") is not True:
+                raise ValueError("not a local account")
+        else:
+            users = data["query"]["users"]
+            if not isinstance(users, list) or len(users) != 1:
+                raise ValueError("ambiguous user query")
+            account, name_key, id_key = users[0], "name", "userid"
+        if not isinstance(account, dict):
+            raise ValueError("invalid account")
+        if not isinstance(account.get(name_key), str):
+            raise ValueError("missing username")
+        if account[name_key].casefold() != username.casefold():
+            raise ValueError("username mismatch")
+        if kind == "mediawiki-user" and ("missing" in account or "invalid" in account):
+            return False
+        identity = account.get(id_key)
+        if isinstance(identity, bool) or not isinstance(identity, (str, int)) or not identity:
+            raise ValueError("missing stable ID")
+        return True
+    except (ValueError, KeyError, TypeError, AttributeError) as exc:
+        raise PluginError("API account identity not confirmed", kind="unverified") from exc
 
 
 def page_evidence(rule: ProbeRule, body: str, username: str, url: str) -> bool:
@@ -192,6 +243,12 @@ class SherlockPlugin(PlatformPlugin):
             raise PluginError("challenge or access restriction; existence unknown", kind="blocked")
         if not plain.strip():
             raise PluginError("empty response; existence unknown", kind="response")
+        if rule.evidence in {"discourse-user", "mastodon-user", "lemmy-user", "mediawiki-user"}:
+            if not engine_identity(plain, username, rule.evidence):
+                return None
+            return Profile(
+                platform=self.name, username=username, url=url, fetched_at=datetime.now(UTC)
+            )
         if soft_404(plain):
             return None
         if rule.kind == "message" and absence_marker(plain, rule.errors):
@@ -207,7 +264,7 @@ class SherlockPlugin(PlatformPlugin):
         if rule.kind not in {"message", "status_code", "response_url"}:
             raise PluginError("unsupported detection rule", kind="response")
         if not rule.evidence or rule.evidence == "profile-meta":
-            if not identifies_profile(plain, username, url):
+            if not identifies_profile(plain, username, probe):
                 raise PluginError("HTTP 200 without account identity evidence", kind="unverified")
             try:
                 api_identity = json_identity(

@@ -1,4 +1,4 @@
-"""Short terminal and visual commands have distinct output and execution contracts."""
+"""Terminal commands do not launch a web server."""
 
 from collections.abc import Callable
 from pathlib import Path
@@ -71,25 +71,8 @@ def test_search_prints_final_english_list_without_duplicates_or_html(
     assert not (tmp_path / "report.html").exists()
 
 
-def test_visual_prefills_seed_and_opens_browser(monkeypatch: pytest.MonkeyPatch) -> None:
-    import idlink.web as web
-
-    calls: list[tuple[str, bool]] = []
-
-    def serve(
-        repository_url: str,
-        port: int = 8765,
-        *,
-        initial_seed: str = "",
-        open_browser: bool = False,
-        initial_platforms: str = "all",
-        timeout: float = 6.0,
-        respect_robots: bool = True,
-        request_interval: float = 2.0,
-        check_case: bool = False,
-    ) -> None:
-        calls.append((initial_seed, open_browser))
-
-    monkeypatch.setattr(web, "serve", serve)
-    assert CliRunner().invoke(app, ["visual", "alice"]).exit_code == 0
-    assert calls == [("alice", True)]
+@pytest.mark.parametrize("command", ["visual", "serve"])
+def test_removed_web_commands_are_rejected(command: str) -> None:
+    result = CliRunner().invoke(app, [command])
+    assert result.exit_code == 2
+    assert "No such command" in result.output

@@ -16,6 +16,7 @@ from idlink.core.collection import Collection, collect, plan_seeds
 from idlink.core.graph import SourceCheck
 from idlink.core.http import PublicHTTP
 from idlink.core.models import Profile
+from idlink.core.profile_urls import public_profile_url
 from idlink.core.ratelimit import DomainRateLimiter
 from idlink.core.report import read_report, write_report
 from idlink.plugins.base import PluginError
@@ -139,7 +140,10 @@ def run(
         result.report.nodes,
         key=lambda node: (PLATFORM_LABELS.get(node.platform, node.platform).casefold(), node.id),
     ):
-        typer.echo(f"{PLATFORM_LABELS.get(node.platform, node.platform)}: {node.id}")
+        label = PLATFORM_LABELS.get(node.platform, node.platform)
+        url = public_profile_url(label, node.username, node.id)
+        if url:
+            typer.echo(f"{label}: {url}")
     if out is not None:
         for warning in result.report.warnings:
             typer.echo(warning, err=True)
@@ -244,67 +248,6 @@ def search(
 
 
 @app.command()
-def visual(
-    ctx: typer.Context,
-    username: str,
-    repository_url: Repo = "https://github.com/tzr7ybdfky-dotcom/idlink",
-    port: Annotated[int, typer.Option("--port", min=0, max=65535)] = 0,
-    timeout: Annotated[float, typer.Option("--timeout", min=1, max=120)] = 6.0,
-    platforms: Platforms = "all",
-    respect_robots: RespectRobots = False,
-    forums: Annotated[bool, typer.Option("--forums", help="Только: Форумы.")] = False,
-    social: Annotated[bool, typer.Option("--social", help="Только: Социальные сети.")] = False,
-    dev: Annotated[bool, typer.Option("--dev", help="Только: Разработка.")] = False,
-    gaming: Annotated[bool, typer.Option("--gaming", "--games", help="Только: Игры.")] = False,
-    music: Annotated[bool, typer.Option("--music", help="Только: Музыка.")] = False,
-    video: Annotated[bool, typer.Option("--video", help="Только: Видео и стримы.")] = False,
-    photo: Annotated[bool, typer.Option("--photo", help="Только: Фотография.")] = False,
-    art: Annotated[bool, typer.Option("--art", help="Только: Искусство и дизайн.")] = False,
-    blogs: Annotated[bool, typer.Option("--blogs", help="Только: Блоги.")] = False,
-    news: Annotated[bool, typer.Option("--news", help="Только: Новости.")] = False,
-    science: Annotated[bool, typer.Option("--science", help="Только: Наука.")] = False,
-    education: Annotated[bool, typer.Option("--education", help="Только: Образование.")] = False,
-    business: Annotated[bool, typer.Option("--business", help="Только: Работа и бизнес.")] = False,
-    shopping: Annotated[bool, typer.Option("--shopping", help="Только: Магазины.")] = False,
-    sport: Annotated[bool, typer.Option("--sport", help="Только: Спорт.")] = False,
-    travel: Annotated[bool, typer.Option("--travel", help="Только: Путешествия.")] = False,
-    wikis: Annotated[bool, typer.Option("--wikis", help="Только: Вики.")] = False,
-) -> None:
-    """Открыть сайт и автоматически построить граф по нику, домену или почте."""
-    from idlink.web import serve as serve_web
-
-    try:
-        platforms = selected_platforms(platforms, ctx.params)
-        plan_seeds(username, platforms, [])
-        serve_web(
-            repository_url,
-            port,
-            initial_seed=username,
-            open_browser=True,
-            initial_platforms=platforms,
-            timeout=timeout,
-            respect_robots=respect_robots,
-        )
-    except (ValueError, OSError) as exc:
-        raise typer.BadParameter(str(exc)) from exc
-
-
-@app.command()
-def serve(
-    repository_url: Repo,
-    port: Annotated[int, typer.Option("--port", min=1024, max=65535)] = 8765,
-    respect_robots: RespectRobots = False,
-) -> None:
-    """Открыть локальный веб-интерфейс поиска на http://127.0.0.1:8765."""
-    from idlink.web import serve as serve_web
-
-    try:
-        serve_web(repository_url, port, respect_robots=respect_robots)
-    except (ValueError, OSError) as exc:
-        raise typer.BadParameter(str(exc)) from exc
-
-
-@app.command()
 def explain(
     edge_id: str,
     report: Annotated[Path, typer.Option("--report")] = Path("report.html"),
@@ -325,16 +268,14 @@ def explain(
 @app.command("help")
 def show_help() -> None:
     """Показать команды, флаги категорий и примеры поиска."""
-    typer.echo("idlink search НИК — ссылки в терминале\nidlink visual НИК — сайт с графом")
+    typer.echo("idlink search НИК — ссылки в терминале")
     typer.echo("Вместо ника: домен или почта. Без фильтров проверяются все подходящие источники.")
     typer.echo("\nКатегории (несколько флагов объединяются):")
     for flag, (label, _) in CATEGORIES.items():
         typer.echo(f"  --{flag:12} {label}")
     typer.echo("\nДругие флаги: --platforms, --purpose, --depth, --out, --profile, --activity,")
-    typer.echo(
-        "--repository-url, --timeout; у visual также --port. Подробности: idlink search --help."
-    )
-    typer.echo("\nidlink search alice --forums --social\nidlink visual alice --gaming")
+    typer.echo("--repository-url, --timeout. Подробности: idlink search --help.")
+    typer.echo("\nidlink search alice --forums --social\nidlink search alice --gaming")
 
 
 @app.callback()

@@ -1,0 +1,14 @@
+{
+  "source": "https://github.com/WebBreacher/WhatsMyName",
+  "file": "wmn-data.json",
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Micah Hoffman and WhatsMyName contributors",
+  "retrieved_at": "2026-10-14",
+  "source_sha256": "9656b34dceefb2cf82280f5d9b5715ae85956b19e5e0d0a6899a95dfb7a46f95",
+  "entries": 267,
+  "adaptations": "GET-only metadata, normalized templates, deduplication; no example accounts",
+  "derived_files": [
+    "wmn_platforms.json",
+    "wmn_probe_rules.json"
+  ]
+}

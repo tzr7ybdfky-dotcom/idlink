@@ -4,6 +4,7 @@ from importlib.resources import files
 
 from pydantic import BaseModel, TypeAdapter
 
+from idlink.core.profile_urls import is_api_url
 from idlink.plugins.discourse import FORUMS
 from idlink.plugins.sherlock import RULES
 
@@ -100,6 +101,11 @@ manual_sources.extend(
         files("idlink.data").joinpath("extra_platforms.json").read_bytes()
     )
 )
+manual_sources.extend(
+    TypeAdapter(list[Source]).validate_json(
+        files("idlink.data").joinpath("wmn_platforms.json").read_bytes()
+    )
+)
 by_label = {s.label.casefold(): s for s in manual_sources}
 for source in SOURCES:
     imported = by_label.get(source.label.casefold())
@@ -114,6 +120,12 @@ RESTRICTED = {"habr", "dev community", "gitlab"}
 PROBE_SOURCES = {}
 for source in SOURCES:
     rule = RULES.get(source.label.casefold())
+    if rule:
+        source.template = rule.url
+        if is_api_url(rule.url):
+            source.automatic = False
+            source.reason = "Доступен только API; прямая страница аккаунта не подключена."
+            continue
     if (
         not source.automatic
         and rule
@@ -123,6 +135,18 @@ for source in SOURCES:
         source.automatic = True
         source.reason = "Правило публичной GET-проверки; результат — эвристический кандидат."
         PROBE_SOURCES[source.name] = rule
+seen_profile_pages: set[str] = set()
+for source in SOURCES:
+    if not source.automatic or not source.template:
+        continue
+    endpoint = source.template.rstrip("/").casefold()
+    if endpoint in seen_profile_pages:
+        source.automatic = False
+        source.reason = "Эта страница уже проверяется другим источником каталога."
+        PROBE_SOURCES.pop(source.name, None)
+    else:
+        seen_profile_pages.add(endpoint)
+
 USERNAME_PLATFORMS = frozenset(
     s.name for s in SOURCES if s.automatic and s.input_kind == "username"
 )

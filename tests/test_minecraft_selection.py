@@ -22,6 +22,8 @@ async def test_minecraft_is_found_with_and_without_gaming_filter() -> None:
         if request.url.host == "api.mojang.com" and request.url.path != "/robots.txt":
             calls.append(str(request.url))
             return httpx.Response(200, json={"id": "0" * 32, "name": "demouser"})
+        if request.url.host == "namemc.com" and request.url.path == "/profile/demouser":
+            return httpx.Response(200, text="<title>demouser | NameMC</title>")
         return httpx.Response(404)
 
     async def sleep(delay: float) -> None:

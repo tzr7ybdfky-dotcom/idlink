@@ -29,6 +29,35 @@ class Site(BaseModel):
     requestMethod: str = "GET"
     headers: dict[str, str] = Field(default_factory=dict)
     requestBody: str | dict[str, object] | None = None
+    requestPayload: str | dict[str, object] | None = None
+    activation: dict[str, object] = Field(default_factory=dict)
+    type: str = "username"
+    protocol: str = ""
+    urlMain: str = ""
+    urlSubpath: str = ""
+    errorUrl: str = ""
+
+
+class Engine(BaseModel):
+    """Only the site's request defaults are inherited, never example identities."""
+
+    site: Site
+
+
+def resolve_site(raw: dict[str, object], engines: dict[str, Engine]) -> Site | None:
+    """Resolve declared engine defaults with explicit per-site overrides."""
+    site = Site.model_validate(raw)
+    if site.engine:
+        engine = engines.get(site.engine)
+        if engine is None:
+            return None
+        site = Site.model_validate(engine.site.model_dump(exclude_unset=True) | raw)
+    for field in ("url", "urlProbe"):
+        value = getattr(site, field)
+        value = value.replace("{urlMain}", site.urlMain.rstrip("/"))
+        value = value.replace("{urlSubpath}", site.urlSubpath)
+        setattr(site, field, value)
+    return site
 
 
 def safe_template(url: str) -> bool:
@@ -51,21 +80,28 @@ def import_sites(snapshot: Path) -> tuple[list[dict[str, object]], list[dict[str
     """Deduplicate original profile endpoints and exclude rules needing custom requests."""
     from idlink.core.categories import category_for_tags
 
-    sites = json.loads(snapshot.read_bytes())["sites"]
+    data = json.loads(snapshot.read_bytes())
+    sites = data["sites"]
+    engines = {name: Engine.model_validate(raw) for name, raw in data.get("engines", {}).items()}
     existing = json.loads((ROOT / "idlink/data/platforms.json").read_bytes())
     labels = {s["label"].casefold() for s in existing}
     urls = {s["template"].rstrip("/").casefold() for s in existing}
     sources: list[dict[str, object]] = []
     rules: list[dict[str, object]] = []
     for label, raw in sites.items():
-        site = Site.model_validate(raw)
+        site = resolve_site(raw, engines)
+        if site is None:
+            continue
         tags = sorted(set(site.tags))
         if (
             site.disabled
-            or site.engine
             or site.source
             or site.headers
             or site.requestBody
+            or site.requestPayload
+            or site.activation
+            or site.type != "username"
+            or site.protocol not in {"", "https"}
             or site.requestMethod != "GET"
             or not safe_template(site.url)
             or not safe_template(site.urlProbe or site.url)
@@ -104,6 +140,16 @@ def import_sites(snapshot: Path) -> tuple[list[dict[str, object]], list[dict[str
                 "errors": site.absenceStrs,
                 "presence": site.presenseStrs,
                 "pattern": site.regexCheck,
+                "error_url": site.errorUrl,
+                "evidence": (
+                    "mediawiki-user"
+                    if site.engine.startswith("MediaWikiJson")
+                    else {
+                        "DiscourseJson": "discourse-user",
+                        "Mastodon": "mastodon-user",
+                        "Lemmy": "lemmy-user",
+                    }.get(site.engine, "")
+                ),
             }
         )
         labels.add(label.casefold())
@@ -130,7 +176,7 @@ def main() -> None:
                 "retrieved_at": datetime.now(UTC).date().isoformat(),
                 "source_sha256": hashlib.sha256(snapshot.read_bytes()).hexdigest(),
                 "entries": len(sources),
-                "use": "GET rules only; no example identities or headers",
+                "use": "GET rules with resolved engine defaults; no example identities or headers",
             },
             indent=2,
         )
