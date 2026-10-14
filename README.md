@@ -21,75 +21,49 @@
   <a href="https://github.com/tzr7ybdfky-dotcom/idlink/issues">Сообщить об ошибке</a>
 </p>
 
-<a id="quick-start"></a>
+<a id="installation"></a>
 
-## Запуск поиска в терминале
+## Скачать и установить
 
-Откройте терминал в папке с `pyproject.toml`. Если проект уже скачан,
-повторять `git clone` и `cd idlink` не нужно.
+Нужны **Python 3.11+** и **Git**. Если проект уже скачан, откройте терминал в его папке и пропустите первые две команды.
 
 ### macOS / Linux
 
-Если окружение уже настроено, выполните:
+```bash
+git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
+cd idlink
+python3 -m venv .venv
+.venv/bin/python -m pip install -e .
+```
+
+### Windows · PowerShell
+
+```powershell
+git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
+cd idlink
+py -3 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e .
+```
+
+<a id="quick-start"></a>
+
+## Запустить
+
+Откройте терминал в папке проекта (где лежит `pyproject.toml`). Замените `YOUR_USERNAME` на ник без `@`.
+
+**macOS / Linux:**
 
 ```bash
 .venv/bin/python -m idlink search YOUR_USERNAME
 ```
 
-Замените `YOUR_USERNAME` на нужный ник, без символа `@`.
-Прогресс и найденные ссылки появятся прямо в терминале. Дождитесь завершения;
-чтобы прервать поиск, нажмите **Ctrl+C**. При следующем поиске повторите команду
-с другим ником. Активация окружения и запуск сервера не требуются.
-
-Используйте именно `.venv/bin/python`: отметка `(.venv)` в терминале сама по себе
-не гарантирует, что команда `python` запускает окружение этого проекта.
-
-**Только при первой установке**, если `.venv` ещё не настроена (нужен Python 3.11+):
-
-```bash
-python3 -m venv .venv
-.venv/bin/python -m pip install -e .
-```
-
-После установки выполните команду поиска выше.
-
-### Windows · PowerShell
-
-Поиск из папки проекта:
+**Windows · PowerShell:**
 
 ```powershell
 .\.venv\Scripts\python.exe -m idlink search YOUR_USERNAME
 ```
 
-Только при первой установке:
-
-```powershell
-py -3 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e .
-```
-
-### Выбор площадок и справка
-
-Без фильтров поиск идёт по всем подходящим источникам каталога. Для проверки
-только GitHub и Telegram или просмотра параметров на macOS/Linux:
-
-```bash
-.venv/bin/python -m idlink search YOUR_USERNAME --platforms github,telegram
-.venv/bin/python -m idlink search --help
-```
-
-В PowerShell замените `.venv/bin/python` на `.\.venv\Scripts\python.exe`.
-
-### Если не запускается
-
-- `No such file or directory` для `.venv`: проверьте папку проекта и выполните первоначальную установку выше.
-- `No module named typer` при запуске через `python`: повторите команду через `.venv/bin/python`. Если ошибка остаётся, установите зависимости командой `.venv/bin/python -m pip install -e .`.
-- `No module named idlink` или ошибка другой отсутствующей зависимости: выполните `.venv/bin/python -m pip install -e .`.
-- `Missing argument 'USERNAME'`: добавьте ник после `search`.
-- `idlink: command not found`: используйте `.venv/bin/python -m idlink` из примеров выше.
-- `Address already in use` при запуске `serve`: это ошибка веб-сервера. Для поиска в терминале используйте `search`; запускать `serve` не нужно.
-
-Копируйте только команды из блоков, без приглашения терминала и сообщений об ошибках.
+Остановить поиск — **Ctrl+C**.
 
 ## Что умеет idlink
 
@@ -104,36 +78,6 @@ py -3 -m venv .venv
 
 > Совпадение ника не доказывает, что профили принадлежат одному человеку.
 > Оценки связей — эвристика. Недоступный сайт не означает отсутствие аккаунта.
-
-<a id="installation"></a>
-
-## Установка
-
-Нужны **Python 3.11+** и **Git**. Замените `YOUR_USERNAME` на нужный ник.
-
-### Linux / macOS
-
-```bash
-git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
-cd idlink
-python3 -m venv .venv
-.venv/bin/python -m pip install .
-source .venv/bin/activate
-idlink search YOUR_USERNAME
-```
-
-### Windows · PowerShell
-
-```powershell
-git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
-cd idlink
-py -3 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install .
-.\.venv\Scripts\idlink.exe search YOUR_USERNAME
-```
-
-В PowerShell используйте `.\.venv\Scripts\idlink.exe` вместо `idlink` в примерах ниже.
-Если репозиторий уже скачан, выполняйте установку из папки с `pyproject.toml`.
 
 <a id="usage"></a>
 
