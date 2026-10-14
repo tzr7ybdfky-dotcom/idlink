@@ -33,7 +33,7 @@
 git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
 cd idlink
 python3 -m venv .venv
-.venv/bin/python -m pip install -e .
+.venv/bin/python -m pip install .
 ```
 
 ### Windows · PowerShell
@@ -42,28 +42,40 @@ python3 -m venv .venv
 git clone https://github.com/tzr7ybdfky-dotcom/idlink.git
 cd idlink
 py -3 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\python.exe -m pip install .
 ```
 
 <a id="quick-start"></a>
 
-## Запустить
+## Открыть терминал и запустить
 
-Откройте терминал в папке проекта (где лежит `pyproject.toml`). Замените `YOUR_USERNAME` на ник без `@`.
+- **macOS:** откройте «Терминал» через Spotlight (`⌘ + пробел`). Введите `cd `, перетащите папку проекта в окно и нажмите Enter.
+- **Linux:** откройте папку проекта в файловом менеджере → правая кнопка мыши → «Открыть в терминале».
+- **Windows:** откройте папку проекта в Проводнике, в адресной строке введите `powershell` и нажмите Enter.
+
+Активируйте окружение в открытом терминале:
 
 **macOS / Linux:**
 
 ```bash
-.venv/bin/python -m idlink search YOUR_USERNAME
+source .venv/bin/activate
 ```
 
 **Windows · PowerShell:**
 
 ```powershell
-.\.venv\Scripts\python.exe -m idlink search YOUR_USERNAME
+.\.venv\Scripts\Activate.ps1
 ```
 
-Остановить поиск — **Ctrl+C**.
+Если PowerShell запрещает запуск скрипта, выполните `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` и повторите активацию. Настройка действует только в текущем окне.
+
+Теперь запускайте поиск:
+
+```bash
+idlink search YOUR_USERNAME
+```
+
+Замените `YOUR_USERNAME` на ник без `@`. Для следующего поиска повторите команду с другим ником. В новом окне терминала снова активируйте окружение. Остановить поиск — **Ctrl+C**.
 
 ## Что умеет idlink
 
