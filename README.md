@@ -23,66 +23,74 @@
 
 <a id="quick-start"></a>
 
-## Уже в папке проекта — как запустить
+## Запуск поиска в терминале
 
-Откройте терминал в папке, где лежат `pyproject.toml` и этот README.
-Если проект уже скачан, повторять `git clone` и `cd idlink` не нужно.
-Копируйте только команды из блоков, без приглашения терминала и сообщений об ошибках.
+Откройте терминал в папке с `pyproject.toml`. Если проект уже скачан,
+повторять `git clone` и `cd idlink` не нужно.
 
 ### macOS / Linux
 
-При первом запуске подготовьте окружение (нужен Python 3.11+):
+Если окружение уже настроено, выполните:
+
+```bash
+.venv/bin/python -m idlink search YOUR_USERNAME
+```
+
+Замените `YOUR_USERNAME` на нужный ник, без символа `@`.
+Прогресс и найденные ссылки появятся прямо в терминале. Дождитесь завершения;
+чтобы прервать поиск, нажмите **Ctrl+C**. При следующем поиске повторите команду
+с другим ником. Активация окружения и запуск сервера не требуются.
+
+Если в начале строки терминала уже есть `(.venv)`, можно короче:
+
+```bash
+python -m idlink search YOUR_USERNAME
+```
+
+**Только при первой установке**, если `.venv` ещё не настроена (нужен Python 3.11+):
 
 ```bash
 python3 -m venv .venv
 .venv/bin/python -m pip install -e .
 ```
 
-Если `.venv` уже настроена, сразу запускайте интерфейс:
-
-```bash
-.venv/bin/python -m idlink serve --repository-url https://github.com/tzr7ybdfky-dotcom/idlink
-```
-
-Оставьте терминал открытым и перейдите в браузере на
-**[http://127.0.0.1:8765](http://127.0.0.1:8765)**. Введите ник в интерфейсе и начните поиск.
-`serve` запускает сервер, но сам браузер не открывает. Для остановки нажмите **Ctrl+C**
-в терминале с сервером. При следующем запуске достаточно последней команды;
-активировать `.venv` через `source` не требуется.
+После установки выполните команду поиска выше.
 
 ### Windows · PowerShell
 
-Первоначальная установка из папки проекта:
+Поиск из папки проекта:
+
+```powershell
+.\.venv\Scripts\python.exe -m idlink search YOUR_USERNAME
+```
+
+Только при первой установке:
 
 ```powershell
 py -3 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -e .
 ```
 
-Запуск интерфейса:
+### Выбор площадок и справка
 
-```powershell
-.\.venv\Scripts\python.exe -m idlink serve --repository-url https://github.com/tzr7ybdfky-dotcom/idlink
+Без фильтров поиск идёт по всем подходящим источникам каталога. Для проверки
+только GitHub и Telegram или просмотра параметров на macOS/Linux:
+
+```bash
+.venv/bin/python -m idlink search YOUR_USERNAME --platforms github,telegram
+.venv/bin/python -m idlink search --help
 ```
 
-Откройте **http://127.0.0.1:8765**; остановка — **Ctrl+C**.
+В PowerShell замените `.venv/bin/python` на `.\.venv\Scripts\python.exe`.
 
 ### Если не запускается
 
 - `No such file or directory` для `.venv`: проверьте папку проекта и выполните первоначальную установку выше.
 - `No module named idlink` или ошибка отсутствующей зависимости: повторите установку через Python из `.venv` (`-m pip install -e .`).
-- `Missing option --repository-url`: скопируйте команду запуска целиком, включая URL репозитория. Это публичный адрес проекта, не токен доступа.
-- `Address already in use`: интерфейс может уже работать на **http://127.0.0.1:8765**. Для отдельного запуска добавьте `--port 8766` и откройте **http://127.0.0.1:8766**.
-- `idlink: command not found`: используйте `.venv/bin/python -m idlink` на macOS/Linux или `.\.venv\Scripts\python.exe -m idlink` в PowerShell.
+- `Missing argument 'USERNAME'`: добавьте ник после `search`.
+- `idlink: command not found`: используйте команды `python -m idlink` из примеров выше.
 
-Для поиска прямо в терминале на macOS/Linux:
-
-```bash
-.venv/bin/python -m idlink search YOUR_USERNAME --platforms github,telegram
-```
-
-Замените `YOUR_USERNAME` на нужный ник. Команда `visual YOUR_USERNAME` вместо `serve`
-сама открывает браузер и начинает поиск по этому нику; подробнее — ниже.
+Копируйте только команды из блоков, без приглашения терминала и сообщений об ошибках.
 
 ## Что умеет idlink
 
