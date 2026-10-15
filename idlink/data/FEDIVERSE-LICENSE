@@ -1,0 +1,10 @@
+The factual server metadata in fediverse_servers.json was collected by idlink
+from public server endpoints. It contains no account names or profile contents.
+
+To the extent possible under law, idlink contributors waive copyright and
+related rights in this generated factual metadata under CC0 1.0 Universal:
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Discovery seed: https://mastodon.social/api/v1/instance/peers
+API documentation: https://docs.joinmastodon.org/methods/instance/
+The operators of the listed servers are not affiliated with idlink.

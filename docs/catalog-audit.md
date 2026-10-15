@@ -1,30 +1,33 @@
-# Catalogue audit
+# Каталог и покрытие проверками
 
-UTC: 2026-10-12T12:19:45.309790+00:00. Catalogue: 2161 sources.
+Обновлено: 2026-10-15T04:55:57.271867+00:00.
 
-| Coverage | Sources |
+**10193 записей**, **10159 автоматических источников для поиска по нику**.
+CSV содержит все записи текущего каталога плюс одну строку заголовка.
+
+| Проверка | Записей |
 |---|---:|
-| controls_passed | 567 |
-| disabled | 8 |
-| inconclusive | 1586 |
+| `controls_passed` | 2973 |
+| `disabled` | 32 |
+| `endpoint_checked` | 327 |
+| `not_tested` | 6861 |
 
-See [the per-source CSV](catalog-audit.csv). `controls_passed` means a public reference
-account was found and a random format-valid handle was absent in this run.
-It is evidence for that detector at that time, not a guarantee for every account.
-`inconclusive` includes inaccessible endpoints, missing/stale public references and
-ambiguous pages. Blocked requests and timeouts never establish absence.
-`unexpected_positive` requires investigation; it is not automatically a real account.
-Disabled sources are not queried. Domain and email inputs need separate controls.
+[Полный каталог CSV](catalog-audit.csv) ·
+[Архив сетевого аудита от 12 октября](audits/2026-10-12.md).
 
-References come from official Sherlock/Maigret metadata and reviewed Discourse forums.
-Requests respect robots.txt, access refusals and a shared two-second hostname limiter.
-Only URL templates and statuses are published; no profile text or avatars are stored.
+- `controls_passed`: положительный и случайный отрицательный контроль прошли в дату `checked_at`.
+- `endpoint_checked`: проверены метаданные сервера и отсутствие случайного аккаунта;
+  положительный контроль не проводился.
+- `not_tested`: правило подключено, свежей сетевой проверки здесь нет.
+- `disabled`: источник отключён или дублирует уже подключённую страницу.
 
-Reproduce from a development checkout:
+`historical_coverage` — результат старого аудита для совпадающего URL, **не свежая проверка**.
+Число источников не означает, что все сайты доступны или что любой ник на них существует.
+Серверы Fediverse считаются отдельно: это независимые базы аккаунтов одной сети.
+В таблице только шаблоны ссылок и статусы, без ников контрольных аккаунтов и данных профилей.
 
-```sh
-python -m tools.audit_catalog --live --username YOUR_USERNAME --out build/audit.json
-python -m tools.render_catalog_audit build/audit.json --out docs
+Обновить таблицу после изменения каталога (без сетевых запросов):
+
+```bash
+python -m tools.render_catalog_audit --inventory --out docs
 ```
-
-This is an opt-in live audit. Automated tests use fixtures and prohibit real networking.

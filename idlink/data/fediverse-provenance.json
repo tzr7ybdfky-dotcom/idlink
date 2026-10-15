@@ -1,0 +1,17 @@
+{
+  "discovery_source": "https://mastodon.social/api/v1/instance/peers",
+  "documentation": "https://docs.joinmastodon.org/methods/accounts/#lookup",
+  "retrieved_at": "2026-10-15T04:55:56.823566+00:00",
+  "entries": 3300,
+  "snapshot_sha256": "a75110085d279bad2245e1283ef82bb477f700b4aae264e5c53f3cda3c162041",
+  "positive_controls": {
+    "found": 2973,
+    "not_tested": 327
+  },
+  "negative_controls": {
+    "missing": 3300
+  },
+  "use": "Independently operated servers; direct local profile URLs; no account identities",
+  "verification": "Instance metadata, random absent account, optional public contact account",
+  "license": "CC0-1.0 (idlink-generated factual server metadata)"
+}

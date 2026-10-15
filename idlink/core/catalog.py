@@ -4,6 +4,7 @@ from importlib.resources import files
 
 from pydantic import BaseModel, TypeAdapter
 
+from idlink.core.fediverse import SERVERS
 from idlink.core.profile_urls import is_api_url
 from idlink.plugins.discourse import FORUMS
 from idlink.plugins.sherlock import RULES
@@ -116,6 +117,17 @@ for source in SOURCES:
         source.template = f"https://{source.host}/wiki/User:{{}}"
 existing = {s.label.casefold() for s in SOURCES}
 SOURCES.extend(s for s in manual_sources if s.label.casefold() not in existing)
+SOURCES.extend(
+    Source(
+        name=server.name,
+        label=f"Mastodon: {server.domain}",
+        category="Социальные сети",
+        tags=frozenset({"social", "fediverse", "mastodon"}),
+        template=server.template,
+        automatic=False,
+    )
+    for server in SERVERS
+)
 RESTRICTED = {"habr", "dev community", "gitlab"}
 PROBE_SOURCES = {}
 for source in SOURCES:

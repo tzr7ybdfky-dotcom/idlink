@@ -10,6 +10,7 @@ from urllib.parse import parse_qs, quote, urlsplit
 from bs4 import BeautifulSoup
 from pydantic import BaseModel, Field, TypeAdapter
 
+from idlink.core.fediverse import SERVERS
 from idlink.core.http import PublicHTTP
 from idlink.core.models import Profile
 from idlink.core.profile_urls import PROFILE_PAGES, is_api_url
@@ -106,6 +107,16 @@ SOCIAL_RULES = {
 }
 RULES.update(SOCIAL_RULES)
 RULES["twitter"] = SOCIAL_RULES["x / twitter"]
+for server in SERVERS:
+    label = f"Mastodon: {server.domain}"
+    RULES[label.casefold()] = ProbeRule(
+        label=label,
+        url=server.template,
+        probe=f"https://{server.domain}/api/v1/accounts/lookup?acct={{}}",
+        kind="status_code",
+        pattern=r"[A-Za-z0-9_]{1,30}",
+        evidence="mastodon-user",
+    )
 for label, rule in RULES.items():
     if is_api_url(rule.url) and label in PROFILE_PAGES:
         rule.url = PROFILE_PAGES[label]
