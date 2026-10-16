@@ -9,6 +9,7 @@ from typing import Literal
 import networkx as nx
 from pydantic import BaseModel, ConfigDict, Field
 
+from idlink.core.discovery import SimilarMatch
 from idlink.core.models import Edge, Profile
 from idlink.core.scoring import score
 from idlink.plugins.base import ErrorKind
@@ -49,6 +50,7 @@ class Report(BaseModel):
     edges: dict[str, Edge]
     warnings: list[str] = Field(default_factory=list)
     checks: list[SourceCheck] = Field(default_factory=list)
+    similar: list[SimilarMatch] = Field(default_factory=list)
 
 
 def build_graph(profiles: list[Profile], *, sparse: bool = False) -> nx.Graph[str]:
