@@ -30,6 +30,11 @@ Haskell Discourse,forum-haskell-discourse,https://discourse.haskell.org/u/{},tru
 ClojureVerse,forum-clojureverse,https://clojureverse.org/u/{},true,not_tested,not_tested,not_tested,,controls_passed
 NixOS Discourse,forum-nixos-discourse,https://discourse.nixos.org/u/{},true,not_tested,not_tested,not_tested,,controls_passed
 Zorin Forum,forum-zorin-forum,https://forum.zorin.com/u/{},true,not_tested,not_tested,not_tested,,controls_passed
+Одноклассники,ok,https://ok.ru/{},true,not_tested,not_tested,not_tested,,
+Одноклассники (ID),ok-id,https://ok.ru/profile/{},true,not_tested,not_tested,not_tested,,
+Rutube,rutube,https://rutube.ru/{},true,not_tested,not_tested,not_tested,,
+Rutube (ID),rutube-id,https://rutube.ru/channel/{}/,true,not_tested,not_tested,not_tested,,
+Дзен,dzen,https://dzen.ru/{},true,not_tested,not_tested,not_tested,,
 1337x,manual-1337x,https://www.1337x.to/user/{}/,true,not_tested,not_tested,not_tested,,inconclusive
 2Dimensions,manual-2dimensions,https://2Dimensions.com/a/{},true,not_tested,not_tested,not_tested,,inconclusive
 7Cups,manual-7cups,https://www.7cups.com/@{},true,not_tested,not_tested,not_tested,,inconclusive
@@ -511,7 +516,7 @@ Zhihu,maigret-03b06fe676d753ef,https://www.zhihu.com/people/{},true,not_tested,n
 VNOJ,maigret-e4d677092b492015,https://oj.vnoi.info/user/{},true,not_tested,not_tested,not_tested,,inconclusive
 Weld,maigret-fa02b0013fa86ff2,https://weld.in.ua/forum/member.php/?username={},true,not_tested,not_tested,not_tested,,controls_passed
 W3Schools,maigret-c133ab6eae904671,https://pathfinder-api.kai.w3spaces.com/public-profile-api/{},false,not_tested,not_tested,disabled,,inconclusive
-OK,maigret-ea1f7643917b883e,https://ok.ru/{},true,not_tested,not_tested,not_tested,,inconclusive
+OK,maigret-ea1f7643917b883e,https://ok.ru/{},false,not_tested,not_tested,disabled,,inconclusive
 profile.hatena.ne.jp,maigret-9abd3f1943f22d20,https://profile.hatena.ne.jp/{}/,true,not_tested,not_tested,not_tested,,inconclusive
 NPM-Package,maigret-43624a468f3c1c96,https://www.npmjs.com/package/{},true,not_tested,not_tested,not_tested,,inconclusive
 Love.Mail.ru,maigret-8d5c66d19ef8a572,https://love.mail.ru/profile/{},true,not_tested,not_tested,not_tested,,inconclusive

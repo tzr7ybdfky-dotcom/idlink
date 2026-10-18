@@ -1,0 +1,62 @@
+[
+  {
+    "label": "Одноклассники",
+    "url": "https://ok.ru/{}",
+    "probe": "https://ok.ru/{}",
+    "kind": "message",
+    "pattern": "[A-Za-z0-9][A-Za-z0-9_.-]*",
+    "errors": [
+      "Такой страницы нет",
+      "Страница не найдена"
+    ],
+    "evidence": "profile-url"
+  },
+  {
+    "label": "Одноклассники (ID)",
+    "url": "https://ok.ru/profile/{}",
+    "probe": "https://ok.ru/profile/{}",
+    "kind": "message",
+    "pattern": "[0-9]+",
+    "errors": [
+      "Такой страницы нет",
+      "Страница не найдена"
+    ],
+    "evidence": "profile-url"
+  },
+  {
+    "label": "Rutube",
+    "url": "https://rutube.ru/{}",
+    "probe": "https://rutube.ru/{}",
+    "kind": "message",
+    "pattern": "[A-Za-z][A-Za-z0-9_-]*",
+    "errors": [
+      "Канал не найден",
+      "Страница не найдена"
+    ],
+    "evidence": "profile-url"
+  },
+  {
+    "label": "Rutube (ID)",
+    "url": "https://rutube.ru/channel/{}/",
+    "probe": "https://rutube.ru/channel/{}/",
+    "kind": "message",
+    "pattern": "[0-9]+",
+    "errors": [
+      "Канал не найден",
+      "Страница не найдена"
+    ],
+    "evidence": "profile-url"
+  },
+  {
+    "label": "Дзен",
+    "url": "https://dzen.ru/{}",
+    "probe": "https://dzen.ru/{}",
+    "kind": "message",
+    "pattern": "[A-Za-z0-9_][A-Za-z0-9_.-]*",
+    "errors": [
+      "Такой страницы нет",
+      "Страница не найдена"
+    ],
+    "evidence": "profile-url"
+  }
+]

@@ -66,6 +66,16 @@ RULES.update(
 )
 
 
+RULES.update(
+    {
+        r.label.casefold(): r
+        for r in TypeAdapter(list[ProbeRule]).validate_json(
+            files("idlink.data").joinpath("russian_probe_rules.json").read_bytes()
+        )
+    }
+)
+
+
 SOCIAL_RULES = {
     "telegram": ProbeRule(
         label="Telegram",
@@ -183,6 +193,15 @@ def page_evidence(rule: ProbeRule, body: str, username: str, url: str) -> bool:
             and title.get_text(strip=True)
             and any(resolves_requested_handle(str(action.get("href", ""))) for action in actions)
         )
+    if rule.evidence == "profile-url":
+        locator = soup.select_one('meta[property="og:url"]')
+        title = soup.select_one('meta[property="og:title"]')
+        return bool(
+            locator
+            and title
+            and str(title.get("content", "")).strip()
+            and str(locator.get("content", "")).rstrip("/") == url.rstrip("/")
+        )
     if rule.evidence == "profile-meta":
         locator = soup.select_one('meta[property="og:url"]')
         kind = soup.select_one('meta[property="og:type"]')
@@ -274,8 +293,8 @@ class SherlockPlugin(PlatformPlugin):
             )
         if rule.kind not in {"message", "status_code", "response_url"}:
             raise PluginError("unsupported detection rule", kind="response")
-        if not rule.evidence or rule.evidence == "profile-meta":
-            if not identifies_profile(plain, username, probe):
+        if not rule.evidence or rule.evidence in {"profile-meta", "profile-url"}:
+            if rule.evidence != "profile-url" and not identifies_profile(plain, username, probe):
                 raise PluginError("HTTP 200 without account identity evidence", kind="unverified")
             try:
                 api_identity = json_identity(
@@ -306,6 +325,9 @@ class SherlockPlugin(PlatformPlugin):
     async def _negative_control(self, username: str) -> None:
         """A second, rare handle must explicitly be absent; catch-all pages remain unverified."""
         candidates = [secrets.token_hex(length) for length in (16, 12, 8, 6, 4)]
+        candidates.extend("u" + candidate for candidate in candidates.copy())
+        # Numeric profile IDs also need an explicit missing-page control.
+        candidates.append(str(10**19 + secrets.randbelow(9 * 10**19)))
         name = next(
             (
                 candidate

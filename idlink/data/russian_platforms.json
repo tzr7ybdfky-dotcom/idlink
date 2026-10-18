@@ -1,0 +1,60 @@
+[
+  {
+    "name": "ok",
+    "label": "Одноклассники",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://ok.ru/{}",
+    "tags": [
+      "social",
+      "ru"
+    ]
+  },
+  {
+    "name": "ok-id",
+    "label": "Одноклассники (ID)",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://ok.ru/profile/{}",
+    "tags": [
+      "social",
+      "ru"
+    ]
+  },
+  {
+    "name": "rutube",
+    "label": "Rutube",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://rutube.ru/{}",
+    "tags": [
+      "social",
+      "video",
+      "ru"
+    ]
+  },
+  {
+    "name": "rutube-id",
+    "label": "Rutube (ID)",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://rutube.ru/channel/{}/",
+    "tags": [
+      "social",
+      "video",
+      "ru"
+    ]
+  },
+  {
+    "name": "dzen",
+    "label": "Дзен",
+    "category": "Социальные сети",
+    "automatic": false,
+    "template": "https://dzen.ru/{}",
+    "tags": [
+      "social",
+      "blog",
+      "ru"
+    ]
+  }
+]

@@ -107,6 +107,17 @@ manual_sources.extend(
         files("idlink.data").joinpath("wmn_platforms.json").read_bytes()
     )
 )
+SOURCES.extend(
+    TypeAdapter(list[Source]).validate_json(
+        files("idlink.data").joinpath("russian_platforms.json").read_bytes()
+    )
+)
+# Keep imported source IDs stable while making Russian communities discoverable.
+for source in manual_sources:
+    if source.label.casefold() in {"pikabu", "boosty", "livejournal"} or source.label.startswith(
+        "My.Mail.ru@"
+    ):
+        source.tags = source.tags | {"social", "ru"}
 by_label = {s.label.casefold(): s for s in manual_sources}
 for source in SOURCES:
     imported = by_label.get(source.label.casefold())
